@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from coinceres.exceptions import error_helper
-from coinceres.http import HttpRequest
+from coinceres.exceptions import error_helper, error_helper_without_code
+from coinceres.http_client import HttpRequest
 from coinceres.sign import SignMixin
 
 
 class APIClient(HttpRequest, SignMixin):
     """Http客户端"""
 
-    def __init__(self, api_key, secret_key, host='open.coinceres.com', url='api/v1'):
+    def __init__(self, api_key=None, secret_key=None, host='open.coinceres.com', url='api/v1'):
         """
         :param api_key:
         :param secret_key:
@@ -178,3 +178,61 @@ class APIClient(HttpRequest, SignMixin):
             count=count
         )
         return self._do_get("trade/trans", data=data)
+
+    @error_helper_without_code
+    def kline(self, exchange: str, contract: str, duration: str, begin: str = None, end: str = None, size: int = None):
+        """
+
+        :param exchange: 交易所名称
+        :param contract: 币币交易对或合约名称
+        :param duration: 请求周期类型(1m.5m.15m.30m.1h.4h.1d)
+            duration表示周期，1m.5m.15m.30m表示1分钟线.5分钟线.15分钟线.30分钟线，1h.4h表示1小时线.4小时线，1d表示日线
+        :param begin: 请求开始时间(时间戳)
+        :param end: 请求结束时间(时间戳)
+        :param size: 请求根数
+            如果begin 和end都填写了，则size忽略，如果begin和size填写了，end没有填写，则表示从begin开始向后请求多少根，
+            如果end和size填写了，begin没有填写，则表示向前请求多少根。
+        :return:
+        """
+        data = dict(
+            exchange=exchange,
+            contract=contract,
+            duration=duration,
+        )
+        if begin:
+            data.update(begin=begin)
+        if end:
+            data.update(end=end)
+        if size:
+            data.update(size=size)
+        return self._do_post("query/cycle/data/history", data=data)
+
+    @error_helper_without_code
+    def trade(self, exchange: str, contract: str, begin: str = None, end: str = None, size: int = None):
+        data = dict(
+            exchange=exchange,
+            contract=contract,
+        )
+        if begin:
+            data.update(begin=begin)
+        if end:
+            data.update(end=end)
+        if size:
+            data.update(size=size)
+        return self._do_post("query/trade/data", data=data)
+
+    @error_helper_without_code
+    def depth(self, exchange: str, contract: str):
+        data = dict(
+            exchange=exchange,
+            contract=contract,
+        )
+        return self._do_post("query/depth10/data", data=data)
+
+    @error_helper_without_code
+    def tick(self, exchange: str, contract: str):
+        data = dict(
+            exchange=exchange,
+            contract=contract,
+        )
+        return self._do_post("query/tick/data", data=data)
