@@ -205,7 +205,7 @@ class APIClient(HttpRequest, SignMixin):
             data.update(end=end)
         if size:
             data.update(size=size)
-        return self._do_post("query/cycle/data/history", data=data)
+        return self._do_get("market/candle", data=data)
 
     @error_helper_without_code
     def trade(self, exchange: str, contract: str, begin: str = None, end: str = None, size: int = None):
@@ -219,7 +219,7 @@ class APIClient(HttpRequest, SignMixin):
             data.update(end=end)
         if size:
             data.update(size=size)
-        return self._do_post("query/trade/data", data=data)
+        return self._do_get("market/trade", data=data)
 
     @error_helper_without_code
     def depth(self, exchange: str, contract: str):
@@ -227,7 +227,7 @@ class APIClient(HttpRequest, SignMixin):
             exchange=exchange,
             contract=contract,
         )
-        return self._do_post("query/depth10/data", data=data)
+        return self._do_get("market/depth10", data=data)
 
     @error_helper_without_code
     def tick(self, exchange: str, contract: str):
@@ -235,4 +235,4 @@ class APIClient(HttpRequest, SignMixin):
             exchange=exchange,
             contract=contract,
         )
-        return self._do_post("query/tick/data", data=data)
+        return self._do_get("market/tick", data=data)

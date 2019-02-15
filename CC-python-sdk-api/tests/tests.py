@@ -26,6 +26,26 @@ def test_account():
 
 def test_order():
     r = APIClient(api_key="dWbkgDeLIzLavnYs", secret_key="dePW2XslyzFYnTuc41yRhqHIUWEVco4W",
-                  host="192.168.50.172").limit_order("BITMEX", "BTC_USDT", "10", "buy", "open", "10", "0.000011",
+                  host="192.168.50.172").limit_order("BITMEX", "BTC/USDT", "10", "buy", "open", "10", "0.000011",
                                                      "0.00000997")
+    print(r)
+
+
+def test_depth():
+    r = APIClient(host="market.coinceres.com").depth("HUOBI", "BTC/USDT")
+    print(r)
+
+
+def test_kline():
+    r = APIClient(host="market.coinceres.com").kline("HUOBI", "BTC/USDT", '1d', '1546985600000', '1560130387000')
+    print(r)
+
+
+def test_tick():
+    r = APIClient(host="market.coinceres.com").tick("HUOBI", "BTC/USDT")
+    print(r)
+
+
+def test_trade():
+    r = APIClient(host="market.coinceres.com").trade("HUOBI", "BTC/USDT", '1546985600000', '1560130387000')
     print(r)
