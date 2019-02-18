@@ -18,7 +18,7 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("jfAFaUgGPexhzsnJ","jDW3sYWwV6LZRo3plnrpJmK9EkJrwjZM").newRestClient();
+        restClient = CoinceresApiClientFactory.newInstance("xxx","xxx").newRestClient();
     }
 
     public static void main(String[] args) {
