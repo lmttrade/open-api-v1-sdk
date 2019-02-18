@@ -6,9 +6,9 @@ package com.ceres.api.constant;
  */
 public class Const {
 
-    public static final String API_BASE_URL = "http://localhost:9088";
-    public static final String DATA_BASE_URL = "http://localhost:9101";
-    public static String wsUrl = "ws://localhost:9307";
+    public static final String API_BASE_URL = "http://open.coinceres.com";
+    public static final String DATA_BASE_URL = "http://market.coinceres.com";
+    public static String wsUrl = "ws://192.168.50.172:18003";
 
     public static final String ENDPOINT_SECURITY_TYPE_APIKEY = "api_key";
     public static final String ENDPOINT_SECURITY_TYPE_SIGNED = "sign";
