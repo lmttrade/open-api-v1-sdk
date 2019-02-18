@@ -20,7 +20,7 @@ public class CoinceresApiClientFactory {
     private String secret;
 
     /**
-     * Instantiates a new binance api client factory.
+     * Instantiates a new coinceres api client factory.
      */
     private CoinceresApiClientFactory(String apiKey, String secret) {
         this.apiKey = apiKey;
