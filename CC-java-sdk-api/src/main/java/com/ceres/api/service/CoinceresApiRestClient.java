@@ -41,4 +41,9 @@ public interface CoinceresApiRestClient {
      * 查询成交
      */
     ResultsVO<List<TransRecord>> queryTransRecord(TransReq req);
+
+    /**
+     * 平仓
+     */
+    ResultsVO<InputOrderRes> close(CloseOrderReq req);
 }

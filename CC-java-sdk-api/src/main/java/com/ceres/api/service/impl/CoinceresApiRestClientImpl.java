@@ -52,4 +52,9 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     public ResultsVO<List<TransRecord>> queryTransRecord(TransReq req) {
         return executeSync(coinceresApiService.queryTransRecord(req.getExchange(), req.getContract(), req.getCount()));
     }
+
+    @Override
+    public ResultsVO<InputOrderRes> close(CloseOrderReq req) {
+        return executeSync(coinceresApiService.close(req));
+    }
 }

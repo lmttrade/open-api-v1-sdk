@@ -40,4 +40,8 @@ public interface CoinceresApiService {
     @GET("/api/v1/trade/trans")
     Call<ResultsVO<List<TransRecord>>> queryTransRecord(@Query("exchange") String exchange, @Query("contract") String contract,
                                                         @Query("count") String count);
+
+    @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
+    @POST("/api/v1/trade/close")
+    Call<ResultsVO<InputOrderRes> > close(@Body CloseOrderReq req);
 }

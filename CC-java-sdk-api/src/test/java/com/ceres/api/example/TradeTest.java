@@ -71,5 +71,19 @@ public class TradeTest {
 //        req.setCount("10");
 //        ResultsVO<List<TransRecord>> result = restClient.queryTransRecord(req);
 //        System.out.println(result);
+
+        // 8.平仓
+//        CloseOrderReq req = new CloseOrderReq();
+//        req.setClientOid("123");
+//        req.setCloseRule("admin");
+//        req.setContract("BTC/USDT");
+//        req.setDealId("123456789");
+//        req.setEntrustBs("buy");
+//        req.setEntrustPrice("1212");
+//        req.setEntrustVol("10");
+//        req.setExchange("HUOBI");
+//        req.setPriceType("limit");
+//        ResultsVO<InputOrderRes> result = restClient.close(req);
+//        System.out.println(result);
     }
 }
