@@ -3,9 +3,11 @@ package com.ceres.api.client;
 import com.ceres.api.service.CoinceresApiRestClient;
 import com.ceres.api.service.CoinceresApiWebSocketClient;
 import com.ceres.api.service.CoinceresDataRestClient;
+import com.ceres.api.service.CoinceresTradeWebSocketClient;
 import com.ceres.api.service.impl.CoinceresApiRestClientImpl;
 import com.ceres.api.service.impl.CoinceresApiWebSocketClientImpl;
 import com.ceres.api.service.impl.CoinceresDataRestClientImpl;
+import com.ceres.api.service.impl.CoinceresTradeWebSocketClientImpl;
 
 import static com.ceres.api.service.CoinceresApiServiceGenerator.getSharedClient;
 
@@ -60,5 +62,13 @@ public class CoinceresApiClientFactory {
      */
     public CoinceresDataRestClient newDataClient() {
         return new CoinceresDataRestClientImpl();
+    }
+
+
+    /**
+     * create a order stream
+     */
+    public CoinceresTradeWebSocketClient newTradeWebSocketClient() {
+        return new CoinceresTradeWebSocketClientImpl(getSharedClient(), apiKey, secret);
     }
 }
