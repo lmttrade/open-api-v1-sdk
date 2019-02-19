@@ -11,9 +11,6 @@ import java.util.List;
 
 public interface CoinceresDataService {
 
-    @POST("/api/v1/query/all/market-area")
-    Call<ResultsVO<List<MarketArea>>> queryAllMarketArea();
-
     @GET("/api/v1/market/candle")
     Call<OpenResp<List<CycleData>>> queryHistoryCycleData(@Query("exchange") String exchange, @Query("contract") String contract,
                                                           @Query("begin") String begin, @Query("end") String end,

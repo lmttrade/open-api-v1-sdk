@@ -18,10 +18,6 @@ public class CoinceresDataRestClientImpl implements CoinceresDataRestClient {
         this.coinceresDataService = createService(CoinceresDataService.class);
     }
 
-    @Override
-    public ResultsVO<List<MarketArea>> queryAllMarketArea() {
-        return executeSync(coinceresDataService.queryAllMarketArea());
-    }
 
     @Override
     public OpenResp<List<CycleData>> queryHistoryCycleData(CycleReq req) {

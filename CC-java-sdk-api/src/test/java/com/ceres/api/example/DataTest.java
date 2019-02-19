@@ -24,11 +24,7 @@ public class DataTest {
 
     public static void main(String[] args) {
 
-        // 1.查询所有交易所的所有交易对信息
-        ResultsVO<List<MarketArea>> result = dataRestClient.queryAllMarketArea();
-        System.out.println(result);
-
-        // 2. 请求历史分钟线数据
+        // 1. 请求历史分钟线数据
 //        CycleReq req = new CycleReq();
 //        req.setExchange("OKEX");
 //        req.setContract("BTC/USDT");
@@ -39,7 +35,7 @@ public class DataTest {
 //        OpenResp<List<CycleData>> result = dataRestClient.queryHistoryCycleData(req);
 //        System.out.println(result);
 
-        // 3. 请求成交数据
+        // 2. 请求成交数据
 //        TradeDataReq req = new TradeDataReq();
 //        req.setExchange("OKEX");
 //        req.setContract("BTC/USDT");
@@ -48,19 +44,19 @@ public class DataTest {
 //        OpenResp<List<TradeData>> result = dataRestClient.queryTradeData(req);
 //        System.out.println(result);
 
-        // 4. 请求depth10数据
+        // 3. 请求depth10数据
 //        DepthDataReq req = new DepthDataReq();
 //        req.setExchange("OKEX");
 //        req.setContract("BTC/USDT");
 //        OpenBookData result = dataRestClient.queryBookData(req);
 //        System.out.println(result);
 
-        // 5. 请求tick数据
-//        TickDataReq req = new TickDataReq();
-//        req.setExchange("OKEX");
-//        req.setContract("BTC/USDT");
-//        TickData result = dataRestClient.queryTickData(req);
-//        System.out.println(result);
+        // 4. 请求tick数据
+        TickDataReq req = new TickDataReq();
+        req.setExchange("OKEX");
+        req.setContract("BTC/USDT");
+        TickData result = dataRestClient.queryTickData(req);
+        System.out.println(result);
     }
 
 }
