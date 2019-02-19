@@ -4,6 +4,7 @@ import com.ceres.api.constant.Const;
 import com.ceres.api.exception.CoinceresApiError;
 import com.ceres.api.exception.CoinceresApiException;
 import com.ceres.api.security.AuthenticationInterceptor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -69,8 +70,12 @@ public class CoinceresApiServiceGenerator {
             if (response.isSuccessful()) {
                 return response.body();
             } else {
-                CoinceresApiError apiError = getCoinceresApiError(response);
-                throw new CoinceresApiException(apiError);
+//                CoinceresApiError apiError = getCoinceresApiError(response);
+                okhttp3.Response raw = response.raw();
+                CoinceresApiError coinceresApiError = new CoinceresApiError();
+                coinceresApiError.setCode(raw.code());
+                coinceresApiError.setMessage(raw.message());
+                throw new CoinceresApiException(coinceresApiError);
             }
         } catch (IOException e) {
             throw new CoinceresApiException(e);

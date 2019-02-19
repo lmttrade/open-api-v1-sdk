@@ -1,9 +1,13 @@
 package com.ceres.api.example;
 
 import com.ceres.api.client.CoinceresApiClientFactory;
+import com.ceres.api.domain.data.MarketArea;
 import com.ceres.api.domain.data.TickData;
 import com.ceres.api.domain.data.TickDataReq;
+import com.ceres.api.domain.trade.ResultsVO;
 import com.ceres.api.service.CoinceresDataRestClient;
+
+import java.util.List;
 
 /**
  * @author xiaotian.huang
@@ -21,8 +25,8 @@ public class DataTest {
     public static void main(String[] args) {
 
         // 1.查询所有交易所的所有交易对信息
-//        ResultsVO<List<MarketArea>> result = dataRestClient.queryAllMarketArea();
-//        System.out.println(result);
+        ResultsVO<List<MarketArea>> result = dataRestClient.queryAllMarketArea();
+        System.out.println(result);
 
         // 2. 请求历史分钟线数据
 //        CycleReq req = new CycleReq();
@@ -52,11 +56,11 @@ public class DataTest {
 //        System.out.println(result);
 
         // 5. 请求tick数据
-        TickDataReq req = new TickDataReq();
-        req.setExchange("OKEX");
-        req.setContract("BTC/USDT");
-        TickData result = dataRestClient.queryTickData(req);
-        System.out.println(result);
+//        TickDataReq req = new TickDataReq();
+//        req.setExchange("OKEX");
+//        req.setContract("BTC/USDT");
+//        TickData result = dataRestClient.queryTickData(req);
+//        System.out.println(result);
     }
 
 }

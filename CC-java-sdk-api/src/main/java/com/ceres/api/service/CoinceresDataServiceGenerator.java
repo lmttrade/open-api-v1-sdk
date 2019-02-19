@@ -56,8 +56,12 @@ public class CoinceresDataServiceGenerator {
             if (response.isSuccessful()) {
                 return response.body();
             } else {
-                CoinceresApiError apiError = getCoinceresApiError(response);
-                throw new CoinceresApiException(apiError);
+//                CoinceresApiError apiError = getCoinceresApiError(response);
+                okhttp3.Response raw = response.raw();
+                CoinceresApiError coinceresApiError = new CoinceresApiError();
+                coinceresApiError.setCode(raw.code());
+                coinceresApiError.setMessage(raw.message());
+                throw new CoinceresApiException(coinceresApiError);
             }
         } catch (IOException e) {
             throw new CoinceresApiException(e);

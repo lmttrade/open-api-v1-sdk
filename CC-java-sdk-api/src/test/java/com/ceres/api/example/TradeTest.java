@@ -1,9 +1,7 @@
 package com.ceres.api.example;
 
 import com.ceres.api.client.CoinceresApiClientFactory;
-import com.ceres.api.domain.trade.ContractReq;
-import com.ceres.api.domain.trade.CurrencyPair;
-import com.ceres.api.domain.trade.ResultsVO;
+import com.ceres.api.domain.trade.*;
 import com.ceres.api.service.CoinceresApiRestClient;
 
 import java.util.List;
@@ -18,7 +16,7 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("***","***").newRestClient();
+        restClient = CoinceresApiClientFactory.newInstance("dWbkgDeLIzLavnYs","dePW2XslyzFYnTuc41yRhqHIUWEVco4W").newRestClient();
     }
 
     public static void main(String[] args) {

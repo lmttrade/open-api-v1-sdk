@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 public class OrderStreamTest {
     private static CoinceresTradeWebSocketClient orderStreamClient;
     static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("jfAFaUgGPexhzsnJ","jDW3sYWwV6LZRo3plnrpJmK9EkJrwjZM").newTradeWebSocketClient();
+        orderStreamClient = CoinceresApiClientFactory.newInstance("dWbkgDeLIzLavnYs","dePW2XslyzFYnTuc41yRhqHIUWEVco4W").newTradeWebSocketClient();
     }
 
     public static void main(String[] args) {
