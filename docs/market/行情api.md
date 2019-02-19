@@ -1,3 +1,11 @@
+# base url
+
+- rest
+    http://open.coinceres.com
+
+- websocket
+    ws://open.coinceres.com:18003
+
 # rest api
 
 请求错误枚举
@@ -177,6 +185,7 @@ code表明业务错误，枚举code如下
 ..Websocket Client request
 
 ```json
+
 [
     {
         "msg_type":"subscribe-tick",
@@ -184,6 +193,7 @@ code表明业务错误，枚举code如下
         "contract":"BTC/USDT"
     }
 ]
+
 ```
 
 ### b. 返回数据
@@ -191,13 +201,13 @@ code表明业务错误，枚举code如下
 
 ```json
 [{
-    
     "msg_type":"subscribed-tick",
     "exchange": "HUOBI",
     "contract":"BTC/USDT",
     "code": 200,
     "message":"invalid contract"
 }]
+
 ```
 
 ..Websocket server push
