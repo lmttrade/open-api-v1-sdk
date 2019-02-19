@@ -1,5 +1,9 @@
 package com.ceres.api.exception;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * @author xiaotian.huang
  * @date 2019/01/30
@@ -38,7 +42,12 @@ public class CoinceresApiException extends RuntimeException {
   @Override
   public String getMessage() {
     if (error != null) {
-      return error.getMessage();
+      ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+      builder.append("code", error.getCode());
+      if (StringUtils.isNotEmpty(error.getMessage())) {
+        builder.append("errorMessage", error.getMessage());
+      }
+      return builder.toString();
     }
     return super.getMessage();
   }

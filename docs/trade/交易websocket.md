@@ -14,22 +14,24 @@
 
 ```java
 public class OrderStreamTest {
+    private static CoinceresTradeWebSocketClient orderStreamClient;
+    static  {
+        orderStreamClient = CoinceresApiClientFactory.newInstance("dWbkgDeLIzLavnYs","dePW2XslyzFYnTuc41yRhqHIUWEVco4W").newTradeWebSocketClient();
+    }
+
     public static void main(String[] args) {
-        
-        CoinceresTradeWebSocketClient orderStreamClient = CoinceresApiClientFactory.newInstance("jfAFaUgGPexhzsnJ","jDW3sYWwV6LZRo3plnrpJmK9EkJrwjZM").newTradeWebSocketClient();
-        ObjectMapper mapper = new ObjectMapper();
-        
         try {
             orderStreamClient.onOrderStreamEvent(response -> {
-                String json = mapper.writeValueAsString(response);
+                String json = JsonUtils.serialize(response);
+
                 int messageType = response.getMessageType();
                 if (1 == messageType) {
                     // entrustNotice
-                    EntrustNotice entrustNotice = mapper.readValue(json, EntrustNotice.class);
+                    EntrustNotice entrustNotice = JsonUtils.parse(json, EntrustNotice.class);
                     System.out.println(entrustNotice);
                 } else {
                     // positionNotice
-                    PositionNotice positionNotice = mapper.readValue(json, PositionNotice.class);
+                    PositionNotice positionNotice = JsonUtils.parse(json, PositionNotice.class);
                     System.out.println(positionNotice);
                 }
             });
