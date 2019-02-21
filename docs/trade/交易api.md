@@ -256,7 +256,107 @@ system_oid: 系统生成的订单ID
 
 
 
-## 5.取消订单
+## 5. 平仓
+
+```tex
+接口用途： 创建订单
+
+请求方式： POST
+
+接口地址Path： https://open.coinceres.com/api/v1/trade/close
+```
+
+#### 输入参数：
+
+| 参数名称      | 参数类型 | 是否必须 | 参数解释                                       |
+| ------------- | -------- | -------- | ---------------------------------------------- |
+| exchange      | String   | 是       | exchange name交易所名称                        |
+| contract      | String   | 是       | 币币交易对或合约名称                           |
+| price_type    | String   | 是       | 市价：market      限价： limit                 |
+| entrust_price | String   | 否       | 委托价格， 限价必传                            |
+| entrust_vol   | String   | 是       | 委托量，限价买、卖、市价卖是数量，市价买是金额 |
+| entrust_bs    | String   | 是       | 买：buy       卖：sell                         |
+| deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号           |
+| client_oid    | String   | 否       | 客户端标识                                     |
+| close_rule    | String   | 否       | 平仓规则                                       |
+
+#### 返回数据：
+
+```json
+{
+    "code": "200",
+    "data": {
+        "client_oid": "12345",
+        "system_oid": "125520129039151104"
+    },
+    "message": "SUCESS"
+}
+```
+
+#### 备注：
+
+```tex
+client_oid: 客户生成订单ID
+
+system_oid: 系统生成的订单ID
+```
+
+
+
+## 6. 创建合约订单
+
+```tex
+接口用途： 创建合约订单
+
+请求方式： POST
+
+接口地址Path： https://open.coinceres.com/api/v1/trade/input
+```
+
+#### 输入参数：
+
+| 参数名称      | 参数类型 | 是否必须 | 参数解释                                                     |
+| ------------- | -------- | -------- | ------------------------------------------------------------ |
+| exchange      | String   | 是       | exchange name交易所名称                                      |
+| contract      | String   | 是       | 币币交易对或合约名称                                         |
+| price_type    | String   | 是       | 市价：market      限价： limit                               |
+| entrust_price | String   | 否       | 委托价格，市价时无需传入                                     |
+| profit_value  | String   | 否       | 止盈价,合约必传；平仓时无需传入                              |
+| stop_value    | String   | 否       | 止损价，合约必传；平仓时无需传入                             |
+| entrust_vol   | String   | 是       | 委托量 限价买、卖、市价卖是数量，市价买是金额                |
+| entrust_bs    | String   | 是       | 买：buy       卖：sell                                       |
+| future_dir    | String   | 否       | 开仓：open   平仓： close                                    |
+| lever         | String   | 否       | 杠杆倍数                                                     |
+| deal_id       | String   | 否       | 仓位ID，开仓或按规则平仓时该参数无需传入                     |
+| close_rule    | String   | 否       | 1/2,平仓规则,1为按较早开仓时间优先,2为按高风险的仓位优先，开仓时无需传入 |
+| client_oid    | String   | 否       | 客户自定义ID，合约平仓需指定的持仓单号                       |
+
+#### 返回数据：
+
+```json
+{
+    "code": "200",
+    "data": {
+        "client_oid": "12345",
+        "system_oid": "125520129039151104"
+    },
+    "message": "SUCESS"
+}
+```
+
+#### 备注：
+
+```tex
+client_oid: 客户生成订单ID
+
+system_oid: 系统生成的订单ID
+
+备注：当下单的价格类型为限价单时，必须传入entrust_price参数和entrust_vol参数，当委托价格类型为为市价单时，必须传入entrust_vol参数。平仓时，若有指定的仓位ID（deal_id），表示只对该仓位进行平仓，此时无需读取平仓规则参数；若平仓命令中无指定仓位ID，则按指定平仓规则进行平仓。
+```
+
+
+
+## 7.取消订单
 
 ```tex
 接口用途： 取消订单
@@ -305,7 +405,7 @@ data: 撤单信息
 
 
 
-## 6.  查询合约持仓
+## 8.  查询合约持仓
 
 ```tex
 接口用途： 查询合约持仓信息
@@ -380,7 +480,7 @@ lever:杠杆
 
 
 
-## 7.  查询成交纪录
+## 9.  查询成交纪录
 
 ```tex
 接口用途： 查询成交纪录
