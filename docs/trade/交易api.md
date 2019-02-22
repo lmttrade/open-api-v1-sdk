@@ -278,7 +278,7 @@ system_oid: 系统生成的订单ID
 | entrust_bs    | String   | 是       | 买：buy       卖：sell                         |
 | deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号           |
 | client_oid    | String   | 否       | 客户端标识                                     |
-| close_rule    | String   | 否       | 平仓规则                                       |
+| close_rule    | String   | 否       | 平仓规则,可选值为time 、risk                   |
 
 #### 返回数据：
 
@@ -299,6 +299,10 @@ system_oid: 系统生成的订单ID
 client_oid: 客户生成订单ID
 
 system_oid: 系统生成的订单ID
+
+close_rule 平仓规则，可选值为time、risk。 time：按时间排序优先平仓， risk按风险值（接近平仓的程度）优先平仓。
+
+注意： deal_id和close_rule不可同时为空。 两者都不为空时，即按照deal_id平仓（忽略close_rule)。
 ```
 
 
