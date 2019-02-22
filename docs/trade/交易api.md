@@ -286,7 +286,7 @@ system_oid: 系统生成的订单ID
     "code": "200",
     "data": {
         "client_oid": "12345",
-        "system_oid": "125520129039151104"
+        "system_oid": "125520129039151104,125520129039151105"
     },
     "message": "SUCESS"
 }
@@ -297,7 +297,7 @@ system_oid: 系统生成的订单ID
 ```tex
 client_oid: 客户生成订单ID
 
-system_oid: 系统生成的订单ID
+system_oid: 系统生成的订单ID（可能存在多个，多个systemOid用逗号隔开）
 
 close_rule 平仓规则，可选值为time、risk。 time：按时间排序优先平仓， risk按风险值（接近平仓的程度）优先平仓。
 
