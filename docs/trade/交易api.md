@@ -227,7 +227,6 @@ commission：手续费
 | entrust_vol   | String   | 是       | 委托量 限价买、卖、市价卖是数量，市价买是金额 |
 | entrust_bs    | String   | 是       | 买：buy       卖：sell                        |
 | future_dir    | String   | 是       | 开仓：open   平仓： close                     |
-| lever         | String   | 是       | 杠杆倍数                                      |
 | client_oid    | String   | 否       | 来源标记                                      |
 | deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号          |
 
@@ -310,7 +309,7 @@ close_rule 平仓规则，可选值为time、risk。 time：按时间排序优�
 ## 6. 创建合约订单
 
 ```tex
-接口用途： 创建合约订单
+接口用途： 创建合约订单 
 
 请求方式： POST
 
@@ -354,6 +353,8 @@ close_rule 平仓规则，可选值为time、risk。 time：按时间排序优�
 client_oid: 客户生成订单ID
 
 system_oid: 系统生成的订单ID
+
+说明： 此接口和创建订单接口的URL是相同的，两个接口调同一个URL。为了区分普通BB订单和合约订单，文档说明上，对两个接口分开说明
 
 备注：当下单的价格类型为限价单时，必须传入entrust_price参数和entrust_vol参数，当委托价格类型为为市价单时，必须传入entrust_vol参数。平仓时，若有指定的仓位ID（deal_id），表示只对该仓位进行平仓，此时无需读取平仓规则参数；若平仓命令中无指定仓位ID，则按指定平仓规则进行平仓。
 ```
