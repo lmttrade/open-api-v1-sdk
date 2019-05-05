@@ -1,9 +1,11 @@
 package com.ceres.api.domain.trade;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyPair {
 
     private String exchange;
@@ -19,12 +21,8 @@ public class CurrencyPair {
     @JsonProperty("min_price")
     private String minPrice;
 
-    public String getTickSize() {
-        return tickSize;
-    }
     @JsonProperty("min_volume")
     private String minVolume;
-
     private String kind;
 
     public String getExchange() {
@@ -41,6 +39,10 @@ public class CurrencyPair {
 
     public void setContract(String contract) {
         this.contract = contract;
+    }
+
+    public String getTickSize() {
+        return tickSize;
     }
 
     public void setTickSize(String tickSize) {

@@ -7,10 +7,18 @@ import com.ceres.api.service.CoinceresTradeWebSocketClient;
 import com.ceres.api.util.JsonUtils;
 import junit.framework.TestCase;
 
+/**
+ * 订单状态数据推送
+ *
+ * @author xiaotian.huang
+ * @date 2019/05/05
+ */
 public class OrderStreamTest {
+
     private static CoinceresTradeWebSocketClient orderStreamClient;
+
     static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("dWbkgDeLIzLavnYs","dePW2XslyzFYnTuc41yRhqHIUWEVco4W").newTradeWebSocketClient();
+        orderStreamClient = CoinceresApiClientFactory.newInstance("neFwtAEZHixtLMns","n2TqzGIbXobj7Yh0B9Jl8JofFliq6VkM").newTradeWebSocketClient();
     }
 
     public static void main(String[] args) {
@@ -29,8 +37,8 @@ public class OrderStreamTest {
                     System.out.println(positionNotice);
                 }
             });
-        } catch (Exception e) {
-            TestCase.fail(e.getMessage());
+        } catch (Exception ignore) {
+            ignore.printStackTrace();
         }
     }
 }

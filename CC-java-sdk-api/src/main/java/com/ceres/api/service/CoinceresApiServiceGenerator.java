@@ -17,6 +17,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author xiaotian.huang
@@ -33,6 +34,10 @@ public class CoinceresApiServiceGenerator {
         dispatcher.setMaxRequests(500);
         sharedClient = new OkHttpClient.Builder()
                 .dispatcher(dispatcher)
+                /** 设置网络超时，方便调试 */
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .build();
     }
 
@@ -43,14 +48,17 @@ public class CoinceresApiServiceGenerator {
     public static <S> S createService(Class<S> serviceClass, String apiKey, String secret) {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(Const.API_BASE_URL)
-                .addConverterFactory(converterFactory);
+                .addConverterFactory(converterFactory)
+                ;
 
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {
             retrofitBuilder.client(sharedClient);
         } else {
             // `adaptedClient` will use its own interceptor, but share thread pool etc with the 'parent' client
             AuthenticationInterceptor interceptor = new AuthenticationInterceptor(apiKey, secret);
-            OkHttpClient adaptedClient = sharedClient.newBuilder().addInterceptor(interceptor).build();
+            OkHttpClient adaptedClient = sharedClient.newBuilder()
+                    .addInterceptor(interceptor)
+                    .build();
             retrofitBuilder.client(adaptedClient);
         }
         Retrofit retrofit = retrofitBuilder.build();
@@ -64,6 +72,7 @@ public class CoinceresApiServiceGenerator {
     /**
      * Execute a REST call and block until the response is received.
      */
+    @SuppressWarnings("all")
     public static <T> T executeSync(Call<T> call) {
         try {
             Response<T> response = call.execute();
