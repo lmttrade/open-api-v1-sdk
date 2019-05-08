@@ -18,35 +18,40 @@ public class TradeTest {
 
     private static CoinceresApiRestClient restClient;
 
+    /**  productId: 98
+     ID：JNGSXmccgPmpgyuE
+
+     秘钥：Jrs4Xc0OiLEXEYqEyCm3bjviUAOsY0Q3
+     */
     static {
-        restClient = CoinceresApiClientFactory.newInstance("neFwtAEZHixtLMns",
-                "n2TqzGIbXobj7Yh0B9Jl8JofFliq6VkM").newRestClient();
+        restClient = CoinceresApiClientFactory.newInstance("JNGSXmccgPmpgyuE",
+                "Jrs4Xc0OiLEXEYqEyCm3bjviUAOsY0Q3").newRestClient();
     }
 
     public static void main(String[] args) {
         // 01. 查询交易对
-        queryContractList();
+//        queryContractList();
 
         // 02. 下单
         placeOrder();
 
         // 03. 撤单(path参数签名处理，进行了临时处理 todo）
-        cancelOrder();
+//        cancelOrder();
 
         // 04. 查询账户信息
-        queryAccountInfo();
+//        queryAccountInfo();
 
         // 05. 查询订单信息
-        queryOrderInfo();
+//        queryOrderInfo();
 
         // 06. 查询合约持仓
-        queryHolding();
+//        queryHolding();
 
         // 07. 查询成交
-        queryTrade();
+//        queryTrade();
 
         // 8.平仓
-        closeOrder();
+//        closeOrder();
 
     }
 
@@ -110,15 +115,17 @@ public class TradeTest {
     private static void placeOrder() {
         InputOrderReq req = new InputOrderReq();
         req.setExchange("OKEX");
-        req.setContract("ADA/BTC");
+        req.setContract("BTC_USD_190510");
         req.setPriceType("limit");
-        req.setEntrustPrice("0.000011");
-        req.setProfitValue("0.00000997");
-        req.setEntrustVol("10");
+        req.setEntrustPrice("5000");
+        req.setProfitValue("100");
+        req.setEntrustVol("1");
         req.setEntrustBs("buy");
         req.setFutureDir("open");
         req.setLever("10");
         req.setClientOid("12345");
+        req.setTradeType("future");
+        req.setMarginMode("fixed");
         ResultsVO<InputOrderRes> result = restClient.input(req);
         PrettyPrinter.println(result);
     }

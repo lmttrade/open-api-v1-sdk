@@ -1,5 +1,6 @@
 package com.ceres.api.domain.trade;
 
+import com.alibaba.fastjson.annotation.JSONPOJOBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -40,6 +41,28 @@ public class InputOrderReq {
 
     @JsonProperty("client_oid")
     private String clientOid;
+
+    @JsonProperty("trade_type")
+    private String tradeType;
+
+    @JsonProperty("margin_mode")
+    private String marginMode;
+
+    public String getTradeType() {
+        return tradeType;
+    }
+
+    public void setTradeType(String tradeType) {
+        this.tradeType = tradeType;
+    }
+
+    public String getMarginMode() {
+        return marginMode;
+    }
+
+    public void setMarginMode(String marginMode) {
+        this.marginMode = marginMode;
+    }
 
     public String getExchange() {
         return exchange;
