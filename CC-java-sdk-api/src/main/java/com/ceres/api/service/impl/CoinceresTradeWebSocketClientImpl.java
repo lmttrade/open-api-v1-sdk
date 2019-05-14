@@ -1,7 +1,7 @@
 package com.ceres.api.service.impl;
 
 import com.ceres.api.constant.Const;
-import com.ceres.api.domain.stream.OrderNotice;
+import com.ceres.api.domain.stream.EntrustNotice;
 import com.ceres.api.service.CoinceresApiCallback;
 import com.ceres.api.service.CoinceresTradeWebSocketClient;
 import com.ceres.api.util.SHA256Util;
@@ -39,8 +39,8 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
     }
 
     @Override
-    public Closeable onOrderStreamEvent(CoinceresApiCallback<OrderNotice> callback) {
-        return createNewWebSocket(new CoinceresTradeWebSocketListener<>(callback, OrderNotice.class));
+    public Closeable onOrderStreamEvent(CoinceresApiCallback<EntrustNotice> callback) {
+        return createNewWebSocket(new CoinceresTradeWebSocketListener<>(callback, EntrustNotice.class));
     }
 
     private Closeable createNewWebSocket(CoinceresTradeWebSocketListener<?> listener) {

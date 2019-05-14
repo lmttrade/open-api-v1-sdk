@@ -23,6 +23,7 @@ public class CurrencyPair {
 
     @JsonProperty("min_volume")
     private String minVolume;
+
     private String kind;
 
     public String getExchange() {

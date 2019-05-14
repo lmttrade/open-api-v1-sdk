@@ -5,7 +5,6 @@ import com.ceres.api.domain.stream.EntrustNotice;
 import com.ceres.api.domain.stream.PositionNotice;
 import com.ceres.api.service.CoinceresTradeWebSocketClient;
 import com.ceres.api.util.JsonUtils;
-import junit.framework.TestCase;
 
 /**
  * 订单状态数据推送
@@ -18,7 +17,8 @@ public class OrderStreamTest {
     private static CoinceresTradeWebSocketClient orderStreamClient;
 
     static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("neFwtAEZHixtLMns","n2TqzGIbXobj7Yh0B9Jl8JofFliq6VkM").newTradeWebSocketClient();
+        orderStreamClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr","b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl")
+                .newTradeWebSocketClient();
     }
 
     public static void main(String[] args) {

@@ -18,17 +18,12 @@ public class TradeTest {
 
     private static CoinceresApiRestClient restClient;
 
-    /**  productId: 98
-     ID：JNGSXmccgPmpgyuE
-
-     秘钥：Jrs4Xc0OiLEXEYqEyCm3bjviUAOsY0Q3
-     */
     static {
-        restClient = CoinceresApiClientFactory.newInstance("JNGSXmccgPmpgyuE",
-                "Jrs4Xc0OiLEXEYqEyCm3bjviUAOsY0Q3").newRestClient();
+        restClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr",
+                "b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl").newRestClient();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // 01. 查询交易对
 //        queryContractList();
 
@@ -115,17 +110,17 @@ public class TradeTest {
     private static void placeOrder() {
         InputOrderReq req = new InputOrderReq();
         req.setExchange("OKEX");
-        req.setContract("BTC_USD_190510");
+        req.setContract("LTC/BTC");
         req.setPriceType("limit");
-        req.setEntrustPrice("5000");
+        req.setEntrustPrice("0.01");
         req.setProfitValue("100");
         req.setEntrustVol("1");
         req.setEntrustBs("buy");
-        req.setFutureDir("open");
-        req.setLever("10");
+//        req.setFutureDir("open");
+//        req.setLever("10");
         req.setClientOid("12345");
-        req.setTradeType("future");
-        req.setMarginMode("fixed");
+        req.setTradeType("spot");
+//        req.setMarginMode("fixed");
         ResultsVO<InputOrderRes> result = restClient.input(req);
         PrettyPrinter.println(result);
     }
@@ -134,7 +129,7 @@ public class TradeTest {
     private static void queryContractList() {
         ContractReq req = new ContractReq();
         req.setExchange("OKEX");
-        req.setContract("BTC/USDT");
+        req.setContract("BTC/USD/190510");
         ResultsVO<List<CurrencyPair>> result = restClient.getContractList(req);
         PrettyPrinter.println(result);
     }

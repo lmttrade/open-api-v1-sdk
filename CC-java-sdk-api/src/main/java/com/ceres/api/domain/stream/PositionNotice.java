@@ -6,46 +6,40 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PositionNotice {
-    private Integer type;
-    private Long productId;
-    private String dealId;
-    private int messageType;
+
+    /** 产品名称 */
+    private String product;
+
+    /** 委托id */
     private String entrustId;
-    private String profit;
-    private String stop;
+
+    /** 强平价 */
     private String forcedPrice;
+
+    /** 总保证金 */
     private String totalMargin;
 
-    public Integer getType() {
-        return type;
+    /** 止盈 */
+    private String profit;
+
+    /** 止损 */
+    private String stop;
+
+    /** 持仓号 */
+    private String dealId;
+
+    /** 挂单或者持仓 */
+    private String type;
+
+    /** 通知类型 */
+    private int messageType;
+
+    public String getProduct() {
+        return product;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getDealId() {
-        return dealId;
-    }
-
-    public void setDealId(String dealId) {
-        this.dealId = dealId;
-    }
-
-    public int getMessageType() {
-        return messageType;
-    }
-
-    public void setMessageType(int messageType) {
-        this.messageType = messageType;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public String getEntrustId() {
@@ -54,6 +48,22 @@ public class PositionNotice {
 
     public void setEntrustId(String entrustId) {
         this.entrustId = entrustId;
+    }
+
+    public String getForcedPrice() {
+        return forcedPrice;
+    }
+
+    public void setForcedPrice(String forcedPrice) {
+        this.forcedPrice = forcedPrice;
+    }
+
+    public String getTotalMargin() {
+        return totalMargin;
+    }
+
+    public void setTotalMargin(String totalMargin) {
+        this.totalMargin = totalMargin;
     }
 
     public String getProfit() {
@@ -72,20 +82,28 @@ public class PositionNotice {
         this.stop = stop;
     }
 
-    public String getForcedPrice() {
-        return forcedPrice;
+    public String getDealId() {
+        return dealId;
     }
 
-    public void setForcedPrice(String forcedPrice) {
-        this.forcedPrice = forcedPrice;
+    public void setDealId(String dealId) {
+        this.dealId = dealId;
     }
 
-    public String getTotalMargin() {
-        return totalMargin;
+    public String getType() {
+        return type;
     }
 
-    public void setTotalMargin(String totalMargin) {
-        this.totalMargin = totalMargin;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
     }
 
     @Override
