@@ -69,9 +69,9 @@ public class OrderStreamTest {
 ```json
 {
 	"product":"testbc-btc", # 产品名称
-  "exchange":"OKEX", # 交易所名称
+    "exchange":"OKEX", # 交易所名称
 	"contract":"LTC/BTC", # 交易对
-  "entrustId":"181829153963257883", # 委托单号
+    "entrustId":"181829153963257883", # 委托单号
 	"avgDealPrice":"0", # 成交均价
 	"entrustTime":"2019-02-16 19:38:31", # 委托时间
 	"entrustStatus":"SUBMITTING", # 委托状态 
@@ -79,7 +79,7 @@ public class OrderStreamTest {
 	"entrustType":"LIMIT", # 价格类型
 	"lever":"null", # 杠杆倍数
 	"entrustPrice":"0.01" # 委托价格
-  "entrustVol":"1", # 委托数量
+    "entrustVol":"1", # 委托数量
 	"dealVol":"0", # 成交数量
 	"totalDealVol":"null", # 总成交数量
 	"messageType":"1" # 通知类型 1: 状态变更通知  2: 保证金追加
@@ -104,14 +104,14 @@ entrustType取值:
 ```json
 {    
     "product":"testbc-btc", # 产品名称
-		"entrustId":"181829153963257883", # 委托id
-		"forcedPrice":"12", # 强平价
-		"totalMargin":"73", # 总保证金
-		"profit":"30", # 止盈
-		"stop":"10", # 止损
-		"dealId":"", # 持仓号
-		"type":"PENDING", # 挂单或者持仓
-		"messageType":"2" # 通知类型 1: 状态变更通知  2: 保证金追加
+    "entrustId":"181829153963257883", # 委托id
+    "forcedPrice":"12", # 强平价
+    "totalMargin":"73", # 总保证金
+    "profit":"30", # 止盈
+    "stop":"10", # 止损
+    "dealId":"", # 持仓号
+    "type":"PENDING", # 挂单或者持仓
+    "messageType":"2" # 通知类型 1: 状态变更通知  2: 保证金追加
 }
 ```
 
