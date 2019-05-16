@@ -94,7 +94,7 @@ entrustStatus取值:
 废单 "FAILURE", 撤单 "CANCEL",正撤 "CANCELING", 待撤 "PENDING", 部分撤单 "PART_CANCELED",
 已撤 "CANCELED"
 entrustDir取值:
-买 BUY, 卖 SELL, 开多 OPEN_BUY, 开空 OPEN_SELL,平多 CLOSE_SELL, 平空CLOSE_BUY
+买 BUY, 卖 SELL, 开多 BUY_OPEN, 开空 SELL_OPEN,平多 SELL_CLOSE, 平空 BUY_CLOSE
 entrustType取值:
 限价 LIMIT , 市价 MARKET
 ```
