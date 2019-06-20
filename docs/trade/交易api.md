@@ -250,7 +250,7 @@ stop_value：止损价格（币币交易 忽略该字段）
 ```tex
 接口用途： 查询活跃订单
 
-请求方式： POST
+请求方式： GET
 
 接口地址Path： https://open.coinceres.com/api/v1/trade/open_orders
 ```
