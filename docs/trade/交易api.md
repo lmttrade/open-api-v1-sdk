@@ -80,7 +80,7 @@ kind 种类 1定期合约 2股票 3永久合约 4数字货币交易对 5指数
 | 参数名称 | 参数类型 | 是否必须 | 参数解释                |
 | -------- | -------- | -------- | ----------------------- |
 | exchange | String   | 否       | exchange name交易所名称 |
-| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳|
+| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据：
 
@@ -147,7 +147,7 @@ account_type: 1归集账户 2结算账户 3 bb账户 4 bc账户，只有账户�
 | future_dir    | String   | 是       | 开仓：open   平仓： close                     |
 | client_oid    | String   | 否       | 来源标记                                      |
 | deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号          |
-| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳|
+| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据：
 
@@ -187,7 +187,7 @@ system_oid: 系统生成的订单ID
 | 参数名称   | 参数类型 | 是否必须 | 参数解释                                 |
 | ---------- | -------- | -------- | ---------------------------------------- |
 | system_oid | String   | 是       | 系统订单号 |
-| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳|
+| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据：
 
@@ -263,7 +263,7 @@ stop_value：止损价格（币币交易 忽略该字段）
 | contract      | String   | 否       | 币币交易对或合约名称                           |
 | from    | String   | 否       | 起始查询的系统委托单号 从最早下单开始排序                 |
 | limit | String   | 否       | 一次查询最大数量 最大100 默认100                            |
-| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳|
+| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据：
 
@@ -320,7 +320,7 @@ stop_value：止损价格（币币交易 忽略该字段）
 | deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号           |
 | client_oid    | String   | 否       | 客户端标识                                     |
 | close_rule    | String   | 否       | 平仓规则,可选值为time 、risk                   |
-| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳|
+| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据：
 
@@ -376,7 +376,7 @@ close_rule 平仓规则，可选值为time、risk。 time：按时间排序优�
 | deal_id       | String   | 否       | 仓位ID，开仓或按规则平仓时该参数无需传入                     |
 | close_rule    | String   | 否       | 1/2,平仓规则,1为按较早开仓时间优先,2为按高风险的仓位优先，开仓时无需传入 |
 | client_oid    | String   | 否       | 客户自定义ID，合约平仓需指定的持仓单号                       |
-| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳|
+| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据：
 
