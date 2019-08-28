@@ -1,10 +1,10 @@
 # base url
 
 - rest
-    http://open.coinceres.com
+    http://open.lmt.trade
 
 - websocket
-    ws://open.coinceres.com:18003
+    ws://open.lmt.trade:18003
 
 # rest api
 
@@ -29,8 +29,7 @@ code表明业务错误，枚举code如下
 
 |   Name   |  Type  |            Description             | Notes |
 | -------- | ------ | ---------------------------------- | ----- |
-| exchange | string | HUOBI                              | [required] |
-| contract | string | BTC/USDT                           | [required] |
+| symbol | string | BTC/USDT                           | [required] |
 | begin    | string | 请求开始时间(时间戳)                 | [optional] |
 | end      | string | 请求结束时间(时间戳)                 | [optional] |
 | size     | int    | 请求根数                            | [optional] |
@@ -47,8 +46,8 @@ code表明业务错误，枚举code如下
 ```json
 
 {
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "duration":"1m",
     "detail":[
         {
@@ -75,8 +74,7 @@ code表明业务错误，枚举code如下
 
 |   name   |  type  |    description     | Notes |
 | -------- | ------ | ------------------ | ----  |
-| exchange | string | HUOBI              | [required] |
-| contract | string | BTC/USDT           | [required] |
+| symbol | string | BTC/USDT           | [required] |
 | begin    | string | 请求开始时间(时间戳) | [optional] |
 | end      | string | 请求结束时间(时间戳) | [optional] |
 | size     | int    | 请求根数            | [optional] |
@@ -90,8 +88,8 @@ code表明业务错误，枚举code如下
 ```json
 
 {
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "detail":[
         {
             "time":"1354678432345",
@@ -113,17 +111,16 @@ code表明业务错误，枚举code如下
 ### a.请求参数
 
 |   Name   |  Type  | Description | Notes |
-| -------- | ------ | ----------- | ----  | 
-| exchange | string | HUOBI       | [required] |
-| contract | string  | BTC/USDT   | [required] |
+| -------- | ------ | ----------- | ----  |
+| symbol | string  | BTC/USDT   | [required] |
 
 ### b.返回结果
 
 ```json
 
 {
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "asks":[
          {"price": "9216.5", "volume": "1.7371"},
          {"price": "9217.5", "volume": "1.7371"}
@@ -144,16 +141,15 @@ code表明业务错误，枚举code如下
 
 |   Name   |  Type  | Description | Notes |
 | -------- | ------ | ----------- | ----- |
-| exchange | string | HUOBI       | [required] |
-| contract | string  | BTC/USDT   | [required] |
+| symbol | string  | BTC/USDT   | [required] |
 
 ### b.返回结果
 
 ```json
 
 {
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "time":"1354678432345",
     "open":"4.35",
     "high":"4.35",
@@ -189,8 +185,8 @@ code表明业务错误，枚举code如下
 [
     {
         "msg_type":"subscribe-tick",
-        "exchange": "HUOBI",
-        "contract":"BTC/USDT"
+        "exchange": "LMT",
+        "symbol":"BTC/USDT"
     }
 ]
 
@@ -202,10 +198,10 @@ code表明业务错误，枚举code如下
 ```json
 [{
     "msg_type":"subscribed-tick",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "code": 200,
-    "message":"invalid contract"
+    "message":"invalid symbol"
 }]
 
 ```
@@ -215,8 +211,8 @@ code表明业务错误，枚举code如下
 ```json
 {
     "msg_type":"push-tick",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "time":"1354678432345",
     "open":"4.35",
     "high":"4.35",
@@ -236,8 +232,8 @@ code表明业务错误，枚举code如下
 [
     {
         "msg_type":"subscribe-trade",
-        "exchange": "HUOBI",
-        "contract":"BTC/USDT"
+        "exchange": "LMT",
+        "symbol":"BTC/USDT"
     }
 ]
 ```
@@ -248,10 +244,10 @@ code表明业务错误，枚举code如下
 ```json
 [{
     "msg_type":"subscribed-trade",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "code": 200,
-    "message":"invalid contract"
+    "message":"invalid symbol"
 }]
 ```
 
@@ -260,8 +256,8 @@ code表明业务错误，枚举code如下
 ```json
 {
     "msg_type":"push-trade",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "time":"1354678432345",
     "price":"4.35",
     "volume":"4.35",
@@ -278,8 +274,8 @@ code表明业务错误，枚举code如下
 [
     {
         "msg_type":"subscribe-depth10",
-        "exchange": "HUOBI",
-        "contract":"BTC/USDT"
+        "exchange": "LMT",
+        "symbol":"BTC/USDT"
     }
 ]
 ```
@@ -290,10 +286,10 @@ code表明业务错误，枚举code如下
 ```json
 [{
     "msg_type":"subscribed-depth10",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "code": 200,
-    "message":"invalid contract"
+    "message":"invalid symbol"
 }]
 ```
 
@@ -302,8 +298,8 @@ code表明业务错误，枚举code如下
 ```json
 {
     "msg_type":"push-depth10",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "asks":[
          {"price": "9216.5", "volume": "1.7371"},
          {"price": "9217.5", "volume": "1.7371"}
@@ -324,8 +320,8 @@ code表明业务错误，枚举code如下
 [
     {
         "msg_type":"subscribe-candle",
-        "exchange": "HUOBI",
-        "contract":"BTC/USDT",
+        "exchange": "LMT",
+        "symbol":"BTC/USDT",
         "duration":"1m"
     }
 ]
@@ -337,11 +333,11 @@ code表明业务错误，枚举code如下
 ```json
 [{
     "msg_type":"subscribed-candle",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "duration":"1m",
     "code": 200,
-    "message":"invalid contract"
+    "message":"invalid symbol"
 }]
 ```
 
@@ -350,8 +346,8 @@ code表明业务错误，枚举code如下
 ```json
 {
     "msg_type":"push-candle",
-    "exchange": "HUOBI",
-    "contract":"BTC/USDT",
+    "exchange": "LMT",
+    "symbol":"BTC/USDT",
     "duration":"1m",
     "time":"1549868040000",
     "open":"4.35",
