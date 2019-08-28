@@ -3,8 +3,11 @@ package com.ceres.api.domain.trade;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+/**
+ * @author LMT
+ */
 public class TransRecord {
+    private String exchange;
     @JsonProperty("entrust_bs")
     private String entrustBs;
     @JsonProperty("future_dir")
@@ -14,7 +17,7 @@ public class TransRecord {
     private String commission;
     @JsonProperty("commission_currency")
     private String commissionCurrency;
-    private String contract;
+    private String symbol;
     @JsonProperty("dealt_amount")
     private String dealtAmount;
     @JsonProperty("dealt_price")
@@ -66,12 +69,20 @@ public class TransRecord {
         this.commissionCurrency = commissionCurrency;
     }
 
-    public String getContract() {
-        return contract;
+    public String getExchange() {
+        return exchange;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getDealtAmount() {
@@ -122,7 +133,7 @@ public class TransRecord {
                 .append("clientOid", clientOid)
                 .append("commission", commission)
                 .append("commissionCurrency", commissionCurrency)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("dealtAmount", dealtAmount)
                 .append("dealtPrice", dealtPrice)
                 .append("dealtTime", dealtTime)

@@ -12,7 +12,7 @@ import com.ceres.api.service.impl.CoinceresTradeWebSocketClientImpl;
 import static com.ceres.api.service.CoinceresApiServiceGenerator.getSharedClient;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  */
 public class CoinceresApiClientFactory {

@@ -3,7 +3,7 @@ package com.ceres.api.domain.data;
 public class CycleReq {
 
     private String exchange;
-    private String contract;
+    private String symbol;
     private String begin;
     private String end;
     private int size;
@@ -17,12 +17,12 @@ public class CycleReq {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getBegin() {

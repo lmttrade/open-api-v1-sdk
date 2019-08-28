@@ -1,17 +1,16 @@
 package com.ceres.api.domain.trade;
 
-import com.alibaba.fastjson.annotation.JSONPOJOBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+/**
+ * @author LMT
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InputOrderReq {
 
-    private String exchange;
-
-    private String contract;
+    private String symbol;
 
     @JsonProperty("price_type")
     private String priceType;
@@ -25,8 +24,8 @@ public class InputOrderReq {
     @JsonProperty("stop_value")
     private String stopValue;
 
-    @JsonProperty("entrust_vol")
-    private String entrustVol;
+    @JsonProperty("entrust_amount")
+    private String entrustAmount;
 
     @JsonProperty("entrust_bs")
     private String entrustBs;
@@ -48,6 +47,9 @@ public class InputOrderReq {
     @JsonProperty("margin_mode")
     private String marginMode;
 
+    @JsonProperty("timestamp")
+    private Long timestamp;
+
     public String getTradeType() {
         return tradeType;
     }
@@ -64,20 +66,12 @@ public class InputOrderReq {
         this.marginMode = marginMode;
     }
 
-    public String getExchange() {
-        return exchange;
+    public String getSymbol() {
+        return symbol!=null ? symbol.replace('/','_'):null;
     }
 
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
-    }
-
-    public String getContract() {
-        return contract!=null ? contract.replace('/','_'):null;
-    }
-
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getPriceType() {
@@ -112,12 +106,20 @@ public class InputOrderReq {
         this.stopValue = stopValue;
     }
 
-    public String getEntrustVol() {
-        return entrustVol;
+    public String getEntrustAmount() {
+        return entrustAmount;
     }
 
-    public void setEntrustVol(String entrustVol) {
-        this.entrustVol = entrustVol;
+    public void setEntrustAmount(String entrustAmount) {
+        this.entrustAmount = entrustAmount;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getEntrustBs() {
@@ -163,18 +165,20 @@ public class InputOrderReq {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("exchange", exchange)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("priceType", priceType)
                 .append("entrustPrice", entrustPrice)
                 .append("profitValue", profitValue)
                 .append("stopValue", stopValue)
-                .append("entrustVol", entrustVol)
+                .append("entrustAmount", entrustAmount)
                 .append("entrustBs", entrustBs)
                 .append("futureDir", futureDir)
                 .append("dealId", dealId)
                 .append("lever", lever)
                 .append("clientOid", clientOid)
+                .append("tradeType", tradeType)
+                .append("marginMode", marginMode)
+                .append("timestamp", timestamp)
                 .toString();
     }
 }

@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+/**
+ * @author LMT
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyPair {
 
     private String exchange;
 
-    private String contract;
+    private String symbol;
 
     @JsonProperty("tick_size")
     private String tickSize;
@@ -34,12 +36,12 @@ public class CurrencyPair {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getTickSize() {
@@ -86,7 +88,7 @@ public class CurrencyPair {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("exchange", exchange)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("tickSize", tickSize)
                 .append("volumeIncrement", volumeIncrement)
                 .append("minPrice", minPrice)

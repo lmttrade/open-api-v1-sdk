@@ -6,27 +6,28 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  * e.g
- * {"contract":"BTC/USDT","exchange":"OKEX","msg_type":"push-trade","price":"3610.3002","side":"s","time":"1550114101032","volume":"0.03456403"}
+ * {"symbol":"BTC/USDT","exchange":"LMT","msg_type":"push-trade","price":"3610.3002","side":"s","time":"1550114101032",
+ * "volume":"0.03456403"}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TradeEvent {
 
-    private String contract;
+    private String symbol;
 
     private String exchange;
 
     @JsonProperty("msg_type")
     private String msgType;
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getMsgType() {
@@ -88,7 +89,7 @@ public class TradeEvent {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("exchange", exchange)
                 .append("msgType", msgType)
                 .append("price", price)

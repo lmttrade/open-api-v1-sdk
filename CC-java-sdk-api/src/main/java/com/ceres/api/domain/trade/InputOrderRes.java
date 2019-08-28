@@ -3,7 +3,9 @@ package com.ceres.api.domain.trade;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+/**
+ * @author LMT
+ */
 public class InputOrderRes {
 
     @JsonProperty("client_oid")

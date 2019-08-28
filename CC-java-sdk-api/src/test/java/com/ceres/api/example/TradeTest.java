@@ -55,12 +55,11 @@ public class TradeTest {
         CloseOrderReq req = new CloseOrderReq();
         req.setClientOid("123");
         req.setCloseRule("admin");
-        req.setContract("BTC/USDT");
+        req.setSymbol("BTC/USDT");
         req.setDealId("123456789");
         req.setEntrustBs("buy");
         req.setEntrustPrice("1212");
         req.setEntrustVol("10");
-        req.setExchange("HUOBI");
         req.setPriceType("limit");
         ResultsVO<InputOrderRes> result = restClient.close(req);
         PrettyPrinter.println(result);
@@ -70,7 +69,7 @@ public class TradeTest {
     private static void queryTrade() {
         TransReq req = new TransReq();
         req.setExchange("OKEX");
-        req.setContract("BTC/USDT");
+        req.setSymbol("BTC/USDT");
         req.setCount("10");
         ResultsVO<List<TransRecord>> result = restClient.queryTransRecord(req);
         PrettyPrinter.println(result);
@@ -80,7 +79,7 @@ public class TradeTest {
     private static void queryHolding() {
         PositionQueryReq req = new PositionQueryReq();
         req.setExchange("OKEX");
-        req.setContract("BTC/USDT");
+        req.setSymbol("BTC/USDT");
         ResultsVO result = restClient.getPosition(req);
         PrettyPrinter.println(result);
     }
@@ -88,15 +87,15 @@ public class TradeTest {
     /** 查询订单信息 */
     private static void queryOrderInfo() {
         OrderDetailReq req = new OrderDetailReq();
-        req.setExchange("OKEX");
-        req.setContract("BTC/USDT");
+        req.setSystemOid("123456789");
+        req.setTimestamp(System.currentTimeMillis());
         ResultsVO<List<OrderDetailRes>> result = restClient.getOrderInfo(req);
         PrettyPrinter.println(result);
     }
 
     /** 查询账户信息 */
     private static void queryAccountInfo() {
-        ResultsVO<List<AccountInfoRes>> result = restClient.getAccountInfo("OKEX");
+        ResultsVO<List<AccountInfoRes>> result = restClient.getAccountInfo(System.currentTimeMillis());
         PrettyPrinter.println(result);
     }
 
@@ -109,12 +108,11 @@ public class TradeTest {
     /** 下单 */
     private static void placeOrder() {
         InputOrderReq req = new InputOrderReq();
-        req.setExchange("OKEX");
-        req.setContract("LTC/BTC");
+        req.setSymbol("LTC/BTC");
         req.setPriceType("limit");
         req.setEntrustPrice("0.01");
         req.setProfitValue("100");
-        req.setEntrustVol("1");
+        req.setEntrustAmount("1");
         req.setEntrustBs("buy");
 //        req.setFutureDir("open");
 //        req.setLever("10");
@@ -127,10 +125,10 @@ public class TradeTest {
 
     /** 查询交易对 */
     private static void queryContractList() {
-        ContractReq req = new ContractReq();
+        SymbolReq req = new SymbolReq();
         req.setExchange("OKEX");
-        req.setContract("BTC/USD/190510");
-        ResultsVO<List<CurrencyPair>> result = restClient.getContractList(req);
+        req.setSymbol("BTC/USD/190510");
+        ResultsVO<List<CurrencyPair>> result = restClient.getSymbols(req);
         PrettyPrinter.println(result);
     }
 }

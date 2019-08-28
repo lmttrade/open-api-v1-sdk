@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 
 /**
  * Utility class to sign messages using HMAC-SHA256.
+ * @author LMT
  */
 public class HmacSHA256Signer {
 

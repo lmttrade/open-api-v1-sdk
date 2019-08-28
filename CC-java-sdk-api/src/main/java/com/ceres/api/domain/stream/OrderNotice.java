@@ -1,17 +1,33 @@
 package com.ceres.api.domain.stream;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * @author LMT
+ */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderNotice {
-    private long productId;
-    private String entrustId;
+    /** 委托单号 */
+    @JsonProperty("system_oid")
+    private String systemOid;
+
     private int messageType;
-    private String avgDealPrice;
-    private String totalDealVol;
-    private int entrustStatus;
+    /** 成交均价 */
+    @JsonProperty("average_dealt_price")
+    private String averageDealtPrice;
+
+    /** 成交数量 */
+    @JsonProperty("dealt_amount")
+    private String dealtAmount;
+
+    /** 委托状态 */
+    @JsonProperty("status")
+    private String status;
+
     private Integer type;
     private String dealId;
     private String profit;
@@ -19,20 +35,12 @@ public class OrderNotice {
     private String forcedPrice;
     private String totalMargin;
 
-    public long getProductId() {
-        return productId;
+    public String getSystemOid() {
+        return systemOid;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
-    }
-
-    public String getEntrustId() {
-        return entrustId;
-    }
-
-    public void setEntrustId(String entrustId) {
-        this.entrustId = entrustId;
+    public void setSystemOid(String systemOid) {
+        this.systemOid = systemOid;
     }
 
     public int getMessageType() {
@@ -43,28 +51,28 @@ public class OrderNotice {
         this.messageType = messageType;
     }
 
-    public String getAvgDealPrice() {
-        return avgDealPrice;
+    public String getAverageDealtPrice() {
+        return averageDealtPrice;
     }
 
-    public void setAvgDealPrice(String avgDealPrice) {
-        this.avgDealPrice = avgDealPrice;
+    public void setAverageDealtPrice(String averageDealtPrice) {
+        this.averageDealtPrice = averageDealtPrice;
     }
 
-    public String getTotalDealVol() {
-        return totalDealVol;
+    public String getDealtAmount() {
+        return dealtAmount;
     }
 
-    public void setTotalDealVol(String totalDealVol) {
-        this.totalDealVol = totalDealVol;
+    public void setDealtAmount(String dealtAmount) {
+        this.dealtAmount = dealtAmount;
     }
 
-    public int getEntrustStatus() {
-        return entrustStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEntrustStatus(int entrustStatus) {
-        this.entrustStatus = entrustStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Integer getType() {

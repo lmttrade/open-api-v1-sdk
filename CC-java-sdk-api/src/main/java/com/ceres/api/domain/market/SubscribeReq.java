@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  */
 public class SubscribeReq {
@@ -13,7 +13,7 @@ public class SubscribeReq {
     @JsonProperty("msg_type")
     private String msgType;
     private String exchange;
-    private String contract;
+    private String symbol;
     private String duration;
 
     public String getDuration() {
@@ -39,12 +39,12 @@ public class SubscribeReq {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SubscribeReq {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("msg_type", msgType)
                 .append("exchange", exchange)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("duration",duration)
                 .toString();
     }

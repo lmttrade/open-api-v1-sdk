@@ -11,7 +11,7 @@ public class OpenResp<T> implements Serializable {
 
     private String exchange;
 
-    private String contract;
+    private String symbol;
 
     private String duration;
 
@@ -29,12 +29,12 @@ public class OpenResp<T> implements Serializable {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getDuration() {
@@ -74,7 +74,7 @@ public class OpenResp<T> implements Serializable {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("exchange", exchange)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("duration", duration)
                 .append("message", message)
                 .append("code", code)

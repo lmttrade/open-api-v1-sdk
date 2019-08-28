@@ -5,7 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 public class MoneyUtil {
     public static int MONEY_SCALE = 16;
     public static int MONEY_DISPLAY_SCALE = 8;

@@ -6,16 +6,16 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  * e.g
- * {"close":"3616.3721","contract":"BTC/USDT","duration":"1m","exchange":"OKEX",
+ * {"close":"3616.3721","symbol":"BTC/USDT","duration":"1m","exchange":"OKEX",
  * "high":"3616.9806","low":"3616.3507","msg_type":"push-candle","open":"3616.9806","time":"1550126820000","volume":"0.67480051"}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CandleEvent {
     private String close;
-    private String contract;
+    private String symbol;
     private String duration;
     private String exchange;
     private String high;
@@ -73,12 +73,12 @@ public class CandleEvent {
         this.open = open;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getMsgType() {
@@ -110,7 +110,7 @@ public class CandleEvent {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("close", close)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("duration", duration)
                 .append("exchange", exchange)
                 .append("high", high)

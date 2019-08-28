@@ -1,63 +1,66 @@
 package com.ceres.api.domain.stream;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * @author LMT
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EntrustNotice {
-    /** 产品名称 */
-    private String product;
-
     /** 交易所名称 */
     private String exchange;
 
     /** 交易对 */
-    private String contract;
+    private String symbol;
 
     /** 委托单号 */
-    private String entrustId;
+    @JsonProperty("system_oid")
+    private String systemOid;
 
     /** 成交均价 */
-    private String avgDealPrice;
+    @JsonProperty("average_dealt_price")
+    private String averageDealtPrice;
 
     /** 委托时间 */
+    @JsonProperty("entrust_time")
     private String entrustTime;
 
     /** 委托状态 */
-    private String entrustStatus;
+    @JsonProperty("status")
+    private String status;
 
     /** 委托方向 */
-    private String entrustDir;
+    @JsonProperty("entrust_bs")
+    private String entrustBs;
 
     /** 价格类型 */
-    private String entrustType;
+    @JsonProperty("price_type")
+    private String priceType;
 
     /** 杠杆倍数 */
     private String lever;
 
     /** 委托价格 */
+    @JsonProperty("entrust_price")
     private String entrustPrice;
 
     /** 委托数量 */
-    private String entrustVol;
+    @JsonProperty("entrust_amount")
+    private String entrustAmount;
 
     /** 成交数量 */
-    private String dealVol;
+    @JsonProperty("dealt_amount")
+    private String dealtAmount;
 
-    /** 总成交数量 */
-    private String totalDealVol;
+    /** 最后一次成交时间 */
+    @JsonProperty("dealt_time")
+    private String dealtTime;
 
     /** 通知类型 1: 状态变更通知  2: 保证金追加 */
     private int messageType;
-
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
 
     public String getExchange() {
         return exchange;
@@ -67,28 +70,28 @@ public class EntrustNotice {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public String getEntrustId() {
-        return entrustId;
+    public String getSystemOid() {
+        return systemOid;
     }
 
-    public void setEntrustId(String entrustId) {
-        this.entrustId = entrustId;
+    public void setSystemOid(String systemOid) {
+        this.systemOid = systemOid;
     }
 
-    public String getAvgDealPrice() {
-        return avgDealPrice;
+    public String getAverageDealtPrice() {
+        return averageDealtPrice;
     }
 
-    public void setAvgDealPrice(String avgDealPrice) {
-        this.avgDealPrice = avgDealPrice;
+    public void setAverageDealtPrice(String averageDealtPrice) {
+        this.averageDealtPrice = averageDealtPrice;
     }
 
     public String getEntrustTime() {
@@ -99,28 +102,28 @@ public class EntrustNotice {
         this.entrustTime = entrustTime;
     }
 
-    public String getEntrustStatus() {
-        return entrustStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEntrustStatus(String entrustStatus) {
-        this.entrustStatus = entrustStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getEntrustDir() {
-        return entrustDir;
+    public String getEntrustBs() {
+        return entrustBs;
     }
 
-    public void setEntrustDir(String entrustDir) {
-        this.entrustDir = entrustDir;
+    public void setEntrustBs(String entrustBs) {
+        this.entrustBs = entrustBs;
     }
 
-    public String getEntrustType() {
-        return entrustType;
+    public String getPriceType() {
+        return priceType;
     }
 
-    public void setEntrustType(String entrustType) {
-        this.entrustType = entrustType;
+    public void setPriceType(String priceType) {
+        this.priceType = priceType;
     }
 
     public String getLever() {
@@ -139,28 +142,28 @@ public class EntrustNotice {
         this.entrustPrice = entrustPrice;
     }
 
-    public String getEntrustVol() {
-        return entrustVol;
+    public String getEntrustAmount() {
+        return entrustAmount;
     }
 
-    public void setEntrustVol(String entrustVol) {
-        this.entrustVol = entrustVol;
+    public void setEntrustAmount(String entrustAmount) {
+        this.entrustAmount = entrustAmount;
     }
 
-    public String getDealVol() {
-        return dealVol;
+    public String getDealtAmount() {
+        return dealtAmount;
     }
 
-    public void setDealVol(String dealVol) {
-        this.dealVol = dealVol;
+    public void setDealtAmount(String dealtAmount) {
+        this.dealtAmount = dealtAmount;
     }
 
-    public String getTotalDealVol() {
-        return totalDealVol;
+    public String getDealtTime() {
+        return dealtTime;
     }
 
-    public void setTotalDealVol(String totalDealVol) {
-        this.totalDealVol = totalDealVol;
+    public void setDealtTime(String dealtTime) {
+        this.dealtTime = dealtTime;
     }
 
     public int getMessageType() {

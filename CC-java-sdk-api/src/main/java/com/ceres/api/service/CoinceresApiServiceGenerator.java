@@ -4,7 +4,6 @@ import com.ceres.api.constant.Const;
 import com.ceres.api.exception.CoinceresApiError;
 import com.ceres.api.exception.CoinceresApiException;
 import com.ceres.api.security.AuthenticationInterceptor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -20,7 +19,7 @@ import java.lang.annotation.Annotation;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  */
 public class CoinceresApiServiceGenerator {

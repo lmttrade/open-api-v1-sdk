@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  */
 public class CoinceresApiWebSocketListener<T> extends WebSocketListener {

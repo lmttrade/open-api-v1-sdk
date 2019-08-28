@@ -2,7 +2,9 @@ package com.ceres.api.domain.trade;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+/**
+ * @author LMT
+ */
 public class ResultsVO<T> {
     private String code;
 

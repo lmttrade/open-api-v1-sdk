@@ -1,10 +1,10 @@
 package com.ceres.api.domain.trade;
-
+/**
+ * @author LMT
+ */
 public class OrderDetailReq {
     private String systemOid;
-    private Integer status;
-    private String exchange;
-    private String contract;
+    private Long timestamp;
 
     public String getSystemOid() {
         return systemOid;
@@ -14,27 +14,11 @@ public class OrderDetailReq {
         this.systemOid = systemOid;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getExchange() {
-        return exchange;
-    }
-
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
-    }
-
-    public String getContract() {
-        return contract;
-    }
-
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

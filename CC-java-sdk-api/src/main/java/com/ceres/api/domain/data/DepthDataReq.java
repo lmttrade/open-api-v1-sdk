@@ -4,7 +4,7 @@ public class DepthDataReq {
 
     private String exchange;
 
-    private String contract;
+    private String symbol;
 
     public String getExchange() {
         return exchange;
@@ -14,11 +14,11 @@ public class DepthDataReq {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }

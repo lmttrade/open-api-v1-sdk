@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  */
 public class SubType {

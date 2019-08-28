@@ -4,7 +4,6 @@ import com.ceres.api.client.CoinceresApiClientFactory;
 import com.ceres.api.domain.market.SubscribeReq;
 import com.ceres.api.service.CoinceresApiWebSocketClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import junit.framework.TestCase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +43,7 @@ public class MarketSubscribeTest {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-depth10");
         subscribeReq.setExchange("OKEX");
-        subscribeReq.setContract("BTC/USDT");
+        subscribeReq.setSymbol("BTC/USDT");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
@@ -59,7 +58,7 @@ public class MarketSubscribeTest {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-candle");
         subscribeReq.setExchange("OKEX");
-        subscribeReq.setContract("BTC/USDT");
+        subscribeReq.setSymbol("BTC/USDT");
         subscribeReq.setDuration("1m");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
@@ -75,7 +74,7 @@ public class MarketSubscribeTest {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-tick");
         subscribeReq.setExchange("OKEX");
-        subscribeReq.setContract("BTC/USDT");
+        subscribeReq.setSymbol("BTC/USDT");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
@@ -90,7 +89,7 @@ public class MarketSubscribeTest {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-trade");
         subscribeReq.setExchange("OKEX");
-        subscribeReq.setContract("BTC/USDT");
+        subscribeReq.setSymbol("BTC/USDT");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);

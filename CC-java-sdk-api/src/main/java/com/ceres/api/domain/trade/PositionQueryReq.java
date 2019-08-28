@@ -1,9 +1,11 @@
 package com.ceres.api.domain.trade;
-
+/**
+ * @author LMT
+ */
 public class PositionQueryReq {
 
     private String exchange;
-    private String contract;
+    private String symbol;
     private String positionDir;
 
     public String getExchange() {
@@ -14,12 +16,12 @@ public class PositionQueryReq {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getPositionDir() {

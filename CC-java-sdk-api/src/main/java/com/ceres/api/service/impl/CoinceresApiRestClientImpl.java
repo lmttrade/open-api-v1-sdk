@@ -10,6 +10,9 @@ import java.util.Map;
 import static com.ceres.api.service.CoinceresApiServiceGenerator.createService;
 import static com.ceres.api.service.CoinceresApiServiceGenerator.executeSync;
 
+/**
+ * @author LMT
+ */
 public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
 
     private final CoinceresApiService coinceresApiService;
@@ -19,8 +22,8 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<CurrencyPair>> getContractList(ContractReq req) {
-        return executeSync(coinceresApiService.getContractList(req.getExchange(), req.getContract()));
+    public ResultsVO<List<CurrencyPair>> getSymbols(SymbolReq req) {
+        return executeSync(coinceresApiService.getSymbols(req.getExchange(), req.getSymbol()));
     }
 
     @Override
@@ -34,23 +37,23 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<AccountInfoRes>> getAccountInfo(String exchange) {
-        return executeSync(coinceresApiService.getAccountInfo(exchange));
+    public ResultsVO<List<AccountInfoRes>> getAccountInfo(Long timestamp) {
+        return executeSync(coinceresApiService.getAccountInfo(timestamp));
     }
 
     @Override
     public ResultsVO<List<OrderDetailRes>> getOrderInfo(OrderDetailReq req) {
-        return executeSync(coinceresApiService.getOrderInfo(req.getSystemOid(),req.getStatus(),req.getExchange(),req.getContract()));
+        return executeSync(coinceresApiService.getOrderInfo(req.getSystemOid(),req.getTimestamp()));
     }
 
     @Override
     public ResultsVO<List<PositionDetailRes>> getPosition(PositionQueryReq req) {
-        return executeSync(coinceresApiService.getPosition(req.getExchange(), req.getContract(), req.getPositionDir()));
+        return executeSync(coinceresApiService.getPosition(req.getSymbol(), req.getPositionDir()));
     }
 
     @Override
     public ResultsVO<List<TransRecord>> queryTransRecord(TransReq req) {
-        return executeSync(coinceresApiService.queryTransRecord(req.getExchange(), req.getContract(), req.getCount()));
+        return executeSync(coinceresApiService.queryTransRecord(req.getExchange(), req.getSymbol(), req.getCount()));
     }
 
     @Override

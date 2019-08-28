@@ -1,12 +1,12 @@
 package com.ceres.api.domain.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * @author LMT
+ */
 public class CloseOrderReq {
 
-    private String exchange;
-
-    private String contract;
+    private String symbol;
 
     @JsonProperty("price_type")
     private String priceType;
@@ -29,16 +29,19 @@ public class CloseOrderReq {
     @JsonProperty("close_rule")
     private String closeRule;
 
-    public String getExchange() {
-        return exchange;
+    @JsonProperty("timestamp")
+    private Long timestamp;
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getPriceType() {
@@ -97,7 +100,7 @@ public class CloseOrderReq {
         this.closeRule = closeRule;
     }
 
-    public String getContract() {
-        return contract!=null ? contract.replace('/','_'):null;
+    public String getSymbol() {
+        return symbol!=null ? symbol.replace('/','_'):null;
     }
 }

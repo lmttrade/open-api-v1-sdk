@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.List;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  * e.g
  * {"asks":[{"price":"3608.9238","volume":"0.00100000"},{"price":"3609.0435","volume":"0.50912826"},
@@ -22,7 +22,7 @@ import java.util.List;
  * {"price":"3608.2493","volume":"0.13000000"},{"price":"3608.2197","volume":"0.00571767"},
  * {"price":"3608.2136","volume":"0.00880546"},{"price":"3608.1378","volume":"0.27715127"},
  * {"price":"3608.0801","volume":"0.10000000"},{"price":"3607.9311","volume":"0.00914828"}],
- * "contract":"BTC/USDT","exchange":"OKEX","msg_type":"push-depth10"}
+ * "symbol":"BTC/USDT","exchange":"LMT","msg_type":"push-depth10"}
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -30,7 +30,7 @@ public class DepthEvent {
 
   private String exchange;
 
-  private String contract;
+  private String symbol;
 
   @JsonProperty("msg_type")
   private String msgType;
@@ -39,12 +39,12 @@ public class DepthEvent {
 
   private List<OrderBookEntry> asks;
 
-  public String getContract() {
-    return contract;
+  public String getSymbol() {
+    return symbol;
   }
 
-  public void setContract(String contract) {
-    this.contract = contract;
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
   }
 
   public String getMsgType() {
@@ -83,7 +83,7 @@ public class DepthEvent {
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
         .append("exchange", exchange)
-        .append("contract", contract)
+        .append("symbol", symbol)
         .append("msgType", msgType)
         .append("bids", bids)
         .append("asks", asks)

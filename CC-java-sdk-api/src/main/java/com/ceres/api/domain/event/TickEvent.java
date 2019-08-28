@@ -6,10 +6,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  * e.g
- * {"change":"7.0741000","change_rate":"0.0020","contract":"BTC/USDT","exchange":"OKEX","high":"3621.2376",
+ * {"change":"7.0741000","change_rate":"0.0020","symbol":"BTC/USDT","exchange":"LMT","high":"3621.2376",
  * "last":"3610.8865","low":"3606.8170","msg_type":"push-tick","open":"3617.9606","time":"1550108930438","volume":"1066.07976710"}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -18,7 +18,7 @@ public class TickEvent {
     private String change;
     @JsonProperty("change_rate")
     private String changeRate;
-    private String contract;
+    private String symbol;
     private String exchange;
     private String high;
     private String last;
@@ -29,12 +29,12 @@ public class TickEvent {
     private String time;
     private String volume;
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getMsgType() {
@@ -123,7 +123,7 @@ public class TickEvent {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("change", change)
                 .append("changeRate", changeRate)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("exchange", exchange)
                 .append("high", high)
                 .append("last", last)

@@ -16,10 +16,9 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  */
-@SuppressWarnings("all")
 public class CoinceresDataServiceGenerator {
 
     private static final OkHttpClient sharedClient;

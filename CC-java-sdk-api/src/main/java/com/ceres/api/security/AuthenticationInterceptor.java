@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * @author LMT
+ */
 public class AuthenticationInterceptor implements Interceptor{
 
 

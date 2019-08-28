@@ -1,17 +1,20 @@
 package com.ceres.api.domain.stream;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * @author LMT
+ */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PositionNotice {
 
-    /** 产品名称 */
-    private String product;
-
-    /** 委托id */
-    private String entrustId;
+    /** 委托单号 */
+    @JsonProperty("system_oid")
+    private String systemOid;
 
     /** 强平价 */
     private String forcedPrice;
@@ -34,20 +37,12 @@ public class PositionNotice {
     /** 通知类型 */
     private int messageType;
 
-    public String getProduct() {
-        return product;
+    public String getSystemOid() {
+        return systemOid;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public String getEntrustId() {
-        return entrustId;
-    }
-
-    public void setEntrustId(String entrustId) {
-        this.entrustId = entrustId;
+    public void setSystemOid(String systemOid) {
+        this.systemOid = systemOid;
     }
 
     public String getForcedPrice() {

@@ -17,7 +17,10 @@ import java.io.IOException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocketClient, Closeable {
 
     private final static Logger log = LoggerFactory.getLogger(CoinceresTradeWebSocketClientImpl.class);

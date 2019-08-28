@@ -1,10 +1,12 @@
 package com.ceres.api.domain.trade;
-
+/**
+ * @author LMT
+ */
 public class TransReq {
 
     private String exchange;
 
-    private String contract;
+    private String symbol;
 
     private String count;
 
@@ -16,8 +18,8 @@ public class TransReq {
         this.exchange = exchange;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String getCount() {
@@ -28,9 +30,9 @@ public class TransReq {
         this.count = count;
     }
 
-    public String getContract() {
-        if (contract != null) {
-            return contract.replace('/', '_');
+    public String getSymbol() {
+        if (symbol != null) {
+            return symbol.replace('/', '_');
         }
         return null;
     }

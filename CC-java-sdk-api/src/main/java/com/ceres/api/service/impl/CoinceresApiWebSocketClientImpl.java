@@ -15,7 +15,7 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * @author xiaotian.huang
+ * @author LMT
  * @date 2019/01/30
  */
 public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketClient, Closeable {

@@ -10,7 +10,7 @@ public class OpenBookData {
 
     private String exchange;
 
-    private String contract;
+    private String symbol;
 
     private List<OrderBookEntry> bids;
     private List<OrderBookEntry> asks;
@@ -23,12 +23,12 @@ public class OpenBookData {
         this.exchange = exchange;
     }
 
-    public String getContract() {
-        return contract;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setContract(String contract) {
-        this.contract = contract;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public List<OrderBookEntry> getBids() {
@@ -51,7 +51,7 @@ public class OpenBookData {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("exchange", exchange)
-                .append("contract", contract)
+                .append("symbol", symbol)
                 .append("bids", bids)
                 .append("asks", asks)
                 .toString();

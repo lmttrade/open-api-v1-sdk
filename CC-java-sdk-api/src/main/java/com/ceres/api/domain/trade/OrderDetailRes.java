@@ -3,12 +3,16 @@ package com.ceres.api.domain.trade;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+/**
+ * @author LMT
+ */
 public class OrderDetailRes {
-
-    private String contract;
+    private String exchange;
+    private String symbol;
     @JsonProperty("entrust_bs")
     private String entrustBs;
+    @JsonProperty("price_type")
+    private String priceType;
     @JsonProperty("future_dir")
     private String futureDir;
     @JsonProperty("client_oid")
@@ -31,15 +35,12 @@ public class OrderDetailRes {
     private String profitValue;
     @JsonProperty("stop_value")
     private String stopValue;
+    @JsonProperty("trade_type")
+    private String tradeType;
+    @JsonProperty("margin_mode")
+    private String marginMode;
+
     private String commission;
-
-    public String getContract() {
-        return contract;
-    }
-
-    public void setContract(String contract) {
-        this.contract = contract;
-    }
 
     public String getEntrustBs() {
         return entrustBs;
@@ -153,10 +154,51 @@ public class OrderDetailRes {
         this.commission = commission;
     }
 
+    public String getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getPriceType() {
+        return priceType;
+    }
+
+    public void setPriceType(String priceType) {
+        this.priceType = priceType;
+    }
+
+    public String getTradeType() {
+        return tradeType;
+    }
+
+    public void setTradeType(String tradeType) {
+        this.tradeType = tradeType;
+    }
+
+    public String getMarginMode() {
+        return marginMode;
+    }
+
+    public void setMarginMode(String marginMode) {
+        this.marginMode = marginMode;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("contract", contract)
+                .append("exchange", exchange)
+                .append("symbol", symbol)
                 .append("entrustBs", entrustBs)
                 .append("futureDir", futureDir)
                 .append("clientOid", clientOid)
@@ -171,6 +213,9 @@ public class OrderDetailRes {
                 .append("profitValue", profitValue)
                 .append("stopValue", stopValue)
                 .append("commission", commission)
+                .append("tradeType", tradeType)
+                .append("marginMode", marginMode)
+                .append("priceType", priceType)
                 .toString();
     }
 }

@@ -3,7 +3,10 @@ package com.ceres.api.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 public class SHA256Util {
 
     public static String toSignBySha256(String srcStr) throws NoSuchAlgorithmException, UnsupportedEncodingException {

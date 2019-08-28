@@ -11,7 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
 
     private static final Logger log = LoggerFactory.getLogger(CoinceresTradeWebSocketListener.class);
