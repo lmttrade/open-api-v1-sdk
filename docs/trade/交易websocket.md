@@ -50,13 +50,13 @@ public class OrderStreamTest {
    >
    >base_url:
    >
-   > ws://open.lmt.trade:19003
+   > wss://open.lmt.trade:29003
    >
    >
    >
    >订阅完整路径
    >
-   > ws://open.lmt.trade:19003?api_key=**********&sign=**********
+   > wss://open.lmt.trade:29003?api_key=**********&sign=**********
    >
    >按照签名说明文档中描述的规则进行加密得到sign
 
