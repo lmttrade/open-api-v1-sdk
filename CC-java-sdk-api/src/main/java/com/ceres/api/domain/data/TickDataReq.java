@@ -1,5 +1,8 @@
 package com.ceres.api.domain.data;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 public class TickDataReq {
 
     private String exchange;

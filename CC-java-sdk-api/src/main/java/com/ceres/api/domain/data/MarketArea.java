@@ -6,7 +6,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MarketArea {
     private Long marketId;

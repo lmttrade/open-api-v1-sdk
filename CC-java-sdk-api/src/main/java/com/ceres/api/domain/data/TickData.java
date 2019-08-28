@@ -2,7 +2,10 @@ package com.ceres.api.domain.data;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 public class TickData {
 
     private String exchange;

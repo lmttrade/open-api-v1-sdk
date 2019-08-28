@@ -10,6 +10,8 @@ import com.ceres.api.domain.data.TickData;
 import com.ceres.api.domain.data.TickDataReq;
 import com.ceres.api.domain.data.TradeData;
 import com.ceres.api.domain.data.TradeDataReq;
+import com.ceres.api.domain.trade.CurrencyPair;
+import com.ceres.api.domain.trade.SymbolReq;
 import com.ceres.api.service.CoinceresDataRestClient;
 import util.PrettyPrinter;
 
@@ -42,6 +44,9 @@ public class DataTest {
 
         // 04. 请求tick数据
         tickData();
+
+        // 05. 请求币对信息
+        querySymbols();
     }
 
     /** tick数据 */
@@ -86,4 +91,12 @@ public class DataTest {
         PrettyPrinter.println(result);
     }
 
+    /** 查询交易对 */
+    private static void querySymbols() {
+        SymbolReq req = new SymbolReq();
+        req.setExchange("OKEX");
+        req.setSymbol("BTC/USD/190510");
+        List<CurrencyPair> result = dataRestClient.getSymbols(req);
+        PrettyPrinter.println(result);
+    }
 }

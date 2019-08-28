@@ -5,7 +5,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-
+/**
+ * @author LMT
+ * @date 2019/01/30
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenResp<T> implements Serializable {
 

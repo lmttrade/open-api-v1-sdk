@@ -9,6 +9,8 @@ import com.ceres.api.domain.data.TickData;
 import com.ceres.api.domain.data.TickDataReq;
 import com.ceres.api.domain.data.TradeData;
 import com.ceres.api.domain.data.TradeDataReq;
+import com.ceres.api.domain.trade.CurrencyPair;
+import com.ceres.api.domain.trade.SymbolReq;
 import com.ceres.api.service.CoinceresDataRestClient;
 import com.ceres.api.service.CoinceresDataService;
 
@@ -28,6 +30,11 @@ public class CoinceresDataRestClientImpl implements CoinceresDataRestClient {
         this.coinceresDataService = createService(CoinceresDataService.class);
     }
 
+    @Override
+    public List<CurrencyPair> getSymbols(SymbolReq req) {
+        return executeSync(coinceresDataService.getSymbols(req.getExchange(),
+                req.getSymbol()));
+    }
 
     @Override
     public OpenResp<List<CycleData>> queryHistoryCycleData(CycleReq req) {

@@ -9,6 +9,8 @@ import com.ceres.api.domain.data.TickData;
 import com.ceres.api.domain.data.TickDataReq;
 import com.ceres.api.domain.data.TradeData;
 import com.ceres.api.domain.data.TradeDataReq;
+import com.ceres.api.domain.trade.CurrencyPair;
+import com.ceres.api.domain.trade.SymbolReq;
 
 import java.util.List;
 /**
@@ -16,6 +18,13 @@ import java.util.List;
  * @date 2019/01/30
  */
 public interface CoinceresDataRestClient {
+
+    /**
+     * 获取交易对列表
+     * @param req
+     * @return 币对列表
+     */
+    List<CurrencyPair> getSymbols(SymbolReq req);
 
     /**
      * 请求历史分钟线数据

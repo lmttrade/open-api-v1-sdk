@@ -5,6 +5,7 @@ import com.ceres.api.domain.data.OpenBookData;
 import com.ceres.api.domain.data.OpenResp;
 import com.ceres.api.domain.data.TickData;
 import com.ceres.api.domain.data.TradeData;
+import com.ceres.api.domain.trade.CurrencyPair;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,6 +16,16 @@ import java.util.List;
  * @date 2019/01/30
  */
 public interface CoinceresDataService {
+
+    /**
+     * 获取交易对信息
+     * @param exchange
+     * @param symbol
+     * @return
+     */
+    @GET("/api/v1/market/symbols")
+    Call<List<CurrencyPair>> getSymbols(@Query("exchange") String exchange, @Query("symbol") String symbol);
+
     /**
      * K线数据
      * @param symbol

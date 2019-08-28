@@ -122,13 +122,4 @@ public class TradeTest {
         ResultsVO<InputOrderRes> result = restClient.input(req);
         PrettyPrinter.println(result);
     }
-
-    /** 查询交易对 */
-    private static void queryContractList() {
-        SymbolReq req = new SymbolReq();
-        req.setExchange("OKEX");
-        req.setSymbol("BTC/USD/190510");
-        ResultsVO<List<CurrencyPair>> result = restClient.getSymbols(req);
-        PrettyPrinter.println(result);
-    }
 }

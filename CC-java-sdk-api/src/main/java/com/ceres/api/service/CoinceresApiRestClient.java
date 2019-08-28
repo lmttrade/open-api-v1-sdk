@@ -11,13 +11,6 @@ import java.util.Map;
 public interface CoinceresApiRestClient {
 
     /**
-     * 获取交易对列表
-     * @param req
-     * @return 币对列表
-     */
-    ResultsVO<List<CurrencyPair>> getSymbols(SymbolReq req);
-
-    /**
      * 下单
      * @param req
      * @return 下单响应返回值

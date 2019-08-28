@@ -22,11 +22,6 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<CurrencyPair>> getSymbols(SymbolReq req) {
-        return executeSync(coinceresApiService.getSymbols(req.getExchange(), req.getSymbol()));
-    }
-
-    @Override
     public ResultsVO<InputOrderRes> input(InputOrderReq req) {
         return executeSync(coinceresApiService.input(req));
     }

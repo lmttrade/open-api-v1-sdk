@@ -13,16 +13,6 @@ import java.util.Map;
  */
 public interface CoinceresApiService {
     /**
-     * 获取交易对信息
-     * @param exchange
-     * @param symbol
-     * @return
-     */
-    @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
-    @GET("/api/v1/basic/symbols")
-    Call<ResultsVO<List<CurrencyPair>>> getSymbols(@Query("exchange") String exchange, @Query("symbol") String symbol);
-
-    /**
      * 下单
      * @param req
      * @return
