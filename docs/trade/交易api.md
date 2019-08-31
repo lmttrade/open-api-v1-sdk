@@ -645,3 +645,12 @@ system_oid: 系统生成的订单ID
 confirm_id: 确认订单号 同输入的确认单号
 client_oid: 客户端自定义id
 ```
+
+## 下单 撤单时序图
+![avatar](input_cancel.jpg)
+
+## 闪电交易时序图
+![avatar](instant_trading.jpg)
+
+## 订单状态机
+![avatar](order_status.jpg)
