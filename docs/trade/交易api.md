@@ -15,6 +15,7 @@
 | 参数名称 | 参数类型 | 是否必须 | 参数解释                |
 | -------- | -------- | -------- | ----------------------- |
 | timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
+| asset_code | String    | 否       | 账户编码 不填默认查询母账户,否则需要输入该母账户下的子账户编码|
 
 #### 返回数据：
 
@@ -42,16 +43,18 @@
 #### 备注：
 
 ```tex
-balance：余额（可用余额=余额-冻结金额）
+balance：余额
 
 market_value：USDT市值
 
 frozen：冻结金额
 
 currency：币种
+
+可用余额部分=余额-冻结金额
 ```
 
-## 2. 创建订单
+## 2. 创建订单(币币交易、杠杆交易)
 
 ```tex
 接口用途： 创建订单
@@ -65,19 +68,15 @@ currency：币种
 
 | 参数名称      | 参数类型 | 是否必须 | 参数解释                                      |
 | ------------- | -------- | -------- | --------------------------------------------- |
-| trade_type       | String   | 是       | 交易类型：spot币币交易,margin杠杆交易,future合约交易,flash闪电交易, 目前该接口仅支持spot,闪电交易见接口10,11          |
-| symbol      | String   | 是       | 币币交易对或合约名称                          |
+| trade_type       | String   | 是       | 交易类型：spot币币交易,margin杠杆交易,目前该接口仅支持spot,闪电交易见接口10,11          |
+| symbol      | String   | 是       | 币币交易对                     |
 | price_type    | String   | 是       | 市价：market      限价： limit                |
 | entrust_price | String   | 否       | 委托价格                                      |
-| profit_value  | String   | 否       | 止盈价,合约必传                               |
-| stop_value    | String   | 否       | 止损价，合约必传                              |
 | entrust_amount   | String   | 是       | 委托量 限价买、卖、市价卖是数量，市价买 暂不支持 |
 | entrust_bs    | String   | 是       | 买：buy       卖：sell                        |
-| future_dir    | String   | 是       | 开仓：open   平仓： close                     |
 | client_oid    | String   | 否       | 来源标记                                      |
-| deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号          |
-| margin_mode       | String   | 否       | 保证金模式 fixed逐仓 crossed全仓 ，仅杠杆交易使用          |
 | timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
+| program_oid | Long    | 否       | 程序单ID |
 
 #### 返回数据：
 
@@ -157,7 +156,7 @@ entrust_bs : 委托方向,buy买，sell卖
 
 price_type : 委托类型 market市价,limit限价
 
-future_dir:期货方向，open开，close平（币币交易 忽略该字段）
+future_dir:期货方向，open开，close平（币币交易时忽略该字段）
 
 client_oid：客户的生成订单ID
 
@@ -173,11 +172,11 @@ average_dealt_price：平均成交价
 
 dealt_amount：已成交数量
 
-lever：杠杆 （币币交易 忽略该字段）
+lever：杠杆 （币币交易时忽略该字段）
 
-profit_value：止盈价格（币币交易 忽略该字段）
+profit_value：止盈价格（币币交易时忽略该字段）
 
-stop_value：止损价格（币币交易 忽略该字段）
+stop_value：止损价格（币币交易时忽略该字段）
 
 commission: 手续费
 
@@ -244,58 +243,9 @@ margin_mode: 保证金类型 crossed全仓 fixed逐仓 none不区分,仅杠杆�
     各字段含义同单个订单接口
 ```
 
-## 5. 平仓
-
-```tex
-接口用途： 创建订单
-
-请求方式： POST
-
-接口地址Path： https://open.lmt.trade/api/v1/trade/close
-```
-
-#### 输入参数：
-
-| 参数名称      | 参数类型 | 是否必须 | 参数解释                                       |
-| ------------- | -------- | -------- | ---------------------------------------------- |
-| symbol      | String   | 是       | 币币交易对或合约名称                           |
-| price_type    | String   | 是       | 市价：market      限价： limit                 |
-| entrust_price | String   | 否       | 委托价格， 限价必传                            |
-| entrust_vol   | String   | 是       | 委托量，限价买、卖、市价卖是数量，市价买是金额 |
-| entrust_bs    | String   | 是       | 买：buy       卖：sell                         |
-| deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号           |
-| client_oid    | String   | 否       | 客户端标识                                     |
-| close_rule    | String   | 否       | 平仓规则,可选值为time 、risk                   |
-| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
-
-#### 返回数据：
-
-```json
-{
-    "code": "200",
-    "data": {
-        "client_oid": "12345",
-        "system_oid": "125520129039151104,125520129039151105"
-    },
-    "message": "SUCESS"
-}
-```
-
-#### 备注：
-
-```tex
-client_oid: 客户生成订单ID
-
-system_oid: 系统生成的订单ID（可能存在多个，多个systemOid用逗号隔开）
-
-close_rule 平仓规则，可选值为time、risk。 time：按时间排序优先平仓， risk按风险值（接近平仓的程度）优先平仓。
-
-注意： deal_id和close_rule不可同时为空。 两者都不为空时，即按照deal_id平仓（忽略close_rule)。
-```
 
 
-
-## 6. 创建合约订单
+## 5. 创建合约订单
 
 ```tex
 接口用途： 创建合约订单 
@@ -309,17 +259,16 @@ close_rule 平仓规则，可选值为time、risk。 time：按时间排序优�
 
 | 参数名称      | 参数类型 | 是否必须 | 参数解释                                                     |
 | ------------- | -------- | -------- | ------------------------------------------------------------ |
-| symbol      | String   | 是       | 币币交易对或合约名称                                         |
+| trade_type    | String   | 是       | 交易类型：future合约交易          |
+| symbol        | String   | 是       | 币币交易对或合约名称                                         |
 | price_type    | String   | 是       | 市价：market      限价： limit                               |
 | entrust_price | String   | 否       | 委托价格，市价时无需传入                                     |
-| profit_value  | String   | 否       | 止盈价,合约必传；平仓时无需传入                              |
-| stop_value    | String   | 否       | 止损价，合约必传；平仓时无需传入                             |
-| entrust_vol   | String   | 是       | 委托量 限价买、卖、市价卖是数量，市价买是金额                |
+| profit_value  | String   | 否       | 止盈价                       |
+| stop_value    | String   | 否       | 止损价                            |
+| entrust_vol   | String   | 是       | 委托量               |
 | entrust_bs    | String   | 是       | 买：buy       卖：sell                                       |
 | future_dir    | String   | 否       | 开仓：open   平仓： close                                    |
 | lever         | String   | 否       | 杠杆倍数                                                     |
-| deal_id       | String   | 否       | 仓位ID，开仓或按规则平仓时该参数无需传入                     |
-| close_rule    | String   | 否       | 1/2,平仓规则,1为按较早开仓时间优先,2为按高风险的仓位优先，开仓时无需传入 |
 | client_oid    | String   | 否       | 客户自定义ID，合约平仓需指定的持仓单号                       |
 | timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
@@ -348,7 +297,54 @@ system_oid: 系统生成的订单ID
 备注：当下单的价格类型为限价单时，必须传入entrust_price参数和entrust_vol参数，当委托价格类型为为市价单时，必须传入entrust_vol参数。平仓时，若有指定的仓位ID（deal_id），表示只对该仓位进行平仓，此时无需读取平仓规则参数；若平仓命令中无指定仓位ID，则按指定平仓规则进行平仓。
 ```
 
+## 6. 平仓
 
+```tex
+接口用途： 合约平仓
+
+请求方式： POST
+
+接口地址Path： https://open.lmt.trade/api/v1/trade/close
+```
+
+#### 输入参数：
+
+| 参数名称      | 参数类型 | 是否必须 | 参数解释                                       |
+| ------------- | -------- | -------- | ---------------------------------------------- |
+| symbol      | String   | 是       | 币币交易对或合约名称                           |
+| price_type    | String   | 是       | 市价：market      限价： limit                 |
+| entrust_price | String   | 否       | 委托价格， 限价必传                            |
+| entrust_vol   | String   | 是       | 委托量 |
+| entrust_bs    | String   | 是       | 买：buy       卖：sell                         |
+| deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号           |
+| client_oid    | String   | 否       | 客户端标识                                     |
+| close_rule    | String   | 否       | 平仓规则,可选值为time 、risk                   |
+| timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
+
+#### 返回数据：
+
+```json
+{
+    "code": "200",
+    "data": {
+        "client_oid": "12345",
+        "system_oid": "125520129039151104,125520129039151105"
+    },
+    "message": "SUCESS"
+}
+```
+
+#### 备注：
+
+```tex
+client_oid: 客户生成订单ID
+
+system_oid: 系统生成的订单ID（可能存在多个，多个system_oid用逗号隔开）
+
+close_rule 平仓规则，可选值为time、risk。 time：按时间排序优先平仓， risk按风险值（接近平仓的程度）优先平仓。
+
+注意： deal_id和close_rule不可同时为空。 两者都不为空时，即按照deal_id平仓（忽略close_rule)。
+```
 
 ## 7.取消订单
 
