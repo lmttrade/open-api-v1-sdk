@@ -17,6 +17,9 @@ public class InstantTradingAskPriceRes {
     @JsonProperty("dealt_price")
     private String dealtPrice;
 
+    @JsonProperty("dealt_vol")
+    private String dealtVol;
+
     @JsonProperty("dealt_amount")
     private String dealtAmount;
 
@@ -51,6 +54,14 @@ public class InstantTradingAskPriceRes {
 
     public void setDealtPrice(String dealtPrice) {
         this.dealtPrice = dealtPrice;
+    }
+
+    public String getDealtVol() {
+        return dealtVol;
+    }
+
+    public void setDealtVol(String dealtVol) {
+        this.dealtVol = dealtVol;
     }
 
     public String getDealtAmount() {
@@ -91,6 +102,7 @@ public class InstantTradingAskPriceRes {
                 "exchange='" + exchange + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", dealtPrice='" + dealtPrice + '\'' +
+                ", dealtVol='" + dealtVol + '\'' +
                 ", dealtAmount='" + dealtAmount + '\'' +
                 ", dealtTime='" + dealtTime + '\'' +
                 ", confirmId='" + confirmId + '\'' +
