@@ -10,6 +10,8 @@ public class TransReq {
 
     private String count;
 
+    private Long assetCode;
+
     public String getExchange() {
         return exchange;
     }
@@ -28,6 +30,14 @@ public class TransReq {
 
     public void setCount(String count) {
         this.count = count;
+    }
+
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
     }
 
     public String getSymbol() {

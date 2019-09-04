@@ -50,6 +50,12 @@ public class InputOrderReq {
     @JsonProperty("timestamp")
     private Long timestamp;
 
+    @JsonProperty("program_oid")
+    private Long programOid;
+
+    @JsonProperty("asset_code")
+    private Long assetCode = 0L;
+
     public String getTradeType() {
         return tradeType;
     }
@@ -162,6 +168,22 @@ public class InputOrderReq {
         this.clientOid = clientOid;
     }
 
+    public Long getProgramOid() {
+        return programOid;
+    }
+
+    public void setProgramOid(Long programOid) {
+        this.programOid = programOid;
+    }
+
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -179,6 +201,8 @@ public class InputOrderReq {
                 .append("tradeType", tradeType)
                 .append("marginMode", marginMode)
                 .append("timestamp", timestamp)
+                .append("programOid", programOid)
+                .append("assetCode", assetCode)
                 .toString();
     }
 }

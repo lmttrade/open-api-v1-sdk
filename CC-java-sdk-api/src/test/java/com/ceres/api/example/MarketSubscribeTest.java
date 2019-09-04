@@ -29,20 +29,20 @@ public class MarketSubscribeTest {
         subTrade();
 
         // 订阅tick
-        subTick();
+//        subTick();
 
         // 订阅candle
-        subCandle();
+//        subCandle();
 
         // 订阅depth
-        subDepth();
+//        subDepth();
     }
 
     /** 订阅depth */
     private static void subDepth() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-depth10");
-        subscribeReq.setExchange("OKEX");
+        subscribeReq.setExchange("LMT");
         subscribeReq.setSymbol("BTC/USDT");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
@@ -57,7 +57,7 @@ public class MarketSubscribeTest {
     private static void subCandle() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-candle");
-        subscribeReq.setExchange("OKEX");
+        subscribeReq.setExchange("LMT");
         subscribeReq.setSymbol("BTC/USDT");
         subscribeReq.setDuration("1m");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
@@ -73,7 +73,7 @@ public class MarketSubscribeTest {
     private static void subTick() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-tick");
-        subscribeReq.setExchange("OKEX");
+        subscribeReq.setExchange("LMT");
         subscribeReq.setSymbol("BTC/USDT");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
@@ -88,7 +88,7 @@ public class MarketSubscribeTest {
     private static void subTrade() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setMsgType("subscribe-trade");
-        subscribeReq.setExchange("OKEX");
+        subscribeReq.setExchange("HUOBI");
         subscribeReq.setSymbol("BTC/USDT");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {

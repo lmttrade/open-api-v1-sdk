@@ -28,6 +28,8 @@ public class TransRecord {
     private String systemOid;
     @JsonProperty("system_tid")
     private String systemTid;
+    @JsonProperty("asset_code")
+    private Long assetCode;
 
     public String getEntrustBs() {
         return entrustBs;
@@ -123,6 +125,14 @@ public class TransRecord {
 
     public void setSystemTid(String systemTid) {
         this.systemTid = systemTid;
+    }
+
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
     }
 
     @Override

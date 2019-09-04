@@ -61,7 +61,7 @@ public class DataTest {
     /** depth10数据 */
     private static void depth10() {
         DepthDataReq req = new DepthDataReq();
-        req.setExchange("OKEX");
+        req.setExchange("LMT");
         req.setSymbol("BTC/USDT");
         OpenBookData result = dataRestClient.queryBookData(req);
         PrettyPrinter.println(result);
@@ -70,7 +70,7 @@ public class DataTest {
     /** 请求成交数据 */
     private static void tradeData() {
         TradeDataReq req = new TradeDataReq();
-        req.setExchange("OKEX");
+        req.setExchange("LMT");
         req.setSymbol("BTC/USDT");
         req.setEnd(System.currentTimeMillis()+"");
         req.setSize(5);
@@ -81,7 +81,7 @@ public class DataTest {
     /** 请求历史分钟线数据 */
     private static void cycleLineData() {
         CycleReq req = new CycleReq();
-        req.setExchange("OKEX");
+        req.setExchange("LMT");
         req.setSymbol("BTC/USDT");
         req.setEnd(System.currentTimeMillis() + "");
         System.out.println(req.getEnd());
@@ -94,7 +94,7 @@ public class DataTest {
     /** 查询交易对 */
     private static void querySymbols() {
         SymbolReq req = new SymbolReq();
-        req.setExchange("OKEX");
+        req.setExchange("LMT");
         req.setSymbol("BTC/USD/190510");
         List<CurrencyPair> result = dataRestClient.getSymbols(req);
         PrettyPrinter.println(result);
