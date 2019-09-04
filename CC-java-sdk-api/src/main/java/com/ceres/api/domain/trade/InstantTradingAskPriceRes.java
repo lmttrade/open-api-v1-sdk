@@ -17,8 +17,8 @@ public class InstantTradingAskPriceRes {
     @JsonProperty("dealt_price")
     private String dealtPrice;
 
-    @JsonProperty("entrust_amount")
-    private String entrustAmount;
+    @JsonProperty("dealt_amount")
+    private String dealtAmount;
 
     @JsonProperty("dealt_time")
     private String dealtTime;
@@ -53,12 +53,12 @@ public class InstantTradingAskPriceRes {
         this.dealtPrice = dealtPrice;
     }
 
-    public String getEntrustAmount() {
-        return entrustAmount;
+    public String getDealtAmount() {
+        return dealtAmount;
     }
 
-    public void setEntrustAmount(String entrustAmount) {
-        this.entrustAmount = entrustAmount;
+    public void setDealtAmount(String dealtAmount) {
+        this.dealtAmount = dealtAmount;
     }
 
     public String getDealtTime() {
@@ -91,7 +91,7 @@ public class InstantTradingAskPriceRes {
                 "exchange='" + exchange + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", dealtPrice='" + dealtPrice + '\'' +
-                ", entrustAmount='" + entrustAmount + '\'' +
+                ", dealtAmount='" + dealtAmount + '\'' +
                 ", dealtTime='" + dealtTime + '\'' +
                 ", confirmId='" + confirmId + '\'' +
                 ", timeOut=" + timeOut +
