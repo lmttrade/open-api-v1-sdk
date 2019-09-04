@@ -12,7 +12,7 @@ public class InstantTradingAskPriceReq {
     private String symbol;
 
     @JsonProperty("entrust_type")
-    private String entrustType;
+    private int entrustType;
 
     @JsonProperty("entrust_amount")
     private String entrustAmount;
@@ -28,11 +28,11 @@ public class InstantTradingAskPriceReq {
         this.symbol = symbol;
     }
 
-    public String getEntrustType() {
+    public int getEntrustType() {
         return entrustType;
     }
 
-    public void setEntrustType(String entrustType) {
+    public void setEntrustType(int entrustType) {
         this.entrustType = entrustType;
     }
 
