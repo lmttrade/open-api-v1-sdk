@@ -27,6 +27,8 @@ public class PositionDetailRes {
     String forcePrice;
     String lever;
     private String dealId;
+    @JsonProperty("asset_code")
+    private Long assetCode;
 
     public String getExchange() {
         return exchange;
@@ -122,6 +124,14 @@ public class PositionDetailRes {
 
     public void setDealId(String dealId) {
         this.dealId = dealId;
+    }
+
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
     }
 
     @Override

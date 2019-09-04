@@ -1,6 +1,25 @@
 package com.ceres.api.service;
 
-import com.ceres.api.domain.trade.*;
+import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountInfoRes;
+import com.ceres.api.domain.trade.AccountTransferReq;
+import com.ceres.api.domain.trade.AddSubAccountReq;
+import com.ceres.api.domain.trade.AddSubAccountRes;
+import com.ceres.api.domain.trade.CloseOrderReq;
+import com.ceres.api.domain.trade.InputOrderReq;
+import com.ceres.api.domain.trade.InputOrderRes;
+import com.ceres.api.domain.trade.InstantTradingAskPriceReq;
+import com.ceres.api.domain.trade.InstantTradingAskPriceRes;
+import com.ceres.api.domain.trade.InstantTradingConfirmReq;
+import com.ceres.api.domain.trade.InstantTradingConfirmRes;
+import com.ceres.api.domain.trade.OrderDetailReq;
+import com.ceres.api.domain.trade.OrderDetailRes;
+import com.ceres.api.domain.trade.PositionDetailRes;
+import com.ceres.api.domain.trade.PositionQueryReq;
+import com.ceres.api.domain.trade.ResultsVO;
+import com.ceres.api.domain.trade.SystemOidRecord;
+import com.ceres.api.domain.trade.TransRecord;
+import com.ceres.api.domain.trade.TransReq;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +28,25 @@ import java.util.Map;
  * @author LMT
  */
 public interface CoinceresApiRestClient {
+    /**
+     * 列出账户列表
+     * @return
+     */
+    ResultsVO<List<AccountBase>> getAccounts();
+
+    /**
+     * 添加子账户
+     * @param req
+     * @return
+     */
+    ResultsVO<AddSubAccountRes> addSubAccount(AddSubAccountReq req);
+
+    /**
+     * 子账户资金划转
+     * @param req
+     * @return
+     */
+    ResultsVO<List<AccountInfoRes>> accountTransfer(AccountTransferReq req);
 
     /**
      * 下单
@@ -27,9 +65,10 @@ public interface CoinceresApiRestClient {
     /**
      * 查询账户信息
      * @param timestamp
+     * @param assetCode
      * @return 账户信息
      */
-    ResultsVO<List<AccountInfoRes>> getAccountInfo(Long timestamp);
+    ResultsVO<List<AccountInfoRes>> getAccountInfo(Long timestamp,Long assetCode);
 
     /**
      * 查询订单信息
@@ -58,4 +97,18 @@ public interface CoinceresApiRestClient {
      * @return
      */
     ResultsVO<InputOrderRes> close(CloseOrderReq req);
+
+    /**
+     * 闪电交易询价(预成交)
+     * @param req
+     * @return
+     */
+    ResultsVO<InstantTradingAskPriceRes> flashAskPrice(InstantTradingAskPriceReq req);
+
+    /**
+     * 闪电交易订单确认成交
+     * @param req
+     * @return
+     */
+    ResultsVO<InstantTradingConfirmRes> flashConfirm(InstantTradingConfirmReq req);
 }

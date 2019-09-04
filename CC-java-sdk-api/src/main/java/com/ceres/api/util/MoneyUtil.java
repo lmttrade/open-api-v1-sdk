@@ -107,13 +107,4 @@ public class MoneyUtil {
             return bigDecimal1.divide(num1).multiply(num2).stripTrailingZeros().toPlainString() + "%";
         }
     }
-
-    public static void main(String[] args) {
-        BigDecimal value = divide(multiply((new BigDecimal("10")).multiply(new BigDecimal("0.00020000000000000000")), new BigDecimal("1000")), new BigDecimal("100"));
-        System.out.println(value.toPlainString());
-        System.out.println(covert8(value));
-        BigDecimal ratio = new BigDecimal("0.0005125000");
-        String ratiostr = ratio.setScale(6, 4).multiply(new BigDecimal(100)).stripTrailingZeros().toString();
-        System.out.println(ratiostr);
-    }
 }

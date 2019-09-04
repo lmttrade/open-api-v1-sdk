@@ -24,9 +24,6 @@ public class TradeTest {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        // 01. 查询交易对
-//        queryContractList();
-
         // 02. 下单
         placeOrder();
 
@@ -68,7 +65,7 @@ public class TradeTest {
     /** 查询成交 */
     private static void queryTrade() {
         TransReq req = new TransReq();
-        req.setExchange("OKEX");
+        req.setExchange("LMT");
         req.setSymbol("BTC/USDT");
         req.setCount("10");
         ResultsVO<List<TransRecord>> result = restClient.queryTransRecord(req);
@@ -78,7 +75,7 @@ public class TradeTest {
     /** 查询合约持仓 */
     private static void queryHolding() {
         PositionQueryReq req = new PositionQueryReq();
-        req.setExchange("OKEX");
+        req.setExchange("LMT");
         req.setSymbol("BTC/USDT");
         ResultsVO result = restClient.getPosition(req);
         PrettyPrinter.println(result);
@@ -93,9 +90,35 @@ public class TradeTest {
         PrettyPrinter.println(result);
     }
 
+    /** 查询账户列表信息 */
+    private static void queryAccounts() {
+        ResultsVO<List<AccountBase>> result = restClient.getAccounts();
+        PrettyPrinter.println(result);
+    }
+
+    /** 添加子账户 */
+    private static void addSubAccount() {
+        AddSubAccountReq addSubAccountReq = new AddSubAccountReq();
+        addSubAccountReq.setTimestamp(System.currentTimeMillis());
+        ResultsVO<AddSubAccountRes> result = restClient.addSubAccount(addSubAccountReq);
+        PrettyPrinter.println(result);
+    }
+
+    /** 子账户划账 */
+    private static void accountTransfer() {
+        AccountTransferReq accountTransferReq = new AccountTransferReq();
+        accountTransferReq.setAssetCode(123456789L);
+        accountTransferReq.setBalance("0.123");
+        accountTransferReq.setCurrency("BTC");
+        accountTransferReq.setTimestamp(System.currentTimeMillis());
+        accountTransferReq.setTransferType("IN");
+        ResultsVO<List<AccountInfoRes>> result = restClient.accountTransfer(accountTransferReq);
+        PrettyPrinter.println(result);
+    }
+
     /** 查询账户信息 */
     private static void queryAccountInfo() {
-        ResultsVO<List<AccountInfoRes>> result = restClient.getAccountInfo(System.currentTimeMillis());
+        ResultsVO<List<AccountInfoRes>> result = restClient.getAccountInfo(System.currentTimeMillis(),123456789l);
         PrettyPrinter.println(result);
     }
 
@@ -120,6 +143,38 @@ public class TradeTest {
         req.setTradeType("spot");
 //        req.setMarginMode("fixed");
         ResultsVO<InputOrderRes> result = restClient.input(req);
+        PrettyPrinter.println(result);
+    }
+
+    /** 闪电交易询价-按量 */
+    private static void instantTradingAskPriceByVol() {
+        InstantTradingAskPriceReq instantTradingAskPriceReq = new InstantTradingAskPriceReq();
+        instantTradingAskPriceReq.setEntrustAmount("0.12");
+        instantTradingAskPriceReq.setEntrustBs("buy");
+        instantTradingAskPriceReq.setEntrustType("vol");
+        instantTradingAskPriceReq.setSymbol("BTC_USDT");
+        ResultsVO<InstantTradingAskPriceRes> result = restClient.flashAskPrice(instantTradingAskPriceReq);
+        PrettyPrinter.println(result);
+    }
+
+    /** 闪电交易询价-按额 */
+    private static void instantTradingAskPriceByAmount() {
+        InstantTradingAskPriceReq instantTradingAskPriceReq = new InstantTradingAskPriceReq();
+        instantTradingAskPriceReq.setEntrustAmount("100");
+        instantTradingAskPriceReq.setEntrustBs("sell");
+        instantTradingAskPriceReq.setEntrustType("amount");
+        instantTradingAskPriceReq.setSymbol("BTC_USDT");
+        ResultsVO<InstantTradingAskPriceRes> result = restClient.flashAskPrice(instantTradingAskPriceReq);
+        PrettyPrinter.println(result);
+    }
+
+    /** 闪电交易确认成交 */
+    private static void instantTradingConfirm() {
+        InstantTradingConfirmReq instantTradingConfirmReq = new InstantTradingConfirmReq();
+        instantTradingConfirmReq.setAssetCode(123456789L);
+        instantTradingConfirmReq.setClientOid("uuid-ii982");
+        instantTradingConfirmReq.setConfirmId("63ebfab2-c93a-11e9-a0f4-020f2d8eb122");
+        ResultsVO<InstantTradingConfirmRes> result = restClient.flashConfirm(instantTradingConfirmReq);
         PrettyPrinter.println(result);
     }
 }

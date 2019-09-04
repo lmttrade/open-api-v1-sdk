@@ -39,8 +39,9 @@ public class OrderDetailRes {
     private String tradeType;
     @JsonProperty("margin_mode")
     private String marginMode;
-
     private String commission;
+    @JsonProperty("asset_code")
+    private Long assetCode;
 
     public String getEntrustBs() {
         return entrustBs;
@@ -194,6 +195,14 @@ public class OrderDetailRes {
         this.marginMode = marginMode;
     }
 
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -216,6 +225,7 @@ public class OrderDetailRes {
                 .append("tradeType", tradeType)
                 .append("marginMode", marginMode)
                 .append("priceType", priceType)
+                .append("assetCode", assetCode)
                 .toString();
     }
 }
