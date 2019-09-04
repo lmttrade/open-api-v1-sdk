@@ -42,7 +42,7 @@ public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
     @SuppressWarnings("all")
     public void onMessage(WebSocket webSocket, String text) {
         ObjectMapper mapper = new ObjectMapper();
-        if ("pong".equalsIgnoreCase(text)) {
+        if ("pang".equalsIgnoreCase(text)) {
             return;
         }
         try {
