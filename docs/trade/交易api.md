@@ -722,7 +722,7 @@ asset_code:账户编码
 | -------- | -------- | -------- | ----------------------- |
 | symbol | String   | 是       | 闪电交易币对名称    |
 | entrust_bs    | String      | 是       | 买卖方向: buy/sell        |
-| entrust_type    | String      | 否       | 委托类型 vol:按数量买卖 amount:按额度买卖 (默认按量)      |
+| entrust_type    | int      | 是       | 委托类型 1按买卖数量 2按买卖金额      |
 | entrust_amount    | String      | 是       | 委托量       |
 
 #### 返回数据:
