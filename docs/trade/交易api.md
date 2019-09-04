@@ -33,7 +33,7 @@
            "is_sub_account":1
         },
      ]
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -69,7 +69,7 @@ is_sub_account 是否子账户 0不是(即该账户是母账户,也是默认账�
     "data": {
         "asset_code": 190810234
     }
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -103,19 +103,19 @@ asset_code 子账户编码 用于查询子账户余额、子账户下单、子�
     "code": "200",
     "data": [
         {
-            "balance": "1.01",
-            "currency": "BTC",
-            "frozen": "0",
-            "market_value": "9898.5656"
+            "balance":"1.01",
+            "currency":"BTC",
+            "frozen":"0",
+            "market_value":"9898.5656"
         },
         {
-            "balance": "9800.56",
-            "currency": "USDT",
-            "frozen": "0.982",
-            "market_value": "9800.56"
+            "balance":"9800.56",
+            "currency":"USDT",
+            "frozen":"0.982",
+            "market_value":"9800.56"
         }
     ],
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -161,19 +161,19 @@ currency:币种
     "code": "200",
     "data": [
         {
-            "balance": "1.01",
-            "currency": "BTC",
-            "frozen": "0",
-            "market_value": "9898.5656"
+            "balance":"1.01",
+            "currency":"BTC",
+            "frozen":"0",
+            "market_value":"9898.5656"
         },
         {
-            "balance": "9800.56",
-            "currency": "USDT",
-            "frozen": "0.982",
-            "market_value": "9800.56"
+            "balance":"9800.56",
+            "currency":"USDT",
+            "frozen":"0.982",
+            "market_value":"9800.56"
         }
     ],
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -224,10 +224,10 @@ currency:币种
 {
     "code": "200",
     "data": {
-        "client_oid": "12345",
-        "system_oid": "125520129039151104"
+        "client_oid":"12345",
+        "system_oid":"125520129039151104"
     },
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -265,26 +265,26 @@ system_oid: 系统生成的订单ID
     "code": "200",
     "data": {
             "exchange":"LMT",
-            "average_dealt_price": "0.000011655",
-            "client_oid": "12345",
-            "commission": "0.00000011655",
-            "symbol": "ADA_BTC",
-            "dealt_amount": "10",
-            "entrust_amount": "10",
-            "entrust_bs": "sell",
-            "price_type": "limit",
-            "entrust_price": "0.000011",
-            "entrust_time": "2018-12-10 10:08:43",
-            "lever": "1",
-            "profit_value": "0",
-            "status": 5,
-            "stop_value": "0",
-            "system_oid": "125520129039151104",
+            "average_dealt_price":"0.000011655",
+            "client_oid":"12345",
+            "commission":"0.00000011655",
+            "symbol":"ADA_BTC",
+            "dealt_amount":"10",
+            "entrust_amount":"10",
+            "entrust_bs":"sell",
+            "price_type":"limit",
+            "entrust_price":"0.000011",
+            "entrust_time":"2018-12-10 10:08:43",
+            "lever":"1",
+            "profit_value":"0",
+            "status":5,
+            "stop_value":"0",
+            "system_oid":"125520129039151104",
             "trade_type":"spot",
             "margin_mode":"none",
             "asset_code":190810234
      }
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -359,28 +359,28 @@ asset_code:账户编码
     "data":{
         "orderDetailRes":[
             "exchange":"LMT",
-            "average_dealt_price": "0.000011655",
-            "client_oid": "12345",
-            "commission": "0.00000011655",
-            "symbol": "ADA_BTC",
-            "dealt_amount": "10",
-            "entrust_amount": "10",
-            "entrust_bs": "sell",
-            "price_type": "limit",
-            "entrust_price": "0.000011",
-            "entrust_time": "2018-12-10 10:08:43",
-            "lever": "1",
-            "profit_value": "0",
-            "status": 5,
-            "stop_value": "0",
-            "system_oid": "125520129039151104",
+            "average_dealt_price":"0.000011655",
+            "client_oid":"12345",
+            "commission":"0.00000011655",
+            "symbol":"ADA_BTC",
+            "dealt_amount":"10",
+            "entrust_amount":"10",
+            "entrust_bs":"sell",
+            "price_type":"limit",
+            "entrust_price":"0.000011",
+            "entrust_time":"2018-12-10 10:08:43",
+            "lever":"1",
+            "profit_value":"0",
+            "status":5,
+            "stop_value":"0",
+            "system_oid":"125520129039151104",
             "trade_type":"spot",
             "margin_mode": "none",
             "asset_code":190810234
             ],...
         "nextFrom":"125520129039151104"
      }
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 #### 备注:
@@ -424,10 +424,10 @@ asset_code:账户编码
 {
     "code": "200",
     "data": {
-        "client_oid": "12345",
-        "system_oid": "125520129039151104"
+        "client_oid":"12345",
+        "system_oid":"125520129039151104"
     },
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -473,10 +473,10 @@ system_oid: 系统生成的订单ID
 {
     "code": "200",
     "data": {
-        "client_oid": "12345",
-        "system_oid": "125520129039151104,125520129039151105"
+        "client_oid":"12345",
+        "system_oid":"125520129039151104,125520129039151105"
     },
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -521,11 +521,11 @@ close_rule 平仓规则，可选值为time、risk。 time:按时间排序优先�
         ],
         "ERROR": [
             {
-                "system_oid": "125520129039151104"
+                "system_oid":"125520129039151104"
             }
         ]
     },
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -567,21 +567,21 @@ data: 撤单信息
     "code": "200",
     "data": [
         {
-            "close_profit": "0",
-            "symbol": "BTC_USDT_181229",
-            "dealId": "221595144918675467",
-            "force_price": "0.00000502",
-            "lever": "1",
-            "margin": "0.00001004",
-            "open_price": "0.00001004",
-            "position_dir": "buy",
-            "position_profit": "-0.00000124",
-            "position_value": "1",
-            "vol": "1",
+            "close_profit":"0",
+            "symbol":"BTC_USDT_181229",
+            "dealId":"221595144918675467",
+            "force_price":"0.00000502",
+            "lever":"1",
+            "margin":"0.00001004",
+            "open_price":"0.00001004",
+            "position_dir":"buy",
+            "position_profit":"-0.00000124",
+            "position_value":"1",
+            "vol":"1",
             "asset_code":190810234
         }
     ],
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -644,34 +644,34 @@ asset_code:账户编码
     "data": [
         {
             "exchange":"OKEX",
-            "commission": "0.001",
-            "commission_currency": "BTC",
-            "symbol": "ADA_BTC",
-            "dealt_amount": "1",
-            "dealt_price": "0.00001176",
-            "dealt_time": "2018-11-29 16:19:09",
-            "entrust_bs": "buy",
-            "future_dir": "币币交易，不区分",
-            "system_oid": "121606988609761289",
-            "system_tid": "221619148110966794",
+            "commission":"0.001",
+            "commission_currency":"BTC",
+            "symbol":"ADA_BTC",
+            "dealt_amount":"1",
+            "dealt_price":"0.00001176",
+            "dealt_time":"2018-11-29 16:19:09",
+            "entrust_bs":"buy",
+            "future_dir":"币币交易，不区分",
+            "system_oid":"121606988609761289",
+            "system_tid":"221619148110966794",
             "asset_code":190810234
         },
         {
             "exchange":"INSTANTEX",
-            "commission": "0.2",
-            "commission_currency": "BTC",
-            "symbol": "ADA_BTC",
-            "dealt_amount": "200",
-            "dealt_price": "0.00001176",
-            "dealt_time": "2018-11-29 16:19:33",
-            "entrust_bs": "buy",
-            "future_dir": "币币交易，不区分",
-            "system_oid": "121606988609761290",
-            "system_tid": "221619148110966795",
+            "commission":"0.2",
+            "commission_currency":"BTC",
+            "symbol":"ADA_BTC",
+            "dealt_amount":"200",
+            "dealt_price":"0.00001176",
+            "dealt_time":"2018-11-29 16:19:33",
+            "entrust_bs":"buy",
+            "future_dir":"币币交易，不区分",
+            "system_oid":"121606988609761290",
+            "system_tid":"221619148110966795",
             "asset_code":190810234
         }
     ],
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -733,14 +733,14 @@ asset_code:账户编码
     "data":
         {
             "exchange":"INSTANTEX",
-            "symbol": "BTC_USDT",
-            "dealt_price": "10020.34",
-            "entrust_amount": "0.023",
-            "dealt_time": "2018-11-29 16:19:33",
-            "confirm_id": "63ebfab2-c93a-11e9-a0f4-020f2d8eb122",
-            "time_out": 15
+            "symbol":"BTC_USDT",
+            "dealt_price":"10020.34",
+            "entrust_amount":"0.023",
+            "dealt_time":"2018-11-29 16:19:33",
+            "confirm_id":"63ebfab2-c93a-11e9-a0f4-020f2d8eb122",
+            "time_out":15
         }
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
@@ -781,11 +781,11 @@ time_out: 此次询价有效时长 单位 秒,接入方需在有效时长内，�
     "code": "200",
     "data":
         {
-            "system_oid": "1119809736219570194",
-            "confirm_id": "63ebfab2-c93a-11e9-a0f4-020f2d8eb122",
-            "client_oid": ""
+            "system_oid":"1119809736219570194",
+            "confirm_id":"63ebfab2-c93a-11e9-a0f4-020f2d8eb122",
+            "client_oid":""
         }
-    "message": "SUCESS"
+    "message":"SUCESS"
 }
 ```
 
