@@ -17,7 +17,7 @@ public interface CoinceresApiService {
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
-    @GET("/api/v1/trade/accounts")
+    @GET("/api/v1/account/list")
     Call<ResultsVO<List<AccountBase>>> getAccounts();
 
     /**
@@ -26,7 +26,7 @@ public interface CoinceresApiService {
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
-    @POST("/api/v1/trade/add_sub_account")
+    @POST("/api/v1/account/add_sub_account")
     Call<ResultsVO<AddSubAccountRes>> addSubAccount(@Body AddSubAccountReq req);
 
     /**
@@ -35,7 +35,7 @@ public interface CoinceresApiService {
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
-    @POST("/api/v1/trade/account_transfer")
+    @POST("/api/v1/account/transfer")
     Call<ResultsVO<List<AccountInfoRes>>> accountTransfer(@Body AccountTransferReq req);
 
     /**
