@@ -7,7 +7,7 @@
 
 请求方式: GET
 
-接口地址Path: https://open.lmt.trade/api/v1/trade/accounts
+接口地址Path: https://open.lmt.trade/api/v1/account/list
 ```
 
 #### 输入参数:
@@ -52,7 +52,7 @@ is_sub_account 是否子账户 0不是(即该账户是母账户,也是默认账�
 
 请求方式: POST
 
-接口地址Path: https://open.lmt.trade/api/v1/trade/add_sub_account
+接口地址Path: https://open.lmt.trade/api/v1/account/add_sub_account
 ```
 
 #### 输入参数:
@@ -86,7 +86,7 @@ asset_code 子账户编码 用于查询子账户余额、子账户下单、子�
 
 请求方式: GET
 
-接口地址Path: https://open.lmt.trade/api/v1/trade/account
+接口地址Path: https://open.lmt.trade/api/v1/account/get
 ```
 
 #### 输入参数:
@@ -141,7 +141,7 @@ currency:币种
 
 请求方式: POST
 
-接口地址Path: https://open.lmt.trade/api/v1/trade/account_transfer
+接口地址Path: https://open.lmt.trade/api/v1/account/transfer
 ```
 
 #### 输入参数:
