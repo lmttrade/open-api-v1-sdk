@@ -19,31 +19,36 @@ public class MarketSubscribeTest {
     private static CoinceresApiWebSocketClient ccClient;
     private static ObjectMapper mapper;
 
-    static  {
+    static {
         ccClient = CoinceresApiClientFactory.newWebSocketClient();
         mapper = new ObjectMapper();
     }
 
     public static void main(String[] args) {
         // 订阅trade
-        subTrade();
+        // subTrade();
 
         // 订阅tick
-//        subTick();
+         subTick();
 
         // 订阅candle
-//        subCandle();
+        // subCandle();
 
         // 订阅depth
-//        subDepth();
+        // subDepth();
+
+        // 心跳维护
+        // heartbeat();
     }
 
-    /** 订阅depth */
+    /**
+     * 订阅depth
+     */
     private static void subDepth() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("subscribe-depth10");
-        subscribeReq.setExchange("LMT");
-        subscribeReq.setSymbol("BTC/USDT");
+        subscribeReq.setMsgType("AskBidQueue");
+        subscribeReq.setExchange("");
+        subscribeReq.setSymbol("ETH/BTC");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
@@ -53,13 +58,15 @@ public class MarketSubscribeTest {
         }
     }
 
-    /** 订阅candle */
+    /**
+     * 订阅candle
+     */
     private static void subCandle() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("subscribe-candle");
-        subscribeReq.setExchange("LMT");
-        subscribeReq.setSymbol("BTC/USDT");
-        subscribeReq.setDuration("1m");
+        subscribeReq.setMsgType("Cycle");
+        subscribeReq.setExchange("");
+        subscribeReq.setSymbol("ETH/BTC");
+        subscribeReq.setDuration("5");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
@@ -69,12 +76,14 @@ public class MarketSubscribeTest {
         }
     }
 
-    /** 订阅tick */
+    /**
+     * 订阅tick
+     */
     private static void subTick() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("subscribe-tick");
-        subscribeReq.setExchange("LMT");
-        subscribeReq.setSymbol("BTC/USDT");
+        subscribeReq.setMsgType("Tick");
+        subscribeReq.setExchange("");
+        subscribeReq.setSymbol("HT/BTC");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
@@ -84,15 +93,30 @@ public class MarketSubscribeTest {
         }
     }
 
-    /** 订阅trade */
+    /**
+     * 订阅trade
+     */
     private static void subTrade() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("subscribe-trade");
-        subscribeReq.setExchange("HUOBI");
-        subscribeReq.setSymbol("BTC/USDT");
+        subscribeReq.setMsgType("Trade");
+        subscribeReq.setExchange("BINANCE");
+        subscribeReq.setSymbol("ETH/BTC");
+
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
+            ccClient.onTradeEvent(text, response -> System.out.println(response.toString()));
+        } catch (Exception ignore) {
+            ignore.printStackTrace();
+        }
+    }
+
+    /**
+     * 心跳
+     */
+    private static void heartbeat() {
+        try {
+            String text = "ping";
             ccClient.onTradeEvent(text, response -> System.out.println(response.toString()));
         } catch (Exception ignore) {
             ignore.printStackTrace();
