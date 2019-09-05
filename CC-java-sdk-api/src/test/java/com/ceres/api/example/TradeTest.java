@@ -151,7 +151,7 @@ public class TradeTest {
         InstantTradingAskPriceReq instantTradingAskPriceReq = new InstantTradingAskPriceReq();
         instantTradingAskPriceReq.setEntrustAmount("0.12");
         instantTradingAskPriceReq.setEntrustBs("buy");
-        instantTradingAskPriceReq.setEntrustType("vol");
+        instantTradingAskPriceReq.setEntrustType(1);
         instantTradingAskPriceReq.setSymbol("BTC_USDT");
         ResultsVO<InstantTradingAskPriceRes> result = restClient.flashAskPrice(instantTradingAskPriceReq);
         PrettyPrinter.println(result);
@@ -162,7 +162,7 @@ public class TradeTest {
         InstantTradingAskPriceReq instantTradingAskPriceReq = new InstantTradingAskPriceReq();
         instantTradingAskPriceReq.setEntrustAmount("100");
         instantTradingAskPriceReq.setEntrustBs("sell");
-        instantTradingAskPriceReq.setEntrustType("amount");
+        instantTradingAskPriceReq.setEntrustType(2);
         instantTradingAskPriceReq.setSymbol("BTC_USDT");
         ResultsVO<InstantTradingAskPriceRes> result = restClient.flashAskPrice(instantTradingAskPriceReq);
         PrettyPrinter.println(result);

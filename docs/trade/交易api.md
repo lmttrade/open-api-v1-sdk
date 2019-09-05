@@ -722,7 +722,7 @@ asset_code:账户编码
 | -------- | -------- | -------- | ----------------------- |
 | symbol | String   | 是       | 闪电交易币对名称    |
 | entrust_bs    | String      | 是       | 买卖方向: buy/sell        |
-| entrust_type    | String      | 否       | 委托类型 vol:按数量买卖 amount:按额度买卖 (默认按量)      |
+| entrust_type    | int      | 是       | 委托类型 1按买卖数量 2按买卖金额      |
 | entrust_amount    | String      | 是       | 委托量       |
 
 #### 返回数据:
@@ -735,7 +735,8 @@ asset_code:账户编码
             "exchange":"INSTANTEX",
             "symbol":"BTC_USDT",
             "dealt_price":"10020.34",
-            "entrust_amount":"0.023",
+            "dealt_vol":"0.023",
+            "dealt_amount":"230.46782",
             "dealt_time":"2018-11-29 16:19:33",
             "confirm_id":"63ebfab2-c93a-11e9-a0f4-020f2d8eb122",
             "time_out":15
@@ -750,7 +751,8 @@ asset_code:账户编码
 exchange: 闪电交易所名称
 symbol: 币对名称
 dealt_price: 预成交价格
-entrust_amount: 预成交量 (按量委托等同于输入值,按额委托是根据价格计算后的值)
+dealt_vol: 预成交数量(按量委托等同于输入参数值,按额委托是根据价格计算后的值)
+dealt_amount: 预成交金额(按量委托等于预成交价格*预成交数量,按额委托等同于输入参数值)
 dealt_time: 预成交时间 (当在有效期内确认订单时,订单成交时间按此时间计入)
 confirm_id: 确认订单号
 time_out: 此次询价有效时长 单位 秒,接入方需在有效时长内，来确认该笔交易，否则该笔交易失效,见接口11.
