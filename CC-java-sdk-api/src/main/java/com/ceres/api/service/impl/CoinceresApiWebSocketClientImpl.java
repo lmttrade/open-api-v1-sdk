@@ -10,15 +10,24 @@ import com.ceres.api.service.CoinceresApiWebSocketClient;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author LMT
  * @date 2019/01/30
  */
 public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketClient, Closeable {
+
+    private final static Logger log = LoggerFactory.getLogger(CoinceresTradeWebSocketClientImpl.class);
 
     private final OkHttpClient client;
 
@@ -56,6 +65,10 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
         final WebSocket webSocket = client.newWebSocket(request, listener);
         // 订阅
         webSocket.send(text);
+
+        ScheduledExecutorService scheduledService = new ScheduledThreadPoolExecutor(1,
+                new BasicThreadFactory.Builder().namingPattern("lmt-scheduled-pool-%d").daemon(true).build());
+        scheduledService.scheduleAtFixedRate(() -> webSocket.send("ping"), 5, 10, TimeUnit.SECONDS);
         return () -> {
             final int code = 1000;
             listener.onClosing(webSocket, code, null);

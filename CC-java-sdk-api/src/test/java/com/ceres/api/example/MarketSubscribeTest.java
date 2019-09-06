@@ -26,16 +26,16 @@ public class MarketSubscribeTest {
 
     public static void main(String[] args) {
         // 订阅trade
-        // subTrade();
+         subTrade();
 
         // 订阅tick
-         subTick();
+         //subTick();
 
         // 订阅candle
         // subCandle();
 
         // 订阅depth
-        // subDepth();
+         //subDepth();
 
         // 心跳维护
         // heartbeat();
