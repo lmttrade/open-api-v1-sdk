@@ -374,7 +374,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"dataType": "AskBidQueue",
 	"exchange": "BINANCE",
 	"priceSpread": "0.000002",
-	"securityCode": "ETH_BTC",
+	"securityCode": "ETH_BTC"
 }
 ```
 
@@ -394,7 +394,7 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
 	"dataType": "订阅频道",
 	"exchange": "交易所",
 	"priceSpread": "0.000002",
-	"securityCode": "交易对",
+	"securityCode": "交易对"
 }
 ```
 
