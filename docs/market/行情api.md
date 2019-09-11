@@ -210,7 +210,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 
 [
     {
-        "msg_type":"Tick",
+        "dataType":"Tick",
         "exchange":"BINANCE",
         "symbol":"ETH/BTC"
     }
@@ -222,9 +222,9 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 | -------- | ------ | -------|---------------|-------|
 | exchange | String   |否       | BINANCE，BITMAX，HUOBI，OKEX | 交易所名称,默认值：LMT  |
 | symbol | string | 是 |XXX/XXXX                           | 合约或交易对名称，根据 / 格式传输 |
-| msg_type    | string | 是 | Trade | 4个订阅频道 |
+| dataType    | string | 是 | Trade | 4个订阅频道 |
 | duration | int |否 | 1  | 请求周期类型(查看K线周期枚举对应表)，Cycle频道才需要 |
-- msg_type  订阅频道（Tick，Trade，AskBidQueue，Cycle）
+- dataType  订阅频道（Tick，Trade，AskBidQueue，Cycle）
 
 
 
@@ -240,7 +240,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 
 [
     {
-        "msg_type":"Tick",
+        "dataType":"Tick",
         "exchange":"BINANCE",
         "symbol":"ETH/BTC"
     }
@@ -263,7 +263,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"open": "0.016843",
 	"preClose": "",
 	"preCloseTime": "",
-	"securityCode": "ETH_BTC",
+	"symbol": "ETH/BTC",
 	"time": "1567587133971",
 	"volume": "58952.158"
 }
@@ -282,7 +282,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"open": "开",
 	"preClose": "",
 	"preCloseTime": "",
-	"securityCode": "交易币对",
+	"symbol": "交易币对",
 	"time": "1567587133971",
 	"volume": "58952.158"
 }
@@ -296,7 +296,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 ```json
 [
     {
-        "msg_type":"Trade",
+        "dataType":"Trade",
         "exchange": "BINANCE",
         "symbol":"ETH/BTC"
     }
@@ -311,7 +311,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"dataType": "Trade",
 	"exchange": "BINANCE",
 	"price": "0.016835",
-	"securityCode": "ETH_BTC",
+	"symbol": "ETH/BTC",
 	"time": "1567587083472",
 	"type": 1,
 	"volume": "0.569"
@@ -325,7 +325,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"dataType": "频道",
 	"exchange": "交易所",
 	"price": "交易价格",
-	"securityCode": "交易币对",
+	"symbol": "交易币对",
 	"time": "时间戳",
 	"type": "1:买、2：卖",
 	"volume": "交易数量"
@@ -340,7 +340,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 ```json
 [
     {
-        "msg_type":"AskBidQueue",
+        "dataType":"AskBidQueue",
         "exchange":"",
         "symbol":"ETH/BTC"
     }
@@ -374,7 +374,8 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"dataType": "AskBidQueue",
 	"exchange": "BINANCE",
 	"priceSpread": "0.000002",
-	"securityCode": "ETH_BTC"
+	"symbol": "ETH/BTC",
+	"arriveTime": "1567587083472"
 }
 ```
 
@@ -394,7 +395,8 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
 	"dataType": "订阅频道",
 	"exchange": "交易所",
 	"priceSpread": "0.000002",
-	"securityCode": "交易对"
+	"symbol": "交易对",
+	"time": "1567587083472"
 }
 ```
 
@@ -406,7 +408,7 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
 ```json
 [
     {
-        "msg_type":"Cycle",
+        "dataType":"Cycle",
         "exchange": "BINANCE",
         "symbol":"ETH/BTC",
         "duration":"5"
@@ -430,7 +432,7 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
 	"low": "0.016893",
 	"open": "0.016893",
 	"openTime": "",
-	"securityCode": "ETH_BTC",
+	"symbol": "ETH/BTC",
 	"time": "1567575000000",
 	"volume": "860.11000000"
 }
@@ -447,7 +449,7 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
 	"low": "低",
 	"open": "开",
 	"close": "收，这里的收如果没值，表示当前还没有收",
-	"securityCode": "交易币对",
+	"symbol": "交易币对",
 	"time": "1567575000000",
 	"volume": "成交量"
 }
@@ -462,10 +464,3 @@ code表明业务错误，枚举code如下
 | 40800001 | 请求参数错误 |
 | 40800003 | 闪电交易，暂无报价 |
 | 40800005 | 闪电交易，暂停服务 |
-
-
-
-
-
-
-
