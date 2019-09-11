@@ -53,7 +53,7 @@ public interface CoinceresApiService {
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
-    @DELETE("/api/v1/trade/order/{systemOid}")
+    @DELETE("/api/v1/trade/order/{system_oid}")
     Call<ResultsVO<Map<String, List<SystemOidRecord>>>> cancel(@Path("system_oid") String systemOid);
 
     /**
@@ -63,7 +63,7 @@ public interface CoinceresApiService {
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
-    @GET("/api/v1/trade/account")
+    @GET("/api/v1/account/get")
     Call<ResultsVO<List<AccountInfoRes>>> getAccountInfo(@Query("timestamp") Long timestamp,@Query("asset_code") Long assetCode);
 
     /**
@@ -74,8 +74,25 @@ public interface CoinceresApiService {
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @GET("/api/v1/trade/order")
-    Call<ResultsVO<List<OrderDetailRes>>> getOrderInfo(@Query("system_oid") String systemOid, @Query("timestamp")
-            Long timestamp);
+    Call<ResultsVO<OrderDetailRes>> getOrderInfo(@Query("system_oid") String systemOid, @Query("timestamp") Long timestamp);
+
+    /**
+     * 查询当前活动委托
+     * @param openOrdersReq
+     * @return
+     */
+    @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
+    @POST("/api/v1/trade/open_orders")
+    Call<ResultsVO<List<OrderDetailRes>>> getOpenOrders(@Body OpenOrdersReq openOrdersReq);
+
+    /**
+     * 查询历史订单信息
+     * @param ordersHisReq
+     * @return
+     */
+    @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
+    @POST("/api/v1/trade/orders")
+    Call<ResultsVO<List<OrderDetailRes>>> getOrders(@Body OrdersHisReq ordersHisReq);
 
     /**
      * 查询合约持仓信息

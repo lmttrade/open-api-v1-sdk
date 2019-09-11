@@ -42,6 +42,8 @@ public class OrderDetailRes {
     private String commission;
     @JsonProperty("asset_code")
     private Long assetCode;
+    @JsonProperty("error_code")
+    private Integer errorCode;
 
     public String getEntrustBs() {
         return entrustBs;
@@ -203,6 +205,14 @@ public class OrderDetailRes {
         this.assetCode = assetCode;
     }
 
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -226,6 +236,7 @@ public class OrderDetailRes {
                 .append("marginMode", marginMode)
                 .append("priceType", priceType)
                 .append("assetCode", assetCode)
+                .append("errorCode", errorCode)
                 .toString();
     }
 }

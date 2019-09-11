@@ -42,7 +42,8 @@ public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
     @SuppressWarnings("all")
     public void onMessage(WebSocket webSocket, String text) {
         ObjectMapper mapper = new ObjectMapper();
-        if ("pang".equalsIgnoreCase(text)) {
+        if ("pong".equalsIgnoreCase(text)) {
+            log.info("收到交易连接心跳:{}", text);
             return;
         }
         try {

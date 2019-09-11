@@ -52,8 +52,18 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<OrderDetailRes>> getOrderInfo(OrderDetailReq req) {
+    public ResultsVO<OrderDetailRes> getOrderInfo(OrderDetailReq req) {
         return executeSync(coinceresApiService.getOrderInfo(req.getSystemOid(),req.getTimestamp()));
+    }
+
+    @Override
+    public ResultsVO<List<OrderDetailRes>> getOpenOrders(OpenOrdersReq req) {
+        return executeSync(coinceresApiService.getOpenOrders(req));
+    }
+
+    @Override
+    public ResultsVO<List<OrderDetailRes>> getOrders(OrdersHisReq req) {
+        return executeSync(coinceresApiService.getOrders(req));
     }
 
     @Override

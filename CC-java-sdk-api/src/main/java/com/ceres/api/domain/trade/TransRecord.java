@@ -12,8 +12,6 @@ public class TransRecord {
     private String entrustBs;
     @JsonProperty("future_dir")
     private String futureDir;
-    @JsonProperty("client_oid")
-    private String clientOid;
     private String commission;
     @JsonProperty("commission_currency")
     private String commissionCurrency;
@@ -45,14 +43,6 @@ public class TransRecord {
 
     public void setFutureDir(String futureDir) {
         this.futureDir = futureDir;
-    }
-
-    public String getClientOid() {
-        return clientOid;
-    }
-
-    public void setClientOid(String clientOid) {
-        this.clientOid = clientOid;
     }
 
     public String getCommission() {
@@ -140,7 +130,6 @@ public class TransRecord {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("entrustBs", entrustBs)
                 .append("futureDir", futureDir)
-                .append("clientOid", clientOid)
                 .append("commission", commission)
                 .append("commissionCurrency", commissionCurrency)
                 .append("symbol", symbol)

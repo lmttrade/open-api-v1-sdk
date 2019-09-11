@@ -1,12 +1,32 @@
 package com.ceres.api.example;
 
 import com.ceres.api.client.CoinceresApiClientFactory;
-import com.ceres.api.domain.trade.*;
+import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountInfoRes;
+import com.ceres.api.domain.trade.AccountTransferReq;
+import com.ceres.api.domain.trade.AddSubAccountReq;
+import com.ceres.api.domain.trade.AddSubAccountRes;
+import com.ceres.api.domain.trade.CloseOrderReq;
+import com.ceres.api.domain.trade.InputOrderReq;
+import com.ceres.api.domain.trade.InputOrderRes;
+import com.ceres.api.domain.trade.InstantTradingAskPriceReq;
+import com.ceres.api.domain.trade.InstantTradingAskPriceRes;
+import com.ceres.api.domain.trade.InstantTradingConfirmReq;
+import com.ceres.api.domain.trade.InstantTradingConfirmRes;
+import com.ceres.api.domain.trade.OpenOrdersReq;
+import com.ceres.api.domain.trade.OrderDetailReq;
+import com.ceres.api.domain.trade.OrderDetailRes;
+import com.ceres.api.domain.trade.PositionQueryReq;
+import com.ceres.api.domain.trade.ResultsVO;
+import com.ceres.api.domain.trade.SystemOidRecord;
+import com.ceres.api.domain.trade.TransRecord;
+import com.ceres.api.domain.trade.TransReq;
 import com.ceres.api.service.CoinceresApiRestClient;
 import util.PrettyPrinter;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 关于交易的相关接口
@@ -25,7 +45,7 @@ public class TradeTest {
 
     public static void main(String[] args) throws InterruptedException {
         // 02. 下单
-        placeOrder();
+//        placeOrder();
 
         // 03. 撤单(path参数签名处理，进行了临时处理 todo）
 //        cancelOrder();
@@ -45,6 +65,14 @@ public class TradeTest {
         // 8.平仓
 //        closeOrder();
 
+        // 9.闪电交易询价
+//        String confirmId = instantTradingAskPriceByVol();
+//        if (StringUtils.isNotEmpty(confirmId)) {
+//            instantTradingConfirm(confirmId);
+//        }
+
+        //10 活动委托
+        queryOpenOrders();
     }
 
     /** 平仓 */
@@ -62,11 +90,19 @@ public class TradeTest {
         PrettyPrinter.println(result);
     }
 
+    /** 查询活动委托 */
+    private static void queryOpenOrders() {
+        OpenOrdersReq req = new OpenOrdersReq();
+        req.setTimestamp(System.currentTimeMillis());
+        ResultsVO<List<OrderDetailRes>> result = restClient.getOpenOrders(req);
+        PrettyPrinter.println(result);
+    }
+
     /** 查询成交 */
     private static void queryTrade() {
         TransReq req = new TransReq();
-        req.setExchange("LMT");
-        req.setSymbol("BTC/USDT");
+        req.setExchange("OKEX");
+        req.setSymbol("EOS/USDT");
         req.setCount("10");
         ResultsVO<List<TransRecord>> result = restClient.queryTransRecord(req);
         PrettyPrinter.println(result);
@@ -84,9 +120,9 @@ public class TradeTest {
     /** 查询订单信息 */
     private static void queryOrderInfo() {
         OrderDetailReq req = new OrderDetailReq();
-        req.setSystemOid("123456789");
+        req.setSystemOid("199963652592906273");
         req.setTimestamp(System.currentTimeMillis());
-        ResultsVO<List<OrderDetailRes>> result = restClient.getOrderInfo(req);
+        ResultsVO<OrderDetailRes> result = restClient.getOrderInfo(req);
         PrettyPrinter.println(result);
     }
 
@@ -118,62 +154,50 @@ public class TradeTest {
 
     /** 查询账户信息 */
     private static void queryAccountInfo() {
-        ResultsVO<List<AccountInfoRes>> result = restClient.getAccountInfo(System.currentTimeMillis(),123456789l);
+        ResultsVO<List<AccountInfoRes>> result = restClient.getAccountInfo(System.currentTimeMillis(),null);
         PrettyPrinter.println(result);
     }
 
     /** 撤单 */
     private static void cancelOrder() {
-        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("149150845501059075");
+        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1124890656693825539");
         PrettyPrinter.println(result);
     }
 
     /** 下单 */
     private static void placeOrder() {
         InputOrderReq req = new InputOrderReq();
-        req.setSymbol("LTC/BTC");
+        req.setSymbol("ETH/USDT");
         req.setPriceType("limit");
-        req.setEntrustPrice("0.01");
-        req.setProfitValue("100");
-        req.setEntrustAmount("1");
-        req.setEntrustBs("buy");
-//        req.setFutureDir("open");
-//        req.setLever("10");
+        req.setEntrustPrice("200");
+        req.setEntrustAmount("0.05");
+        req.setEntrustBs("sell");
         req.setClientOid("12345");
         req.setTradeType("spot");
-//        req.setMarginMode("fixed");
         ResultsVO<InputOrderRes> result = restClient.input(req);
         PrettyPrinter.println(result);
     }
 
     /** 闪电交易询价-按量 */
-    private static void instantTradingAskPriceByVol() {
+    private static String instantTradingAskPriceByVol() {
         InstantTradingAskPriceReq instantTradingAskPriceReq = new InstantTradingAskPriceReq();
-        instantTradingAskPriceReq.setEntrustAmount("0.12");
+        instantTradingAskPriceReq.setEntrustAmount("20");
         instantTradingAskPriceReq.setEntrustBs("buy");
-        instantTradingAskPriceReq.setEntrustType(1);
-        instantTradingAskPriceReq.setSymbol("BTC_USDT");
-        ResultsVO<InstantTradingAskPriceRes> result = restClient.flashAskPrice(instantTradingAskPriceReq);
-        PrettyPrinter.println(result);
-    }
-
-    /** 闪电交易询价-按额 */
-    private static void instantTradingAskPriceByAmount() {
-        InstantTradingAskPriceReq instantTradingAskPriceReq = new InstantTradingAskPriceReq();
-        instantTradingAskPriceReq.setEntrustAmount("100");
-        instantTradingAskPriceReq.setEntrustBs("sell");
         instantTradingAskPriceReq.setEntrustType(2);
-        instantTradingAskPriceReq.setSymbol("BTC_USDT");
+        instantTradingAskPriceReq.setSymbol("BTC/USDT");
         ResultsVO<InstantTradingAskPriceRes> result = restClient.flashAskPrice(instantTradingAskPriceReq);
         PrettyPrinter.println(result);
+        if (result.getCode().equals("200")){
+            return result.getData().getConfirmId();
+        }
+        return null;
     }
 
     /** 闪电交易确认成交 */
-    private static void instantTradingConfirm() {
+    private static void instantTradingConfirm(String confirmId) {
         InstantTradingConfirmReq instantTradingConfirmReq = new InstantTradingConfirmReq();
-        instantTradingConfirmReq.setAssetCode(123456789L);
-        instantTradingConfirmReq.setClientOid("uuid-ii982");
-        instantTradingConfirmReq.setConfirmId("63ebfab2-c93a-11e9-a0f4-020f2d8eb122");
+        instantTradingConfirmReq.setClientOid(UUID.randomUUID().toString());
+        instantTradingConfirmReq.setConfirmId(confirmId);
         ResultsVO<InstantTradingConfirmRes> result = restClient.flashConfirm(instantTradingConfirmReq);
         PrettyPrinter.println(result);
     }

@@ -29,7 +29,7 @@ public class MarketSubscribeTest {
          subTrade();
 
         // 订阅tick
-         //subTick();
+//         subTick();
 
         // 订阅candle
         // subCandle();

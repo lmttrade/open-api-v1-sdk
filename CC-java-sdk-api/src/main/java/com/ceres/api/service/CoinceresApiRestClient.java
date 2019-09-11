@@ -12,8 +12,10 @@ import com.ceres.api.domain.trade.InstantTradingAskPriceReq;
 import com.ceres.api.domain.trade.InstantTradingAskPriceRes;
 import com.ceres.api.domain.trade.InstantTradingConfirmReq;
 import com.ceres.api.domain.trade.InstantTradingConfirmRes;
+import com.ceres.api.domain.trade.OpenOrdersReq;
 import com.ceres.api.domain.trade.OrderDetailReq;
 import com.ceres.api.domain.trade.OrderDetailRes;
+import com.ceres.api.domain.trade.OrdersHisReq;
 import com.ceres.api.domain.trade.PositionDetailRes;
 import com.ceres.api.domain.trade.PositionQueryReq;
 import com.ceres.api.domain.trade.ResultsVO;
@@ -73,9 +75,23 @@ public interface CoinceresApiRestClient {
     /**
      * 查询订单信息
      * @param req
-     * @return 订单列表
+     * @return 订单详情
      */
-    ResultsVO<List<OrderDetailRes>> getOrderInfo(OrderDetailReq req);
+    ResultsVO<OrderDetailRes> getOrderInfo(OrderDetailReq req);
+
+    /**
+     * 查询当前活动委托
+     * @param req
+     * @return
+     */
+    ResultsVO<List<OrderDetailRes>> getOpenOrders(OpenOrdersReq req);
+
+    /**
+     * 历史订单列表
+     * @param req
+     * @return
+     */
+    ResultsVO<List<OrderDetailRes>> getOrders(OrdersHisReq req);
 
     /**
      * 查询合约持仓
