@@ -261,8 +261,6 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"last": "0.016837",
 	"low": "0.016756",
 	"open": "0.016843",
-	"preClose": "",
-	"preCloseTime": "",
 	"symbol": "ETH/BTC",
 	"time": "1567587133971",
 	"volume": "58952.158"
@@ -373,9 +371,8 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	}],
 	"dataType": "AskBidQueue",
 	"exchange": "BINANCE",
-	"priceSpread": "0.000002",
 	"symbol": "ETH/BTC",
-	"arriveTime": "1567587083472"
+	"time": "1567587083472"
 }
 ```
 
@@ -421,11 +418,9 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
 
 ```json
 {
-	"amount": "",
-	"arriveTime": 0,
 	"close": "0.016914",
 	"closeTime": "",
-	"cycleType": 5,
+	"duration": 5,
 	"dataType": "Cycle",
 	"exchange": "BINANCE",
 	"high": "0.016918",
@@ -464,3 +459,4 @@ code表明业务错误，枚举code如下
 | 40800001 | 请求参数错误 |
 | 40800003 | 闪电交易，暂无报价 |
 | 40800005 | 闪电交易，暂停服务 |
+
