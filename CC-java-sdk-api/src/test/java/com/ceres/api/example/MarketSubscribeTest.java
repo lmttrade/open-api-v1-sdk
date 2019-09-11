@@ -26,13 +26,17 @@ public class MarketSubscribeTest {
 
     public static void main(String[] args) {
         // 订阅trade
-         subTrade();
+         //subTrade();
 
         // 订阅tick
+<<<<<<< HEAD
 //         subTick();
+=======
+         subTick();
+>>>>>>> 20b2108442387d42703ed9049485242ed774e837
 
         // 订阅candle
-        // subCandle();
+         //subCandle();
 
         // 订阅depth
          //subDepth();
@@ -46,7 +50,7 @@ public class MarketSubscribeTest {
      */
     private static void subDepth() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("AskBidQueue");
+        subscribeReq.setDataType("AskBidQueue");
         subscribeReq.setExchange("");
         subscribeReq.setSymbol("ETH/BTC");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
@@ -63,7 +67,7 @@ public class MarketSubscribeTest {
      */
     private static void subCandle() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("Cycle");
+        subscribeReq.setDataType("Cycle");
         subscribeReq.setExchange("");
         subscribeReq.setSymbol("ETH/BTC");
         subscribeReq.setDuration("5");
@@ -81,8 +85,8 @@ public class MarketSubscribeTest {
      */
     private static void subTick() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("Tick");
-        subscribeReq.setExchange("");
+        subscribeReq.setDataType("Tick");
+        subscribeReq.setExchange("HUOBI");
         subscribeReq.setSymbol("HT/BTC");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
@@ -98,7 +102,7 @@ public class MarketSubscribeTest {
      */
     private static void subTrade() {
         SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setMsgType("Trade");
+        subscribeReq.setDataType("Trade");
         subscribeReq.setExchange("BINANCE");
         subscribeReq.setSymbol("ETH/BTC");
 

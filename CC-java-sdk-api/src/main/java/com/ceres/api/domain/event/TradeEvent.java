@@ -9,8 +9,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author LMT
  * @date 2019/01/30
  * e.g
- * {"symbol":"BTC/USDT","exchange":"LMT","msg_type":"push-trade","price":"3610.3002","side":"s","time":"1550114101032",
- * "volume":"0.03456403"}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TradeEvent {
@@ -19,8 +17,16 @@ public class TradeEvent {
 
     private String exchange;
 
-    @JsonProperty("msg_type")
-    private String msgType;
+    @JsonProperty("dataType")
+    private String dataType;
+
+    private String price;
+
+    private Integer type;
+
+    private String time;
+
+    private String volume;
 
     public String getSymbol() {
         return symbol;
@@ -30,29 +36,21 @@ public class TradeEvent {
         this.symbol = symbol;
     }
 
-    public String getMsgType() {
-        return msgType;
+    public String getDataType() {
+        return dataType;
     }
 
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 
-    public String getSide() {
-        return side;
+    public Integer getType() {
+        return type;
     }
 
-    public void setSide(String side) {
-        this.side = side;
+    public void setType(Integer type) {
+        this.type = type;
     }
-
-    private String price;
-
-    private String side;
-
-    private String time;
-
-    private String volume;
 
     public String getExchange() {
         return exchange;
@@ -91,9 +89,9 @@ public class TradeEvent {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("symbol", symbol)
                 .append("exchange", exchange)
-                .append("msgType", msgType)
+                .append("dataType", dataType)
                 .append("price", price)
-                .append("side",side)
+                .append("type",type)
                 .append("time", time)
                 .append("volume",volume)
                 .toString();

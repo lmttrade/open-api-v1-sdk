@@ -10,8 +10,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class SubscribeReq {
 
-    @JsonProperty("msg_type")
-    private String msgType;
+    @JsonProperty("dataType")
+    private String dataType;
     private String exchange;
     private String symbol;
     private String duration;
@@ -23,12 +23,12 @@ public class SubscribeReq {
         this.duration = duration;
     }
 
-    public String getMsgType() {
-        return msgType;
+    public String getDataType() {
+        return dataType;
     }
 
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 
     public String getExchange() {
@@ -50,7 +50,7 @@ public class SubscribeReq {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("msg_type", msgType)
+                .append("dataType", dataType)
                 .append("exchange", exchange)
                 .append("symbol", symbol)
                 .append("duration",duration)

@@ -9,8 +9,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author LMT
  * @date 2019/01/30
  * e.g
- * {"close":"3616.3721","symbol":"BTC/USDT","duration":"1m","exchange":"LMT",
- * "high":"3616.9806","low":"3616.3507","msg_type":"push-candle","open":"3616.9806","time":"1550126820000","volume":"0.67480051"}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CandleEvent {
@@ -20,10 +18,12 @@ public class CandleEvent {
     private String exchange;
     private String high;
     private String low;
-    @JsonProperty("msg_type")
-    private String msgType;
+    @JsonProperty("dataType")
+    private String dataType;
     private String open;
     private String time;
+    private String openTime;
+    private String closeTime;
     private String volume;
 
     public String getDuration() {
@@ -81,12 +81,12 @@ public class CandleEvent {
         this.symbol = symbol;
     }
 
-    public String getMsgType() {
-        return msgType;
+    public String getDataType() {
+        return dataType;
     }
 
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 
     public String getTime() {
@@ -105,6 +105,22 @@ public class CandleEvent {
         this.volume = volume;
     }
 
+    public String getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(String openTime) {
+        this.openTime = openTime;
+    }
+
+    public String getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(String closeTime) {
+        this.closeTime = closeTime;
+    }
+
     @SuppressWarnings("all")
     @Override
     public String toString() {
@@ -115,10 +131,12 @@ public class CandleEvent {
                 .append("exchange", exchange)
                 .append("high", high)
                 .append("low", low)
-                .append("msgType",msgType)
+                .append("dataType",dataType)
                 .append("open", open)
                 .append("time", time)
                 .append("volume", volume)
+                .append("closeTime", closeTime)
+                .append("openTime", openTime)
                 .toString();
     }
 }
