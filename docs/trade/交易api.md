@@ -213,9 +213,9 @@ currency:币种
 | entrust_price | String   | 否       | 委托价格                                      |
 | entrust_amount   | String   | 是       | 委托量 限价买、卖、市价卖是数量，市价买 暂不支持 |
 | entrust_bs    | String   | 是       | 买:buy       卖:sell                        |
-| client_oid    | String   | 否       | 来源标记                                      |
+| client_oid    | String   | 否       | 客户端保留字段 可用于查询订单信息 需保持唯一性 |
 | timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
-| program_oid | String    | 否       | 程序单ID |
+| program_oid | String    | 否       | 算法任务ID 填入后将校验该ID是否存在 不存在返回下单失败 |
 | asset_code | Long    | 否       | 账户编码 不填默认以此apiKey所属用户下单,否则将依据apiKey权限判定是否以输入的账户下单|
 
 #### 返回数据:
@@ -234,7 +234,7 @@ currency:币种
 #### 备注:
 
 ```tex
-client_oid: 客户生成订单ID
+client_oid: 客户上传的保留字段
 
 system_oid: 系统生成的订单ID
 
@@ -255,7 +255,9 @@ system_oid: 系统生成的订单ID
 
 | 参数名称   | 参数类型 | 是否必须 | 参数解释                                 |
 | ---------- | -------- | -------- | ---------------------------------------- |
-| system_oid | String   | 是       | 系统订单号 |
+| system_oid | String   | 否       | 系统订单号 system_oid与client_oid 至少输入一个值,两者都输入忽略client_oid|
+| client_oid | String   | 否       | 客户上传的保留字段 system_oid与client_oid 至少输入一个值,两者都输入忽略client_oid|
+| asset_code | Long    | 否       | 账户编码 不填默认以此apiKey所属用户查询,否则将依据apiKey权限判定是否以输入的账户查询|
 | timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据:
@@ -338,7 +340,7 @@ program_oid:程序单号
 ```tex
 接口用途: 查询活跃订单
 
-请求方式: GET
+请求方式: POST
 
 接口地址Path: https://open.lmt.trade/api/v1/trade/open_orders
 ```
@@ -350,7 +352,7 @@ program_oid:程序单号
 | exchange      | String   | 否       | 交易所名称 目前仅支持 LMT、INSTANTEX                     |
 | symbol      | String   | 否       | 币币交易对或合约名称                           |
 | from    | String   | 否       | 起始查询的系统委托单号 从最早下单开始排序                 |
-| limit | String   | 否       | 一次查询最大数量 最大100 默认100                            |
+| limit | int   | 否       | 一次查询最大数量 最大100 默认100                            |
 | timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 | asset_code | Long    | 否       | 账户编码 不填默认查询此apiKey所属用户的订单,否则将依据apiKey权限查询输入账户订单|
 
@@ -469,6 +471,7 @@ system_oid: 系统生成的订单ID
 | deal_id       | String   | 否       | 平仓持仓号，合约平仓需指定的持仓单号           |
 | client_oid    | String   | 否       | 客户端标识                                     |
 | close_rule    | String   | 否       | 平仓规则,可选值为time 、risk                   |
+| asset_code | Long    | 否       | 账户编码 不填默认以此apiKey所属用户平仓,否则将依据apiKey权限判定是否以输入的账户平仓|
 | timestamp | Long    | 是       | 全局自增序列 建议使用时间戳(单位ms)|
 
 #### 返回数据:
@@ -511,6 +514,7 @@ close_rule 平仓规则，可选值为time、risk。 time:按时间排序优先�
 | 参数名称   | 参数类型 | 是否必须 | 参数解释                                 |
 | ---------- | -------- | -------- | ---------------------------------------- |
 | system_oid | String   | 是       | 系统生成的订单号，逗号分隔，最多支持15个 |
+| asset_code | Long    | 否       | 账户编码 不填默认以此apiKey所属用户撤单,否则将依据apiKey权限判定是否以输入的账户撤单|
 
 #### 返回数据:
 
@@ -563,6 +567,7 @@ data: 撤单信息
 | ------------ | -------- | -------- | ----------------------------- |
 | symbol     | String   | 否       | 合约名称                      |
 | position_dir | String   | 否       | 持仓方向，多:buy   空: sell |
+| asset_code | Long    | 否       | 账户编码 不填默认以此apiKey所属用户查询,否则将依据apiKey权限判定是否以输入的账户查询|
 
 #### 返回数据:
 
@@ -817,9 +822,71 @@ client_oid: 客户端自定义id
 
 | 参数名称 | 参数类型 | 是否必须 | 参数解释                |
 | -------- | -------- | -------- | ----------------------- |
-| program_oid | String   | 是       | 程序单id(母单号)    |
+| program_oid | String   | 是       | 算法任务单id(母单号)    |
 | from    | String   | 否       | 起始查询的系统委托单号 从最早下单开始排序                 |
-| limit | String   | 否       | 一次查询最大数量 最大100 默认100                            |
+| limit | int   | 否       | 一次查询最大数量 最大100 默认100                            |
+
+#### 返回数据:
+
+```json
+{
+    "code": "200",
+    "data":{
+        "orderDetailRes":[
+            "exchange":"LMT",
+            "average_dealt_price":"0.000011655",
+            "client_oid":"12345",
+            "commission":"0.00000011655",
+            "symbol":"ADA_BTC",
+            "dealt_amount":"10",
+            "entrust_amount":"10",
+            "entrust_bs":"sell",
+            "price_type":"limit",
+            "entrust_price":"0.000011",
+            "entrust_time":"2018-12-10 10:08:43",
+            "lever":"1",
+            "profit_value":"0",
+            "status":5,
+            "stop_value":"0",
+            "system_oid":"125520129039151104",
+            "trade_type":"spot",
+            "margin_mode": "none",
+            "asset_code":190810234,
+            "program_oid":"x34wess89ij2hdk"
+            ],...
+        "nextFrom":"125520129039151104"
+     }
+    "message":"SUCESS"
+}
+```
+
+#### 备注:
+
+```tex
+    各字段含义同单个订单接口
+```
+
+## 16. 查询历史订单记录
+
+```tex
+接口用途: 根据条件查询历史订单(仅可以查询最近一个月的订单记录且订单状态不含"废单",单次最大查询条目100条,支持分页)
+
+请求方式: POST
+
+接口地址Path: https://open.lmt.trade/api/v1/trade/orders
+```
+
+#### 输入参数:
+
+| 参数名称 | 参数类型 | 是否必须 | 参数解释                |
+| -------- | -------- | -------- | ----------------------- |
+| exchange | String   | 否       | 目前仅支持 LMT、INSTANTEX 默认全部   |
+| symbol | String   | 否     | 币对名称  默认全部  |
+| start_time | Long   | 否       | 开始时间戳 如1563880741568 不填默认30天前的时间戳  |
+| end_time | Long   | 否       | 结束时间戳 如1563881775294 不填默认当前时间戳  |
+| from    | String   | 否       | 起始查询的系统委托单号 从最早下单开始排序                 |
+| limit | int   | 否       | 一次查询最大数量 最大100 默认100                            |
+| asset_code | Long   | 否       | 账户编码 不填默认以此apiKey所属用户确认订单,否则将依据apiKey权限使用输入账户查询历史订单                            |
 
 #### 返回数据:
 
