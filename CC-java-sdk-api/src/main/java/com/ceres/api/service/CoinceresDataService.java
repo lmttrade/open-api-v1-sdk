@@ -23,7 +23,7 @@ public interface CoinceresDataService {
      * @param symbol
      * @return
      */
-    @GET("/api/v1/market/symbols")
+    @GET("/api/v1/basic/symbols")
     Call<List<CurrencyPair>> getSymbols(@Query("exchange") String exchange, @Query("symbol") String symbol);
 
     /**
