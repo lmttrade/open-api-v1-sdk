@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CycleData {
+
     private String time;
     private String open;
     private String high;

@@ -1,6 +1,5 @@
 package com.ceres.api.domain.market;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -10,8 +9,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class SubscribeReq {
 
-    @JsonProperty("dataType")
     private String dataType;
+    private String actionType;
     private String exchange;
     private String symbol;
     private String duration;
@@ -19,6 +18,7 @@ public class SubscribeReq {
     public String getDuration() {
         return duration;
     }
+
     public void setDuration(String duration) {
         this.duration = duration;
     }
@@ -45,6 +45,14 @@ public class SubscribeReq {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+
+    public String getActionType() {
+        return actionType;
+    }
+
+    public void setActionType(String actionType) {
+        this.actionType = actionType;
     }
 
     @Override
