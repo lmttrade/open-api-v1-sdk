@@ -10,7 +10,7 @@ public class TransReq {
 
     private String count;
 
-    private Long assetCode;
+    private Long assetCode = 0L;
 
     public String getExchange() {
         return exchange;

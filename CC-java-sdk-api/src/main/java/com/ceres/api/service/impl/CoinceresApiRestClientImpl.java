@@ -42,8 +42,8 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<Map<String, List<SystemOidRecord>>> cancel(String systemOid) {
-        return executeSync(coinceresApiService.cancel(systemOid));
+    public ResultsVO<Map<String, List<SystemOidRecord>>> cancel(String systemOid,Long assetCode) {
+        return executeSync(coinceresApiService.cancel(systemOid,assetCode));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
 
     @Override
     public ResultsVO<OrderDetailRes> getOrderInfo(OrderDetailReq req) {
-        return executeSync(coinceresApiService.getOrderInfo(req.getSystemOid(),req.getTimestamp()));
+        return executeSync(coinceresApiService.getOrderInfo(req.getSystemOid(),req.getTimestamp(),req.getAssetCode()));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
 
     @Override
     public ResultsVO<List<PositionDetailRes>> getPosition(PositionQueryReq req) {
-        return executeSync(coinceresApiService.getPosition(req.getSymbol(), req.getPositionDir()));
+        return executeSync(coinceresApiService.getPosition(req.getSymbol(), req.getPositionDir(),req.getAssetCode()));
     }
 
     @Override

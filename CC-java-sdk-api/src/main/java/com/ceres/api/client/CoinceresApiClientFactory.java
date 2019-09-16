@@ -9,6 +9,9 @@ import com.ceres.api.service.impl.CoinceresApiWebSocketClientImpl;
 import com.ceres.api.service.impl.CoinceresDataRestClientImpl;
 import com.ceres.api.service.impl.CoinceresTradeWebSocketClientImpl;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import static com.ceres.api.service.CoinceresApiServiceGenerator.getSharedClient;
 
 /**
@@ -20,6 +23,8 @@ public class CoinceresApiClientFactory {
     private String apiKey;
 
     private String secret;
+
+    public static final Map<String,Long> MONITOR_MAP = new ConcurrentHashMap<>();
 
     /**
      * Instantiates a new coinceres api client factory.

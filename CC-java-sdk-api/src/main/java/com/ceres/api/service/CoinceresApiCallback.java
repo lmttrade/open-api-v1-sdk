@@ -16,5 +16,7 @@ public interface CoinceresApiCallback<T> {
      * 失败响应
      * @param cause
      */
-    default void onFailure(Throwable cause) {}
+    default void onFailure(Throwable cause) {
+
+    }
 }

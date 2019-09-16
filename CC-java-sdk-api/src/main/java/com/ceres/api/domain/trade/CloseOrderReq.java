@@ -32,6 +32,9 @@ public class CloseOrderReq {
     @JsonProperty("timestamp")
     private Long timestamp;
 
+    @JsonProperty("asset_code")
+    private Long assetCode = 0L;
+
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
@@ -98,6 +101,14 @@ public class CloseOrderReq {
 
     public void setCloseRule(String closeRule) {
         this.closeRule = closeRule;
+    }
+
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
     }
 
     public String getSymbol() {

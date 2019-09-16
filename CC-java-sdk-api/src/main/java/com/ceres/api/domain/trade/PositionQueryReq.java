@@ -7,6 +7,7 @@ public class PositionQueryReq {
     private String exchange;
     private String symbol;
     private String positionDir;
+    private Long assetCode;
 
     public String getExchange() {
         return exchange;
@@ -30,5 +31,13 @@ public class PositionQueryReq {
 
     public void setPositionDir(String positionDir) {
         this.positionDir = positionDir;
+    }
+
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
     }
 }

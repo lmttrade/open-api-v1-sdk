@@ -60,9 +60,10 @@ public interface CoinceresApiRestClient {
     /**
      * 撤单
      * @param systemOid
+     * @param assetCode
      * @return 撤单结果
      */
-    ResultsVO<Map<String,List<SystemOidRecord>>> cancel(String systemOid);
+    ResultsVO<Map<String,List<SystemOidRecord>>> cancel(String systemOid,Long assetCode);
 
     /**
      * 查询账户信息

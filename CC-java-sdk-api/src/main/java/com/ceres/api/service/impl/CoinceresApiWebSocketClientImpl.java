@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -71,6 +70,8 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
         scheduledService.scheduleAtFixedRate(() -> webSocket.send("ping"), 5, 10, TimeUnit.SECONDS);
         return () -> {
             final int code = 1000;
+            log.warn("行情-关闭ping-pong线程监听");
+            scheduledService.shutdownNow();
             listener.onClosing(webSocket, code, null);
             webSocket.close(code, null);
             listener.onClosed(webSocket, code, null);
