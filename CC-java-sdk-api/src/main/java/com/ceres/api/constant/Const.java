@@ -27,4 +27,7 @@ public class Const {
 
     public static final String ENDPOINT_SECURITY_TYPE_APIKEY_HEADER = ENDPOINT_SECURITY_TYPE_APIKEY + ": #";
     public static final String ENDPOINT_SECURITY_TYPE_SIGNED_HEADER = ENDPOINT_SECURITY_TYPE_SIGNED + ": #";
+
+    public static final String MONITOR_TRADE = "trade";
+    public static final String MONITOR_MARKET = "market";
 }

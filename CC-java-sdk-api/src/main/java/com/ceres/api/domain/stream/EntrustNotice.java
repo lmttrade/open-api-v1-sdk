@@ -1,15 +1,12 @@
 package com.ceres.api.domain.stream;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 /**
+ * 成交推送，状态推送的websocket信息
+ *
  * @author LMT
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntrustNotice {
+
     /** 交易所名称 */
     private String exchange;
 
@@ -17,50 +14,70 @@ public class EntrustNotice {
     private String symbol;
 
     /** 委托单号 */
-    @JsonProperty("system_oid")
-    private String systemOid;
+    private String system_oid;
+
+    /** 客户端单号 */
+    private String client_oid;
 
     /** 成交均价 */
-    @JsonProperty("average_dealt_price")
-    private String averageDealtPrice;
+    private String average_dealt_price;
 
     /** 委托时间 */
-    @JsonProperty("entrust_time")
-    private String entrustTime;
+    private String entrust_time;
 
     /** 委托状态 */
-    @JsonProperty("status")
     private String status;
 
     /** 委托方向 */
-    @JsonProperty("entrust_bs")
-    private String entrustBs;
+    private String entrust_bs;
 
     /** 价格类型 */
-    @JsonProperty("price_type")
-    private String priceType;
+    private String price_type;
 
     /** 杠杆倍数 */
     private String lever;
 
     /** 委托价格 */
-    @JsonProperty("entrust_price")
-    private String entrustPrice;
+    private String entrust_price;
 
     /** 委托数量 */
-    @JsonProperty("entrust_amount")
-    private String entrustAmount;
+    private String entrust_amount;
 
-    /** 成交数量 */
-    @JsonProperty("dealt_amount")
-    private String dealtAmount;
+    /** 单次成交数量 */
+    private String dealt_amount;
 
-    /** 最后一次成交时间 */
-    @JsonProperty("dealt_time")
-    private String dealtTime;
+    /**
+     * 累计成交数量
+     */
+    private String total_dealt_amount;
 
-    /** 通知类型 1: 状态变更通知  2: 保证金追加 */
-    private int messageType;
+    /**
+     * 最新成交时间
+     */
+    private String dealt_time;
+
+    /**
+     * 交易类型
+     */
+    private String trade_type;
+
+    /**
+     * 保证金模式
+     */
+    private String margin_mode;
+
+    /**
+     * 账户编码
+     */
+    private long asset_code;
+
+    /**
+     * 程序单编码
+     */
+    private String program_oid;
+
+    /** 通知类型 1: 状态变更通知  2: 持仓变化通知 */
+    private int message_type;
 
     public String getExchange() {
         return exchange;
@@ -78,28 +95,36 @@ public class EntrustNotice {
         this.symbol = symbol;
     }
 
-    public String getSystemOid() {
-        return systemOid;
+    public String getSystem_oid() {
+        return system_oid;
     }
 
-    public void setSystemOid(String systemOid) {
-        this.systemOid = systemOid;
+    public void setSystem_oid(String system_oid) {
+        this.system_oid = system_oid;
     }
 
-    public String getAverageDealtPrice() {
-        return averageDealtPrice;
+    public String getClient_oid() {
+        return client_oid;
     }
 
-    public void setAverageDealtPrice(String averageDealtPrice) {
-        this.averageDealtPrice = averageDealtPrice;
+    public void setClient_oid(String client_oid) {
+        this.client_oid = client_oid;
     }
 
-    public String getEntrustTime() {
-        return entrustTime;
+    public String getAverage_dealt_price() {
+        return average_dealt_price;
     }
 
-    public void setEntrustTime(String entrustTime) {
-        this.entrustTime = entrustTime;
+    public void setAverage_dealt_price(String average_dealt_price) {
+        this.average_dealt_price = average_dealt_price;
+    }
+
+    public String getEntrust_time() {
+        return entrust_time;
+    }
+
+    public void setEntrust_time(String entrust_time) {
+        this.entrust_time = entrust_time;
     }
 
     public String getStatus() {
@@ -110,20 +135,20 @@ public class EntrustNotice {
         this.status = status;
     }
 
-    public String getEntrustBs() {
-        return entrustBs;
+    public String getEntrust_bs() {
+        return entrust_bs;
     }
 
-    public void setEntrustBs(String entrustBs) {
-        this.entrustBs = entrustBs;
+    public void setEntrust_bs(String entrust_bs) {
+        this.entrust_bs = entrust_bs;
     }
 
-    public String getPriceType() {
-        return priceType;
+    public String getPrice_type() {
+        return price_type;
     }
 
-    public void setPriceType(String priceType) {
-        this.priceType = priceType;
+    public void setPrice_type(String price_type) {
+        this.price_type = price_type;
     }
 
     public String getLever() {
@@ -134,48 +159,109 @@ public class EntrustNotice {
         this.lever = lever;
     }
 
-    public String getEntrustPrice() {
-        return entrustPrice;
+    public String getEntrust_price() {
+        return entrust_price;
     }
 
-    public void setEntrustPrice(String entrustPrice) {
-        this.entrustPrice = entrustPrice;
+    public void setEntrust_price(String entrust_price) {
+        this.entrust_price = entrust_price;
     }
 
-    public String getEntrustAmount() {
-        return entrustAmount;
+    public String getEntrust_amount() {
+        return entrust_amount;
     }
 
-    public void setEntrustAmount(String entrustAmount) {
-        this.entrustAmount = entrustAmount;
+    public void setEntrust_amount(String entrust_amount) {
+        this.entrust_amount = entrust_amount;
     }
 
-    public String getDealtAmount() {
-        return dealtAmount;
+    public String getDealt_amount() {
+        return dealt_amount;
     }
 
-    public void setDealtAmount(String dealtAmount) {
-        this.dealtAmount = dealtAmount;
+    public void setDealt_amount(String dealt_amount) {
+        this.dealt_amount = dealt_amount;
     }
 
-    public String getDealtTime() {
-        return dealtTime;
+    public String getTotal_dealt_amount() {
+        return total_dealt_amount;
     }
 
-    public void setDealtTime(String dealtTime) {
-        this.dealtTime = dealtTime;
+    public void setTotal_dealt_amount(String total_dealt_amount) {
+        this.total_dealt_amount = total_dealt_amount;
     }
 
-    public int getMessageType() {
-        return messageType;
+    public String getDealt_time() {
+        return dealt_time;
     }
 
-    public void setMessageType(int messageType) {
-        this.messageType = messageType;
+    public void setDealt_time(String dealt_time) {
+        this.dealt_time = dealt_time;
+    }
+
+    public String getTrade_type() {
+        return trade_type;
+    }
+
+    public void setTrade_type(String trade_type) {
+        this.trade_type = trade_type;
+    }
+
+    public String getMargin_mode() {
+        return margin_mode;
+    }
+
+    public void setMargin_mode(String margin_mode) {
+        this.margin_mode = margin_mode;
+    }
+
+    public long getAsset_code() {
+        return asset_code;
+    }
+
+    public void setAsset_code(long asset_code) {
+        this.asset_code = asset_code;
+    }
+
+    public String getProgram_oid() {
+        return program_oid;
+    }
+
+    public void setProgram_oid(String program_oid) {
+        this.program_oid = program_oid;
+    }
+
+    public int getMessage_type() {
+        return message_type;
+    }
+
+    public void setMessage_type(int message_type) {
+        this.message_type = message_type;
     }
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return "EntrustNotice{" +
+                "exchange='" + exchange + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", system_oid='" + system_oid + '\'' +
+                ", client_oid='" + client_oid + '\'' +
+                ", average_dealt_price='" + average_dealt_price + '\'' +
+                ", entrust_time='" + entrust_time + '\'' +
+                ", status='" + status + '\'' +
+                ", entrust_bs='" + entrust_bs + '\'' +
+                ", price_type='" + price_type + '\'' +
+                ", lever='" + lever + '\'' +
+                ", entrust_price='" + entrust_price + '\'' +
+                ", entrust_amount='" + entrust_amount + '\'' +
+                ", dealt_amount='" + dealt_amount + '\'' +
+                ", total_dealt_amount='" + total_dealt_amount + '\'' +
+                ", dealt_time='" + dealt_time + '\'' +
+                ", trade_type='" + trade_type + '\'' +
+                ", margin_mode='" + margin_mode + '\'' +
+                ", asset_code=" + asset_code +
+                ", program_oid='" + program_oid + '\'' +
+                ", message_type=" + message_type +
+                '}';
     }
 }

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 /**
  * @author LMT
  * @date 2019/01/30
@@ -30,6 +31,13 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
     private String apiKey;
 
     private String secret;
+
+    private static ScheduledExecutorService scheduledService;
+
+    static {
+        scheduledService = new ScheduledThreadPoolExecutor(1,
+                new BasicThreadFactory.Builder().namingPattern("lmt-trade-ping-scheduled-%d").daemon(true).build());
+    }
 
     public CoinceresTradeWebSocketClientImpl(OkHttpClient client,String apiKey, String secret) {
         this.client = client;
@@ -48,21 +56,23 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
 
     private Closeable createNewWebSocket(CoinceresTradeWebSocketListener<?> listener) {
         // cal sign
-        String src = "api_key=" + apiKey + "&secret=" + secret;
+        long timestamp = System.currentTimeMillis();
+        String src = "api_key=" + apiKey + "&timestamp="+timestamp+"&secret=" + secret;
         String sign = null;
         try {
             sign = SHA256Util.toSignBySha256(src);
         } catch (Exception e) {
             log.error("Signature Error，apiKey:{}",apiKey);
         }
-        String streamingUrl = Const.orderWsUrl + "?api_key=" + apiKey + "&sign=" + sign;
+        String streamingUrl = Const.orderWsUrl + "?api_key=" + apiKey + "&timestamp="+timestamp+"&sign=" + sign;
         Request request = new Request.Builder().url(streamingUrl).build();
         final WebSocket webSocket = client.newWebSocket(request, listener);
-        ScheduledExecutorService scheduledService = new ScheduledThreadPoolExecutor(1,
-                new BasicThreadFactory.Builder().namingPattern("coinceres-scheduled-%d").daemon(true).build());
         scheduledService.scheduleAtFixedRate(()->webSocket.send("ping"),5,10,TimeUnit.SECONDS);
+
         return () -> {
             final int code = 1000;
+            log.warn("交易-关闭ping-pong线程监听");
+            scheduledService.shutdownNow();
             listener.onClosing(webSocket, code, null);
             webSocket.close(code, null);
             listener.onClosed(webSocket, code, null);

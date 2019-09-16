@@ -11,6 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+
+import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
+import static com.ceres.api.constant.Const.MONITOR_TRADE;
+
 /**
  * @author LMT
  * @date 2019/01/30
@@ -39,11 +43,25 @@ public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
     }
 
     @Override
+    public void onOpen(WebSocket webSocket, Response response) {
+        log.info("连接成功:{}", response.code());
+        MONITOR_MAP.put(MONITOR_TRADE, 0L);
+    }
+
+    @Override
     @SuppressWarnings("all")
     public void onMessage(WebSocket webSocket, String text) {
         ObjectMapper mapper = new ObjectMapper();
         if ("pong".equalsIgnoreCase(text)) {
             log.info("收到交易连接心跳:{}", text);
+            if (MONITOR_MAP.get(MONITOR_TRADE) != null){
+                Long current = MONITOR_MAP.get(MONITOR_TRADE);
+                long next = current+1;
+                log.info("交易-最新心跳监测数:{}", next);
+                MONITOR_MAP.put(MONITOR_TRADE, next);
+            }else {
+                MONITOR_MAP.put(MONITOR_TRADE, 0L);
+            }
             return;
         }
         try {
@@ -71,5 +89,10 @@ public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
             log.info("Client Endpoint Have Closed ! info:{}",t.getMessage());
             callback.onFailure(t);
         }
+    }
+
+    @Override
+    public void onClosed(WebSocket webSocket, int code, String reason) {
+        log.warn("关闭连接");
     }
 }

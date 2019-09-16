@@ -160,7 +160,7 @@ public class TradeTest {
 
     /** 撤单 */
     private static void cancelOrder() {
-        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1124890656693825539");
+        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1124890656693825539",0L);
         PrettyPrinter.println(result);
     }
 
