@@ -85,7 +85,7 @@ public interface CoinceresApiService {
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @POST("/api/v1/trade/open_orders")
-    Call<ResultsVO<List<OrderDetailRes>>> getOpenOrders(@Body OpenOrdersReq openOrdersReq);
+    Call<ResultsVO<OrdersRes>> getOpenOrders(@Body OpenOrdersReq openOrdersReq);
 
     /**
      * 查询历史订单信息
@@ -94,7 +94,16 @@ public interface CoinceresApiService {
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @POST("/api/v1/trade/orders")
-    Call<ResultsVO<List<OrderDetailRes>>> getOrders(@Body OrdersHisReq ordersHisReq);
+    Call<ResultsVO<OrdersRes>> getOrders(@Body OrdersHisReq ordersHisReq);
+
+    /**
+     * 查询程序单的子单列表
+     * @param programOrdersHisReq
+     * @return
+     */
+    @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
+    @POST("/api/v1/trade/program_orders")
+    Call<ResultsVO<OrdersRes>> getProgramOrders(@Body ProgramOrdersHisReq programOrdersHisReq);
 
     /**
      * 查询合约持仓信息

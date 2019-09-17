@@ -51,7 +51,7 @@ public class InputOrderReq {
     private Long timestamp;
 
     @JsonProperty("program_oid")
-    private Long programOid;
+    private String programOid;
 
     @JsonProperty("asset_code")
     private Long assetCode = 0L;
@@ -168,11 +168,11 @@ public class InputOrderReq {
         this.clientOid = clientOid;
     }
 
-    public Long getProgramOid() {
+    public String getProgramOid() {
         return programOid;
     }
 
-    public void setProgramOid(Long programOid) {
+    public void setProgramOid(String programOid) {
         this.programOid = programOid;
     }
 

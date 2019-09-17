@@ -1,4 +1,7 @@
 package com.ceres.api.domain.trade;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author LMT
  */
@@ -10,6 +13,7 @@ public class TransReq {
 
     private String count;
 
+    @JsonProperty("asset_code")
     private Long assetCode = 0L;
 
     public String getExchange() {
