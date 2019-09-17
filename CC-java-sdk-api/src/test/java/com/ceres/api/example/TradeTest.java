@@ -56,7 +56,7 @@ public class TradeTest {
         //04. 子账户资产划转
 //        accountTransfer();
         //05. 下单
-//        placeOrder();
+        placeOrder();
         //06. 查询订单信息
 //        queryOrderInfo();
         //07. 活动委托
@@ -163,7 +163,7 @@ public class TradeTest {
 
     /** 撤单 */
     private static void cancelOrder() {
-        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1127461861275742210",190908122L);
+        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1127461861275742214",190908122L);
         PrettyPrinter.println(result);
     }
 
@@ -172,7 +172,7 @@ public class TradeTest {
         InputOrderReq req = new InputOrderReq();
         req.setSymbol("ETH/USDT");
         req.setPriceType("limit");
-        req.setEntrustPrice("197.7");
+        req.setEntrustPrice("198");
         req.setEntrustAmount("0.05");
         req.setEntrustBs("sell");
         req.setClientOid(UUID.randomUUID().toString());

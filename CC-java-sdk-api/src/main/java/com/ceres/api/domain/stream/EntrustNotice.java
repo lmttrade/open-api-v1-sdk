@@ -47,11 +47,6 @@ public class EntrustNotice {
     private String dealt_amount;
 
     /**
-     * 累计成交数量
-     */
-    private String total_dealt_amount;
-
-    /**
      * 最新成交时间
      */
     private String dealt_time;
@@ -78,6 +73,15 @@ public class EntrustNotice {
 
     /** 通知类型 1: 状态变更通知  2: 持仓变化通知 */
     private int message_type;
+    /**
+     * 最新一次成交数量
+     */
+    private String last_fill_amount;
+
+    /**
+     * 最新一次成交价格
+     */
+    private String last_fill_price;
 
     public String getExchange() {
         return exchange;
@@ -183,14 +187,6 @@ public class EntrustNotice {
         this.dealt_amount = dealt_amount;
     }
 
-    public String getTotal_dealt_amount() {
-        return total_dealt_amount;
-    }
-
-    public void setTotal_dealt_amount(String total_dealt_amount) {
-        this.total_dealt_amount = total_dealt_amount;
-    }
-
     public String getDealt_time() {
         return dealt_time;
     }
@@ -239,6 +235,22 @@ public class EntrustNotice {
         this.message_type = message_type;
     }
 
+    public String getLast_fill_amount() {
+        return last_fill_amount;
+    }
+
+    public void setLast_fill_amount(String last_fill_amount) {
+        this.last_fill_amount = last_fill_amount;
+    }
+
+    public String getLast_fill_price() {
+        return last_fill_price;
+    }
+
+    public void setLast_fill_price(String last_fill_price) {
+        this.last_fill_price = last_fill_price;
+    }
+
     @Override
     public String toString() {
         return "EntrustNotice{" +
@@ -255,13 +267,14 @@ public class EntrustNotice {
                 ", entrust_price='" + entrust_price + '\'' +
                 ", entrust_amount='" + entrust_amount + '\'' +
                 ", dealt_amount='" + dealt_amount + '\'' +
-                ", total_dealt_amount='" + total_dealt_amount + '\'' +
                 ", dealt_time='" + dealt_time + '\'' +
                 ", trade_type='" + trade_type + '\'' +
                 ", margin_mode='" + margin_mode + '\'' +
                 ", asset_code=" + asset_code +
                 ", program_oid='" + program_oid + '\'' +
                 ", message_type=" + message_type +
+                ", last_fill_amount='" + last_fill_amount + '\'' +
+                ", last_fill_price='" + last_fill_price + '\'' +
                 '}';
     }
 }
