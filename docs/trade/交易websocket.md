@@ -81,8 +81,7 @@ public class OrderStreamTest {
     "lever":"null", #杠杆倍数
     "entrust_price":"0.01" #委托价格
     "entrust_amount":"1", #委托数量
-    "dealt_amount":"0", #成交数量
-    "total_dealt_amount":"0",#累计成交数量
+    "dealt_amount":"0", #累计成交数量(最新总成交数量,注意不是单次成交数量)
     "dealt_time": "2019-02-16 19:38:34", #成交时间
     "message_type": 1, #1:订单通知 2:持仓变化通知
     "client_oid":"12345", #客户端保留字段ID
