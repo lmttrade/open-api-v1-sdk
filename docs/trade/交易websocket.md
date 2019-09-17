@@ -71,25 +71,25 @@ public class OrderStreamTest {
 ```json
 {
     "exchange":"LMT", #交易所名称
-	"symbol":"LTC/BTC", #交易对
+    "symbol":"LTC/BTC", #交易对
     "system_oid":"181829153963257883", #委托单号
-	"average_dealt_price":"0", #成交均价
-	"entrust_time":"2019-02-16 19:38:31", #委托时间
-	"status":"SUBMITTING", #委托状态
-	"entrust_bs":"BUY", #委托方向
-	"price_type":"LIMIT", #价格类型
-	"lever":"null", #杠杆倍数
-	"entrust_price":"0.01" #委托价格
+    "average_dealt_price":"0", #成交均价
+    "entrust_time":"2019-02-16 19:38:31", #委托时间
+    "status":"SUBMITTING", #委托状态
+    "entrust_bs":"BUY", #委托方向
+    "price_type":"LIMIT", #价格类型
+    "lever":"null", #杠杆倍数
+    "entrust_price":"0.01" #委托价格
     "entrust_amount":"1", #委托数量
-	"dealt_amount":"0", #成交数量
-	"total_dealt_amount":"0",#累计成交数量
-	"dealt_time": "2019-02-16 19:38:34", #成交时间
-	"message_type": 1, #1:订单通知 2:持仓变化通知
+    "dealt_amount":"0", #成交数量
+    "total_dealt_amount":"0",#累计成交数量
+    "dealt_time": "2019-02-16 19:38:34", #成交时间
+    "message_type": 1, #1:订单通知 2:持仓变化通知
     "client_oid":"12345", #客户端保留字段ID
     "trade_type":"spot",#交易类型 spot:现货交易
     "margin_mode": "none", #保证金模式 暂不提供
     "asset_code":190810234, #账户编码
-    "program_oid":"PG281829153963257883" #程序单id
+    "program_oid":"AT281829153963257883" #程序单id
 }
 ```
 
