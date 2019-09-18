@@ -6,7 +6,7 @@ package com.ceres.api.constant;
  */
 public class Const {
 
-    public static final String API_BASE_URL = "http://open.lmt.trade";
+    public static final String API_BASE_URL = "https://open.lmt.trade";
     public static final String DATA_BASE_URL = "https://open.lmt.trade";
 
     /**

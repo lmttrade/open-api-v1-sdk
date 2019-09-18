@@ -14,6 +14,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.Iterator;
 
+import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
+import static com.ceres.api.constant.Const.MONITOR_MARKET;
+
 /**
  * @author LMT
  * @date 2019/01/30
@@ -41,6 +44,12 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
     }
 
     @Override
+    public void onOpen(WebSocket webSocket, Response response) {
+        log.info("连接成功:{}", response.code());
+        MONITOR_MAP.put(MONITOR_MARKET, 0L);
+    }
+
+    @Override
     @SuppressWarnings("all")
     public void onMessage(WebSocket webSocket, String text) {
         ObjectMapper mapper = new ObjectMapper();
@@ -52,7 +61,15 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
         }
 
         if (text.equalsIgnoreCase("pang")) {
-            log.info("WebSocket 心跳维护正常!");
+            log.info("收到行情连接心跳:{}", text);
+            if (MONITOR_MAP.get(MONITOR_MARKET) != null){
+                Long current = MONITOR_MAP.get(MONITOR_MARKET);
+                long next = current+1;
+                log.info("行情-最新心跳监测数:{}", next);
+                MONITOR_MAP.put(MONITOR_MARKET, next);
+            }else {
+                MONITOR_MAP.put(MONITOR_MARKET, 0L);
+            }
             return;
         }
 

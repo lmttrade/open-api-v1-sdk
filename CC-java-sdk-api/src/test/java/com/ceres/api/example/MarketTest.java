@@ -14,10 +14,17 @@ import com.ceres.api.domain.trade.SymbolReq;
 import com.ceres.api.service.CoinceresApiWebSocketClient;
 import com.ceres.api.service.CoinceresDataRestClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import util.PrettyPrinter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
+import static com.ceres.api.constant.Const.MONITOR_MARKET;
 
 /**
  * 关于行情查询和订阅的示例
@@ -31,6 +38,8 @@ public class MarketTest {
     private static CoinceresApiWebSocketClient dataWebSocketClient;
     private static ObjectMapper mapper;
 
+    private static long lastPingCount = 0;
+
     static {
         mapper = new ObjectMapper();
         dataRestClient = CoinceresApiClientFactory.newInstance().newDataClient();
@@ -41,13 +50,13 @@ public class MarketTest {
     public static void main(String[] args) {
         //Rest API
         // 01. 请求币对信息
-        querySymbols();
+//        querySymbols();
 
         // 02. 请求闪电交易币对报价信息
-        queryFlashIndicativePrice();
+//        queryFlashIndicativePrice();
 
         // 03. 请求历史分钟线数据
-        queryCycleLine();
+//        queryCycleLine();
 
         /*
          * 注意：SDK请求服务端后，如果不同币对多次请求会认为是同一个客户端，数据会合并推送，解决方案：
@@ -55,22 +64,43 @@ public class MarketTest {
          * 2、一直订阅，SDK根据需求筛选需要的币对信息，
          */
         //WebSocket API
+        // !!!【注意】!!! 测试订阅方法时,订阅什么内容 下面的reconnectService中是同样的方法
         // 订阅trade
         subTrade();
 
         // 订阅tick
-        subTick();
+//                subTick();
 
         // 订阅candle
-        subCandle();
+//                subCandle();
 
         // 订阅depth
-        subDepth();
+//                subDepth();
 
+        ScheduledExecutorService reconnectService = new ScheduledThreadPoolExecutor(1,
+                new BasicThreadFactory.Builder().namingPattern("lmt-market-reconnect-scheduled-%d").daemon(true).build());
+        reconnectService.scheduleAtFixedRate(()->{
+            Long currentPingCount = MONITOR_MAP.getOrDefault(MONITOR_MARKET,0L);
+            if (currentPingCount.longValue() == lastPingCount && lastPingCount != 0){
+                dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient();
+                // 订阅trade 这里的几个订阅方法和上面需同时打开或关闭
+                subTrade();
+
+                // 订阅tick
+//                subTick();
+
+                // 订阅candle
+//                subCandle();
+
+                // 订阅depth
+//                subDepth();
+                lastPingCount = 0;
+            }else {
+                lastPingCount = currentPingCount.longValue();
+            }
+        },6,15,TimeUnit.SECONDS);
         //取消订阅
         //unSubTrade();
-        // 心跳维护
-        // heartbeat();
     }
 
 
@@ -203,17 +233,4 @@ public class MarketTest {
             ignore.printStackTrace();
         }
     }
-
-    /**
-     * 心跳
-     */
-    private static void heartbeat() {
-        try {
-            String text = "ping";
-            dataWebSocketClient.onTradeEvent(text, response -> System.out.println(response.toString()));
-        } catch (Exception ignore) {
-            ignore.printStackTrace();
-        }
-    }
-
 }
