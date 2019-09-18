@@ -43,7 +43,7 @@ public class EntrustNotice {
     /** 委托数量 */
     private String entrust_amount;
 
-    /** 单次成交数量 */
+    /** 本单累计成交数量 */
     private String dealt_amount;
 
     /**
@@ -74,12 +74,12 @@ public class EntrustNotice {
     /** 通知类型 1: 状态变更通知  2: 持仓变化通知 */
     private int message_type;
     /**
-     * 最新一次成交数量
+     * 最新一次成交数量 即本次成交的数量 仅在成交下有值 其他状态推送是 "0"
      */
     private String last_fill_amount;
 
     /**
-     * 最新一次成交价格
+     * 最新一次成交价格 即本次成交的价格 仅在成交下有值 其他状态推送是 "0"
      */
     private String last_fill_price;
 
