@@ -163,7 +163,7 @@ public class TradeTest {
 
     /** 撤单 */
     private static void cancelOrder() {
-        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1127461861275742214",190908122L);
+        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1128133132787396617",190908122L);
         PrettyPrinter.println(result);
     }
 
@@ -172,9 +172,9 @@ public class TradeTest {
         InputOrderReq req = new InputOrderReq();
         req.setSymbol("ETH/USDT");
         req.setPriceType("limit");
-        req.setEntrustPrice("198");
-        req.setEntrustAmount("0.05");
-        req.setEntrustBs("sell");
+        req.setEntrustPrice("175");
+        req.setEntrustAmount("1");
+        req.setEntrustBs("buy");
         req.setClientOid(UUID.randomUUID().toString());
         req.setTradeType("spot");
         req.setProgramOid("AT127366888882712580");

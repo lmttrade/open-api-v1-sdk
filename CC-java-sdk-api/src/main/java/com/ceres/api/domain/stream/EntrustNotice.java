@@ -83,6 +83,16 @@ public class EntrustNotice {
      */
     private String last_fill_price;
 
+    /**
+     * 错误码 仅在状态是 FAILURE 时有值 其他状态是0
+     */
+    private long error_code = 0;
+
+    /**
+     * 错误信息 仅在状态是 FAILURE 时有值 其他状态是 ""
+     */
+    private String message = "";
+
     public String getExchange() {
         return exchange;
     }
@@ -251,6 +261,22 @@ public class EntrustNotice {
         this.last_fill_price = last_fill_price;
     }
 
+    public long getError_code() {
+        return error_code;
+    }
+
+    public void setError_code(long error_code) {
+        this.error_code = error_code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
         return "EntrustNotice{" +
@@ -275,6 +301,8 @@ public class EntrustNotice {
                 ", message_type=" + message_type +
                 ", last_fill_amount='" + last_fill_amount + '\'' +
                 ", last_fill_price='" + last_fill_price + '\'' +
+                ", error_code=" + error_code +
+                ", message='" + message + '\'' +
                 '}';
     }
 }
