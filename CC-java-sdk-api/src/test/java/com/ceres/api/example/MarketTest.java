@@ -9,6 +9,7 @@ import com.ceres.api.domain.enums.ActionTypeEnum;
 import com.ceres.api.domain.enums.ExchangeEnum;
 import com.ceres.api.domain.market.SubscribeReq;
 import com.ceres.api.domain.trade.CurrencyPair;
+import com.ceres.api.domain.trade.ExchangeVO;
 import com.ceres.api.domain.trade.ResultsVO;
 import com.ceres.api.domain.trade.SymbolReq;
 import com.ceres.api.service.CoinceresApiWebSocketClient;
@@ -57,6 +58,9 @@ public class MarketTest {
 
         // 03. 请求历史分钟线数据
 //        queryCycleLine();
+
+        //获取交易所
+        //getExchange();
 
         /*
          * 注意：SDK请求服务端后，如果不同币对多次请求会认为是同一个客户端，数据会合并推送，解决方案：
@@ -232,5 +236,14 @@ public class MarketTest {
         } catch (Exception ignore) {
             ignore.printStackTrace();
         }
+    }
+
+    /**
+     * 获取交易所
+     */
+    private static void getExchange() {
+
+        ResultsVO<ExchangeVO> exchange = dataRestClient.getExchange();
+        PrettyPrinter.println(exchange);
     }
 }

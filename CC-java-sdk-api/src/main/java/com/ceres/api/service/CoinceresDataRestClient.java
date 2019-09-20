@@ -2,6 +2,7 @@ package com.ceres.api.service;
 
 import com.ceres.api.domain.data.*;
 import com.ceres.api.domain.trade.CurrencyPair;
+import com.ceres.api.domain.trade.ExchangeVO;
 import com.ceres.api.domain.trade.ResultsVO;
 import com.ceres.api.domain.trade.SymbolReq;
 
@@ -32,5 +33,12 @@ public interface CoinceresDataRestClient {
      * @return
      */
     ResultsVO<CycleResData> queryHistoryCycleData(CycleReq req);
+
+    /**
+     * 获取交易所
+     *
+     * @return
+     */
+    ResultsVO<ExchangeVO> getExchange();
 
 }

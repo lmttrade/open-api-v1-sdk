@@ -193,6 +193,60 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
 
 ```
 
+
+## 3.4、 请求获取交易所信息
+### URI: /api/v1/basic/getExchange
+### HTTP-METHOD: GET
+### a.请求参数 无
+### b.返回结果
+使用方一般只需关注defaultExchange即可,
+第二个集合中的数据为排除defaultExchange可交易币对以外的其他币对和交易所,有特殊币种情况可以从这个集合中获取相应交易所
+
+
+```json
+{
+  "code": "200",
+  "data": {
+    "defaultExchange": "BINANCE",
+    "excludeExchangeResList": [
+      {
+        "marketName": "BITFINEX",
+        "contractCode": "BTC_USD"
+      },
+      {
+        "marketName": "BITFINEX",
+        "contractCode": "ETH_USD"
+      }
+    ]
+  },
+  "message": "SUCCESS"
+}
+
+```
+
+### c.返回数据解析
+
+```json
+{
+  "code": "200",
+  "data": {
+    "defaultExchange": "默认交易所名称",
+    "excludeExchangeResList": [
+      {
+        "marketName": "交易所名称",
+        "contractCode": "币对"
+      },
+      {
+        "marketName": "BITFINEX",
+        "contractCode": "ETH_USD"
+      }
+    ]
+  },
+  "message": "SUCCESS"
+}
+```
+
+
 # 4、行情 websocket api
 
 

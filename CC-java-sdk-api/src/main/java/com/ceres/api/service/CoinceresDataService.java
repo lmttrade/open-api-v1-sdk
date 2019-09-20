@@ -2,6 +2,7 @@ package com.ceres.api.service;
 
 import com.ceres.api.domain.data.*;
 import com.ceres.api.domain.trade.CurrencyPair;
+import com.ceres.api.domain.trade.ExchangeVO;
 import com.ceres.api.domain.trade.ResultsVO;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -52,5 +53,13 @@ public interface CoinceresDataService {
                                                         @Query("symbol") String symbol,
                                                         @Query("begin") Long begin, @Query("end") Long end,
                                                         @Query("duration") Integer duration);
+
+    /**
+     * 获取交易所
+     *
+     * @return
+     */
+    @GET("/api/v1/basic/getExchange")
+    Call<ResultsVO<ExchangeVO>> getExchange();
 
 }

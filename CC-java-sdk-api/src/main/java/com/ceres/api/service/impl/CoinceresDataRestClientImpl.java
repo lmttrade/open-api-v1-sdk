@@ -2,6 +2,7 @@ package com.ceres.api.service.impl;
 
 import com.ceres.api.domain.data.*;
 import com.ceres.api.domain.trade.CurrencyPair;
+import com.ceres.api.domain.trade.ExchangeVO;
 import com.ceres.api.domain.trade.ResultsVO;
 import com.ceres.api.domain.trade.SymbolReq;
 import com.ceres.api.service.CoinceresDataRestClient;
@@ -39,5 +40,10 @@ public class CoinceresDataRestClientImpl implements CoinceresDataRestClient {
     public ResultsVO<CycleResData> queryHistoryCycleData(CycleReq req) {
         return executeSync(coinceresDataService.queryHistoryCycleData(req.getExchange(),req.getSymbol(),
                 req.getBegin(), req.getEnd(),req.getDuration()));
+    }
+
+    @Override
+    public ResultsVO<ExchangeVO> getExchange() {
+        return executeSync(coinceresDataService.getExchange());
     }
 }
