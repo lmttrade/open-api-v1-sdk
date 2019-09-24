@@ -82,7 +82,7 @@ public class TradeTest {
         CloseOrderReq req = new CloseOrderReq();
         req.setClientOid("123");
         req.setCloseRule("admin");
-        req.setSymbol("BTC/USDT");
+        req.setSymbol("BTC_USDT");
         req.setDealId("123456789");
         req.setEntrustBs("buy");
         req.setEntrustPrice("1212");
@@ -104,7 +104,7 @@ public class TradeTest {
     private static void queryTrade() {
         TransReq req = new TransReq();
         req.setExchange("BINANCE");
-        req.setSymbol("NEO/USDT");
+        req.setSymbol("NEO_USDT");
         req.setCount("10");
         req.setAssetCode(190900062L);
         ResultsVO<List<TransRecord>> result = restClient.queryTransRecord(req);
@@ -115,7 +115,7 @@ public class TradeTest {
     private static void queryHolding() {
         PositionQueryReq req = new PositionQueryReq();
         req.setExchange("LMT");
-        req.setSymbol("BTC/USDT");
+        req.setSymbol("BTC_USDT");
         ResultsVO result = restClient.getPosition(req);
         PrettyPrinter.println(result);
     }
@@ -170,7 +170,7 @@ public class TradeTest {
     /** 下单 */
     private static void placeOrder() {
         InputOrderReq req = new InputOrderReq();
-        req.setSymbol("ETH/USDT");
+        req.setSymbol("ETH_USDT");
         req.setPriceType("limit");
         req.setEntrustPrice("175");
         req.setEntrustAmount("1");
@@ -190,7 +190,7 @@ public class TradeTest {
         instantTradingAskPriceReq.setEntrustAmount("20");
         instantTradingAskPriceReq.setEntrustBs("buy");
         instantTradingAskPriceReq.setEntrustType(2);
-        instantTradingAskPriceReq.setSymbol("BTC/USDT");
+        instantTradingAskPriceReq.setSymbol("BTC_USDT");
         ResultsVO<InstantTradingAskPriceRes> result = restClient.flashAskPrice(instantTradingAskPriceReq);
         PrettyPrinter.println(result);
         if (result.getCode().equals("200")){
@@ -220,7 +220,7 @@ public class TradeTest {
         OrdersHisReq ordersHisReq = new OrdersHisReq();
         ordersHisReq.setAssetCode(190908122L);
         ordersHisReq.setExchange("INSTANTEX");
-        ordersHisReq.setSymbol("BTC/USDT");
+        ordersHisReq.setSymbol("BTC_USDT");
         ResultsVO<OrdersRes> result = restClient.getOrders(ordersHisReq);
         PrettyPrinter.println(result);
     }

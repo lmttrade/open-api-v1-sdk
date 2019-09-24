@@ -112,6 +112,6 @@ public class CloseOrderReq {
     }
 
     public String getSymbol() {
-        return symbol!=null ? symbol.replace('/','_'):null;
+        return symbol;
     }
 }

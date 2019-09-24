@@ -114,7 +114,7 @@ public class MarketTest {
     private static void querySymbols() {
         SymbolReq req = new SymbolReq();
         req.setExchange(ExchangeEnum.LMT.getValue());
-        req.setSymbol("BTC/USDT");
+        req.setSymbol("BTC_USDT");
         ResultsVO<List<CurrencyPair>> result = dataRestClient.getSymbols(req);
         PrettyPrinter.println(result);
     }
@@ -125,7 +125,7 @@ public class MarketTest {
     private static void queryFlashIndicativePrice() {
         FlashIndicativePriceReq req = new FlashIndicativePriceReq();
         req.setExchange(ExchangeEnum.INSTANTEX.getValue());
-        req.setSymbol("BTC/USDT");
+        req.setSymbol("BTC_USDT");
         ResultsVO<FlashIndicativePriceData> result = dataRestClient.queryFlashIndicativePrice(req);
         PrettyPrinter.println(result);
     }
@@ -136,7 +136,7 @@ public class MarketTest {
     private static void queryCycleLine() {
         CycleReq req = new CycleReq();
         req.setExchange(ExchangeEnum.LMT.getValue());
-        req.setSymbol("BTC/USDT");
+        req.setSymbol("BTC_USDT");
         req.setBegin(1567683193L);
         req.setEnd(System.currentTimeMillis() / 1000);
         req.setDuration(1);
@@ -153,7 +153,7 @@ public class MarketTest {
         subscribeReq.setDataType("AskBidQueue");
         subscribeReq.setActionType(ActionTypeEnum.sub.name());
         subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
-        subscribeReq.setSymbol("ETH/BTC");
+        subscribeReq.setSymbol("ETH_BTC");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
@@ -171,7 +171,7 @@ public class MarketTest {
         subscribeReq.setDataType("Cycle");
         subscribeReq.setActionType(ActionTypeEnum.sub.name());
         subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
-        subscribeReq.setSymbol("ETH/BTC");
+        subscribeReq.setSymbol("ETH_BTC");
         subscribeReq.setDuration("5");
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
@@ -188,7 +188,7 @@ public class MarketTest {
     private static void subTick() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setDataType("Tick");
-        subscribeReq.setSymbol("HT/BTC");
+        subscribeReq.setSymbol("HT_BTC");
         subscribeReq.setActionType(ActionTypeEnum.sub.name());
         subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
@@ -206,7 +206,7 @@ public class MarketTest {
     private static void subTrade() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setDataType("Trade");
-        subscribeReq.setSymbol("ETH/BTC");
+        subscribeReq.setSymbol("ETH_BTC");
         subscribeReq.setActionType(ActionTypeEnum.sub.name());
         subscribeReq.setExchange(ExchangeEnum.OKEX.getValue());
 
@@ -225,7 +225,7 @@ public class MarketTest {
     private static void unSubTrade() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setDataType("Trade");
-        subscribeReq.setSymbol("ETH/BTC");
+        subscribeReq.setSymbol("ETH_BTC");
         subscribeReq.setActionType(ActionTypeEnum.unsub.name());
         subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
 

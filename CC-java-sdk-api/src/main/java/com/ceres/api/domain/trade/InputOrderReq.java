@@ -73,7 +73,7 @@ public class InputOrderReq {
     }
 
     public String getSymbol() {
-        return symbol!=null ? symbol.replace('/','_'):null;
+        return symbol;
     }
 
     public void setSymbol(String symbol) {

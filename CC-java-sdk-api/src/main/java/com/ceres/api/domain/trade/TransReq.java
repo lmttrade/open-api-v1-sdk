@@ -45,9 +45,6 @@ public class TransReq {
     }
 
     public String getSymbol() {
-        if (symbol != null) {
-            return symbol.replace('/', '_');
-        }
-        return null;
+        return symbol;
     }
 }
