@@ -71,7 +71,7 @@ public class OrderStreamTest {
 ```json
 {
     "exchange":"LMT", #交易所名称
-    "symbol":"LTC/BTC", #交易对
+    "symbol":"LTC_BTC", #交易对
     "system_oid":"181829153963257883", #委托单号
     "average_dealt_price":"0", #成交均价
     "entrust_time":"2019-02-16 19:38:31", #委托时间
