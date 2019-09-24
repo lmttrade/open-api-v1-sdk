@@ -13,7 +13,7 @@ public class ExchangeVO {
     /**
      * 排除默认交易所外,剩余币种对应交易所
      */
-    private List<SymbolExcludeExchangeRes> excludeExchangeResList;
+    private List<SymbolExcludeExchangeRes> symbolExcludeExchangeRes;
 
     public String getDefaultExchange() {
         return defaultExchange;
@@ -23,19 +23,19 @@ public class ExchangeVO {
         this.defaultExchange = defaultExchange;
     }
 
-    public List<SymbolExcludeExchangeRes> getExcludeExchangeResList() {
-        return excludeExchangeResList;
+    public List<SymbolExcludeExchangeRes> getSymbolExcludeExchangeRes() {
+        return symbolExcludeExchangeRes;
     }
 
-    public void setExcludeExchangeResList(List<SymbolExcludeExchangeRes> excludeExchangeResList) {
-        this.excludeExchangeResList = excludeExchangeResList;
+    public void setSymbolExcludeExchangeRes(List<SymbolExcludeExchangeRes> symbolExcludeExchangeRes) {
+        this.symbolExcludeExchangeRes = symbolExcludeExchangeRes;
     }
 
     @Override
     public String toString() {
         return "ExchangeVO{" +
                 "defaultExchange='" + defaultExchange + '\'' +
-                ", excludeExchangeResList=" + excludeExchangeResList +
+                ", symbolExcludeExchangeRes=" + symbolExcludeExchangeRes +
                 '}';
     }
 }
