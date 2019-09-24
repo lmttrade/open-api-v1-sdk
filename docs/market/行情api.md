@@ -41,7 +41,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
 | 参数名称  | 参数类型 | 是否必须 | 可传值| 参数描述 |
 | -------- | -------- | -------- | --------| --------|
 | exchange | String   |否       | LMT、INSTANTEX  | 交易所名称,默认值：LMT  |
-| symbol | String   | 否         | XXX/XXXX       | 合约或交易对名称，根据 / 格式传输 |
+| symbol | String   | 否         | XXX_XXXX       | 合约或交易对名称，根据 _ 格式传输 |
 
 **注意：**
 *交易所名称 目前返回仅有 LMT(普通币币交易使用)，INSTANTEX(闪电交易使用)*
@@ -54,7 +54,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
   "data": [
     {
       "exchange": "LMT",
-      "symbol": "OKB/BTC",
+      "symbol": "OKB_BTC",
       "kind": "4",
       "tick_size": "0.0000001",
       "volume_increment": "0.01",
@@ -63,7 +63,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
     },
     {
       "exchange": "LMT",
-      "symbol": "ELF/ETH",
+      "symbol": "ELF_ETH",
       "kind": "4",
       "tick_size": "0.00000001",
       "volume_increment": "0.1",
@@ -98,7 +98,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
 | 参数名称  | 参数类型 | 是否必须 | 可传值| 参数描述 |
 | -------- | ------ | --------|-------|----------|
 | exchange | String   |否       | LMT、BINANCE、BITMAX、HUOBI、OKEX | 交易所名称,默认值：LMT(组合)  |
-| symbol | string | 是 |XXX/XXXX                           | 合约或交易对名称，根据 / 格式传输 |
+| symbol | string | 是 |XXX_XXXX                           | 合约或交易对名称，根据 _ 格式传输 |
 | begin    | long | 是 | 1565091133 | 开始时间(时间戳-秒) |
 | end      | long | 是  | 1567683193| 结束时间(时间戳-秒) |
 | duration | int |是 | 1  | 请求周期类型(查看K线周期枚举对应表) |
@@ -115,7 +115,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
 	"code": "200",
 	"data": {
 		"exchange": "HUOBI",
-		"symbol": "BTC/USDT",
+		"symbol": "BTC_USDT",
 		"duration": "5",
 		"detail": [{
 			"time": "1565229600000",
@@ -175,7 +175,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
 | 参数名称  | 参数类型 | 是否必须 | 可传值| 参数描述 |
 | -------- | ------ | ---------------|----------|--------- |
 | exchange | String   |是       | INSTANTEX  | 交易所名称：INSTANTEX  |
-| symbol | string | 是 |BTC/USDT、ETH/USDT | 合约或交易对名称，根据 / 格式传输 |
+| symbol | string | 是 |BTC_USDT、ETH_USDT | 合约或交易对名称，根据 _ 格式传输 |
 
 ### b.返回结果
 
@@ -184,7 +184,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
   "code": "200",
   "data": {
     "exchange": "INSTANTEX",
-    "symbol": "BTC/USDT",
+    "symbol": "BTC_USDT",
     "sell_price": "10595.88",
     "buy_price": "10568.65",
     "time": 1567735783856
@@ -268,7 +268,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
         "dataType":"Tick",
         "actionType":"sub",
         "exchange":"BINANCE",
-        "symbol":"ETH/BTC",
+        "symbol":"ETH_BTC"
        
     }
 ]
@@ -278,14 +278,14 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 | 参数名称  | 参数类型 | 是否必须 | 可传值| 参数描述 |
 | -------- | ------ | -------|---------------|-------|
 | exchange | String   |否       | BINANCE，BITMAX，HUOBI，OKEX | 交易所名称,默认值：LMT  |
-| symbol | string | 是 |XXX/XXXX                           | 合约或交易对名称，根据 / 格式传输 |
+| symbol | string | 是 |XXX_XXXX                           | 合约或交易对名称，根据 _ 格式传输 |
 | dataType    | string | 是 | Trade | 4个订阅频道 |
 | actionType    | string | 是 |sub、unsub | sub是订阅数据、unsub是取消订阅 |
 | duration | int |否 | 1  | 请求周期类型(查看K线周期枚举对应表)，Cycle频道才需要 |
 - dataType  订阅频道（Tick，Trade，AskBidQueue，Cycle）
 
 **注意：**
-    *actionType如果不传认为是订阅数据，当交易对切换的时候必须先取消订阅先前交易对的数据，不然订阅新的交易对数据还会收到先前交易对的数据。如:订阅ETH/BTC后切换到BTC/USDT后先要取消订阅ETH/BTC*
+    *actionType如果不传认为是订阅数据，当交易对切换的时候必须先取消订阅先前交易对的数据，不然订阅新的交易对数据还会收到先前交易对的数据。如:订阅ETH_BTC后切换到BTC_USDT后先要取消订阅ETH_BTC*
 
 
 
@@ -302,7 +302,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
         "dataType":"Tick",
         "exchange":"BINANCE",
         "actionType":"sub",
-        "symbol":"ETH/BTC"
+        "symbol":"ETH_BTC"
     }
 ]
 
@@ -321,7 +321,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"last": "0.016837",
 	"low": "0.016756",
 	"open": "0.016843",
-	"symbol": "ETH/BTC",
+	"symbol": "ETH_BTC",
 	"time": "1567587133971",
 	"volume": "58952.158"
 }
@@ -357,7 +357,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
         "dataType":"Trade",
         "actionType":"sub",
         "exchange": "BINANCE",
-        "symbol":"ETH/BTC"
+        "symbol":"ETH_BTC"
     }
 ]
 ```
@@ -370,7 +370,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	"dataType": "Trade",
 	"exchange": "BINANCE",
 	"price": "0.016835",
-	"symbol": "ETH/BTC",
+	"symbol": "ETH_BTC",
 	"time": "1567587083472",
 	"type": 1,
 	"volume": "0.569"
@@ -402,7 +402,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
         "dataType":"AskBidQueue",
         "actionType":"sub",
         "exchange":"BINANCE",
-        "symbol":"ETH/BTC"
+        "symbol":"ETH_BTC"
     }
 ]
 ```
@@ -433,7 +433,7 @@ websocket 的请求包体为JsonArray类型，共有4个订阅频道：
 	}],
 	"dataType": "AskBidQueue",
 	"exchange": "BINANCE",
-	"symbol": "ETH/BTC",
+	"symbol": "ETH_BTC",
 	"time": "1567587083472"
 }
 ```
@@ -470,7 +470,7 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
         "dataType":"Cycle",
         "exchange": "BINANCE",
         "actionType":"sub",
-        "symbol":"ETH/BTC",
+        "symbol":"ETH_BTC",
         "duration":"5"
     }
 ]
@@ -490,7 +490,7 @@ asks 交易对“卖”数组深度数据，bids 交易对"买"深度数据
 	"low": "0.016893",
 	"open": "0.016893",
 	"openTime": "",
-	"symbol": "ETH/BTC",
+	"symbol": "ETH_BTC",
 	"time": "1567575000000",
 	"volume": "860.11000000"
 }
