@@ -208,7 +208,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
   "code": "200",
   "data": {
     "defaultExchange": "BINANCE",
-    "excludeExchangeResList": [
+    "symbolExcludeExchangeRes": [
       {
         "exchange": "BITFINEX",
         "symbol": "BTC_USD"
@@ -231,7 +231,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
   "code": "200",
   "data": {
     "defaultExchange": "默认交易所名称",
-    "excludeExchangeResList": [
+    "symbolExcludeExchangeRes": [
       {
         "exchange": "交易所名称",
         "symbol": "币对"
