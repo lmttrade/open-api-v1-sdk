@@ -210,12 +210,12 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
     "defaultExchange": "BINANCE",
     "excludeExchangeResList": [
       {
-        "marketName": "BITFINEX",
-        "contractCode": "BTC_USD"
+        "exchange": "BITFINEX",
+        "symbol": "BTC_USD"
       },
       {
-        "marketName": "BITFINEX",
-        "contractCode": "ETH_USD"
+        "exchange": "BITFINEX",
+        "symbol": "ETH_USD"
       }
     ]
   },
@@ -233,12 +233,12 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
     "defaultExchange": "默认交易所名称",
     "excludeExchangeResList": [
       {
-        "marketName": "交易所名称",
-        "contractCode": "币对"
+        "exchange": "交易所名称",
+        "symbol": "币对"
       },
       {
-        "marketName": "BITFINEX",
-        "contractCode": "ETH_USD"
+        "exchange": "BITFINEX",
+        "symbol": "ETH_USD"
       }
     ]
   },
