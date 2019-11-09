@@ -1,6 +1,5 @@
 package com.ceres.api.service.impl;
 
-import com.ceres.api.constant.Const;
 import com.ceres.api.domain.event.CandleEvent;
 import com.ceres.api.domain.event.DepthEvent;
 import com.ceres.api.domain.event.TickEvent;
@@ -28,6 +27,8 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
 
     private final static Logger log = LoggerFactory.getLogger(CoinceresTradeWebSocketClientImpl.class);
 
+    private final String wsEndPoint;
+
     private final OkHttpClient client;
 
     private static ScheduledExecutorService scheduledService;
@@ -37,7 +38,8 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
                 new BasicThreadFactory.Builder().namingPattern("lmt-market-ping-scheduled-%d").daemon(true).build());
     }
 
-    public CoinceresApiWebSocketClientImpl(OkHttpClient client) {
+    public CoinceresApiWebSocketClientImpl(String wsEndPoint,OkHttpClient client) {
+        this.wsEndPoint = wsEndPoint;
         this.client = client;
     }
 
@@ -66,8 +68,7 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
     }
 
     private Closeable createNewWebSocket(String text, CoinceresApiWebSocketListener<?> listener) {
-        String streamingUrl = Const.wsUrl;
-        Request request = new Request.Builder().url(streamingUrl).build();
+        Request request = new Request.Builder().url(this.wsEndPoint).build();
         final WebSocket webSocket = client.newWebSocket(request, listener);
         // 订阅
         webSocket.send(text);

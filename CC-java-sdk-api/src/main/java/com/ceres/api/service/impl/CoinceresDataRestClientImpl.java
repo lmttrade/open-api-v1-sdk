@@ -21,8 +21,8 @@ public class CoinceresDataRestClientImpl implements CoinceresDataRestClient {
 
     private final CoinceresDataService coinceresDataService;
 
-    public CoinceresDataRestClientImpl() {
-        this.coinceresDataService = createService(CoinceresDataService.class);
+    public CoinceresDataRestClientImpl(String endPoint) {
+        this.coinceresDataService = createService(endPoint,CoinceresDataService.class);
     }
 
     @Override

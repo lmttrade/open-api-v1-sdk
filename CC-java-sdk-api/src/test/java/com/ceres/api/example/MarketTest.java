@@ -26,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 
 import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
 import static com.ceres.api.constant.Const.MONITOR_MARKET;
+import static com.ceres.api.constant.Const.PRE_API_BASE_URL;
+import static com.ceres.api.constant.Const.PRE_wsUrl;
 
 /**
  * 关于行情查询和订阅的示例
@@ -43,8 +45,8 @@ public class MarketTest {
 
     static {
         mapper = new ObjectMapper();
-        dataRestClient = CoinceresApiClientFactory.newInstance().newDataClient();
-        dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient();
+        dataRestClient = CoinceresApiClientFactory.newInstance().newDataClient(PRE_API_BASE_URL);
+        dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient(PRE_wsUrl);
     }
 
 
@@ -81,12 +83,14 @@ public class MarketTest {
         // 订阅depth
 //                subDepth();
 
+        MONITOR_MAP.put(MONITOR_MARKET, 5L);
+
         ScheduledExecutorService reconnectService = new ScheduledThreadPoolExecutor(1,
                 new BasicThreadFactory.Builder().namingPattern("lmt-market-reconnect-scheduled-%d").daemon(true).build());
         reconnectService.scheduleAtFixedRate(()->{
             Long currentPingCount = MONITOR_MAP.getOrDefault(MONITOR_MARKET,0L);
             if (currentPingCount.longValue() == lastPingCount && lastPingCount != 0){
-                dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient();
+                dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient(PRE_wsUrl);
                 // 订阅trade 这里的几个订阅方法和上面需同时打开或关闭
                 subTrade();
 
@@ -114,7 +118,7 @@ public class MarketTest {
     private static void querySymbols() {
         SymbolReq req = new SymbolReq();
         req.setExchange(ExchangeEnum.LMT.getValue());
-        req.setSymbol("BTC_USDT");
+        req.setSymbol("ETH_USDT");
         ResultsVO<List<CurrencyPair>> result = dataRestClient.getSymbols(req);
         PrettyPrinter.println(result);
     }

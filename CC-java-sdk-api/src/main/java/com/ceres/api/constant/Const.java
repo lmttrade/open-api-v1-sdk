@@ -6,18 +6,31 @@ package com.ceres.api.constant;
  */
 public class Const {
 
-    public static final String API_BASE_URL = "https://open.lmt.trade";
-    public static final String DATA_BASE_URL = "https://open.lmt.trade";
+    /**
+     * 沙箱环境
+     */
 
+    public static final String PRE_API_BASE_URL = "https://open.lmttrade.net";
+    public static String PRE_wsUrl = "wss://open.lmttrade.net/ws/market";
+    public static String PRE_orderWsUrl = "wss://open.lmttrade.net/ws/trade";
+
+    /**
+     * =================================================================================================================
+     */
+
+    /**
+     * 生产环境
+     */
+    public static final String API_BASE_URL = "https://open.lmt.trade";
     /**
      * 行情订阅
      */
-    public static String wsUrl = "wss://open.lmt.trade:28003";
+    public static String wsUrl = "wss://open.lmt.trade/ws/market";
 
     /**
      * 订单订阅
      */
-    public static String orderWsUrl = "wss://open.lmt.trade:29003";
+    public static String orderWsUrl = "wss://open.lmt.trade/ws/trade";
 
     public static final String ENDPOINT_SECURITY_TYPE_APIKEY = "api_key";
     public static final String ENDPOINT_SECURITY_TYPE_SIGNED = "sign";

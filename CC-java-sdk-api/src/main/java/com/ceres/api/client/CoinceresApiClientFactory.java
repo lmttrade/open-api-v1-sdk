@@ -51,29 +51,29 @@ public class CoinceresApiClientFactory {
     /**
      * Creates a new web socket client used for handling data streams.
      */
-    public static CoinceresApiWebSocketClient newWebSocketClient() {
-        return new CoinceresApiWebSocketClientImpl(getSharedClient());
+    public static CoinceresApiWebSocketClient newWebSocketClient(String wsEndPoint) {
+        return new CoinceresApiWebSocketClientImpl(wsEndPoint,getSharedClient());
     }
 
     /**
      * Creates a new synchronous/blocking REST client.
      */
-    public CoinceresApiRestClient newRestClient() {
-        return new CoinceresApiRestClientImpl(apiKey, secret);
+    public CoinceresApiRestClient newRestClient(String endPoint) {
+        return new CoinceresApiRestClientImpl(endPoint,apiKey, secret);
     }
 
     /**
      * creates a new synchronous client for data
      */
-    public CoinceresDataRestClient newDataClient() {
-        return new CoinceresDataRestClientImpl();
+    public CoinceresDataRestClient newDataClient(String endPoint) {
+        return new CoinceresDataRestClientImpl(endPoint);
     }
 
 
     /**
      * create a order stream
      */
-    public CoinceresTradeWebSocketClient newTradeWebSocketClient() {
-        return new CoinceresTradeWebSocketClientImpl(getSharedClient(), apiKey, secret);
+    public CoinceresTradeWebSocketClient newTradeWebSocketClient(String wsEndPoint) {
+        return new CoinceresTradeWebSocketClientImpl(wsEndPoint,getSharedClient(), apiKey, secret);
     }
 }

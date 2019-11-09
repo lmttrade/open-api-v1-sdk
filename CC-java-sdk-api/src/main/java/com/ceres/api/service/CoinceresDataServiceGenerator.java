@@ -1,6 +1,5 @@
 package com.ceres.api.service;
 
-import com.ceres.api.constant.Const;
 import com.ceres.api.exception.CoinceresApiError;
 import com.ceres.api.exception.CoinceresApiException;
 import okhttp3.Dispatcher;
@@ -37,9 +36,9 @@ public class CoinceresDataServiceGenerator {
             (Converter<ResponseBody, CoinceresApiError>)converterFactory.responseBodyConverter(
                     CoinceresApiError.class, new Annotation[0], null);
 
-    public static <S> S createService(Class<S> serviceClass) {
+    public static <S> S createService(String endPoint,Class<S> serviceClass) {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl(Const.DATA_BASE_URL)
+                .baseUrl(endPoint)
                 .addConverterFactory(converterFactory)
                 .client(sharedClient);
         Retrofit retrofit = retrofitBuilder.build();

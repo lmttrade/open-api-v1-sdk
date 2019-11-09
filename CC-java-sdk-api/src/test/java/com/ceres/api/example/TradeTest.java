@@ -1,6 +1,7 @@
 package com.ceres.api.example;
 
 import com.ceres.api.client.CoinceresApiClientFactory;
+import com.ceres.api.constant.Const;
 import com.ceres.api.domain.trade.AccountBase;
 import com.ceres.api.domain.trade.AccountInfoRes;
 import com.ceres.api.domain.trade.AccountTransferReq;
@@ -43,7 +44,7 @@ public class TradeTest {
 
     static {
         restClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr",
-                "b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl").newRestClient();
+                "b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl").newRestClient(Const.PRE_API_BASE_URL);
     }
 
     public static void main(String[] args) throws InterruptedException {

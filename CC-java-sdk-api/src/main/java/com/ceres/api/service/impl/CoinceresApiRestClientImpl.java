@@ -17,8 +17,8 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
 
     private final CoinceresApiService coinceresApiService;
 
-    public CoinceresApiRestClientImpl(String apiKey, String secret) {
-        coinceresApiService = createService(CoinceresApiService.class, apiKey, secret);
+    public CoinceresApiRestClientImpl(String endPoint,String apiKey, String secret) {
+        coinceresApiService = createService(endPoint,CoinceresApiService.class, apiKey, secret);
     }
 
     @Override

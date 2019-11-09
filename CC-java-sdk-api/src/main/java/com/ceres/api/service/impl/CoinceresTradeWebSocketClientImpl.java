@@ -1,6 +1,5 @@
 package com.ceres.api.service.impl;
 
-import com.ceres.api.constant.Const;
 import com.ceres.api.domain.stream.EntrustNotice;
 import com.ceres.api.service.CoinceresApiCallback;
 import com.ceres.api.service.CoinceresTradeWebSocketClient;
@@ -26,6 +25,8 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
 
     private final static Logger log = LoggerFactory.getLogger(CoinceresTradeWebSocketClientImpl.class);
 
+    private final String wsEndPoint;
+
     private final OkHttpClient client;
 
     private String apiKey;
@@ -39,7 +40,8 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
                 new BasicThreadFactory.Builder().namingPattern("lmt-trade-ping-scheduled-%d").daemon(true).build());
     }
 
-    public CoinceresTradeWebSocketClientImpl(OkHttpClient client,String apiKey, String secret) {
+    public CoinceresTradeWebSocketClientImpl(String wsEndPoint,OkHttpClient client,String apiKey, String secret) {
+        this.wsEndPoint = wsEndPoint;
         this.client = client;
         this.apiKey = apiKey;
         this.secret = secret;
@@ -64,7 +66,7 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
         } catch (Exception e) {
             log.error("Signature Error，apiKey:{}",apiKey);
         }
-        String streamingUrl = Const.orderWsUrl + "?api_key=" + apiKey + "&timestamp="+timestamp+"&sign=" + sign;
+        String streamingUrl = this.wsEndPoint + "?api_key=" + apiKey + "&timestamp="+timestamp+"&sign=" + sign;
         Request request = new Request.Builder().url(streamingUrl).build();
         final WebSocket webSocket = client.newWebSocket(request, listener);
         scheduledService.scheduleAtFixedRate(()->webSocket.send("ping"),5,10,TimeUnit.SECONDS);

@@ -1,9 +1,10 @@
 package com.ceres.api.service;
 
-import com.ceres.api.constant.Const;
 import com.ceres.api.exception.CoinceresApiError;
 import com.ceres.api.exception.CoinceresApiException;
 import com.ceres.api.security.AuthenticationInterceptor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class CoinceresApiServiceGenerator {
 
     private static final OkHttpClient sharedClient;
-    private static final Converter.Factory converterFactory = JacksonConverterFactory.create();
+    private static final Converter.Factory converterFactory = JacksonConverterFactory.create(buildObjectMapper());
 
     static {
         Dispatcher dispatcher = new Dispatcher();
@@ -40,13 +41,19 @@ public class CoinceresApiServiceGenerator {
                 .build();
     }
 
+    private static ObjectMapper buildObjectMapper(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return objectMapper;
+    }
+
     private static final Converter<ResponseBody, CoinceresApiError> errorBodyConverter =
             (Converter<ResponseBody, CoinceresApiError>)converterFactory.responseBodyConverter(
                     CoinceresApiError.class, new Annotation[0], null);
 
-    public static <S> S createService(Class<S> serviceClass, String apiKey, String secret) {
+    public static <S> S createService(String endPoint,Class<S> serviceClass, String apiKey, String secret) {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl(Const.API_BASE_URL)
+                .baseUrl(endPoint)
                 .addConverterFactory(converterFactory)
                 ;
 
@@ -64,8 +71,8 @@ public class CoinceresApiServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
-    public static <S> S createService(Class<S> serviceClass) {
-        return createService(serviceClass, null, null);
+    public static <S> S createService(String endPoint,Class<S> serviceClass) {
+        return createService(endPoint,serviceClass, null, null);
     }
 
     /**

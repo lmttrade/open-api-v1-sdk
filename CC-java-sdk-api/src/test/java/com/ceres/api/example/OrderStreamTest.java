@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
 import static com.ceres.api.constant.Const.MONITOR_TRADE;
+import static com.ceres.api.constant.Const.PRE_orderWsUrl;
 
 /**
  * 订单状态数据推送
@@ -27,8 +28,9 @@ public class OrderStreamTest {
     private static long lastPingCount = 0;
 
     static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr","b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl")
-                .newTradeWebSocketClient();
+        orderStreamClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr",
+                "b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl")
+                .newTradeWebSocketClient(PRE_orderWsUrl);
 
     }
 
@@ -44,7 +46,7 @@ public class OrderStreamTest {
                 if (currentPingCount.longValue() == lastPingCount && lastPingCount != 0){
                     // 重连
                     orderStreamClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr","b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl")
-                            .newTradeWebSocketClient();
+                            .newTradeWebSocketClient(PRE_orderWsUrl);
                     connectAndListen();
                     lastPingCount = 0;
                 }else {
