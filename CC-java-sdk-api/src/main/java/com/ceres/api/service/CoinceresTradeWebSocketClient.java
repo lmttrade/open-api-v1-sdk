@@ -14,4 +14,9 @@ public interface CoinceresTradeWebSocketClient {
      * @return
      */
     Closeable onOrderStreamEvent(CoinceresApiCallback<EntrustNotice> callback);
+
+    /**
+     * 重连 关闭之前的连接
+     */
+    void closeWebSocket();
 }

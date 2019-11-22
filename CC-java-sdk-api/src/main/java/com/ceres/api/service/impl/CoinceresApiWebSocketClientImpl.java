@@ -33,6 +33,8 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
 
     private static ScheduledExecutorService scheduledService;
 
+    private WebSocket webSocket = null;
+
     static {
         scheduledService = new ScheduledThreadPoolExecutor(1,
                 new BasicThreadFactory.Builder().namingPattern("lmt-market-ping-scheduled-%d").daemon(true).build());
@@ -69,7 +71,7 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
 
     private Closeable createNewWebSocket(String text, CoinceresApiWebSocketListener<?> listener) {
         Request request = new Request.Builder().url(this.wsEndPoint).build();
-        final WebSocket webSocket = client.newWebSocket(request, listener);
+        webSocket = client.newWebSocket(request, listener);
         // 订阅
         webSocket.send(text);
 
@@ -82,5 +84,13 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
             webSocket.close(code, null);
             listener.onClosed(webSocket, code, null);
         };
+    }
+
+    @Override
+    public void closeWebSocket() {
+        if (this.webSocket != null) {
+            this.webSocket.close(1000, "断线重连");
+            this.webSocket = null;
+        }
     }
 }

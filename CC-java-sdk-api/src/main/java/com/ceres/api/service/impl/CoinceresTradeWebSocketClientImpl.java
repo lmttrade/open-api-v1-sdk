@@ -35,6 +35,8 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
 
     private static ScheduledExecutorService scheduledService;
 
+    private WebSocket webSocket = null;
+
     static {
         scheduledService = new ScheduledThreadPoolExecutor(1,
                 new BasicThreadFactory.Builder().namingPattern("lmt-trade-ping-scheduled-%d").daemon(true).build());
@@ -68,7 +70,7 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
         }
         String streamingUrl = this.wsEndPoint + "?api_key=" + apiKey + "&timestamp="+timestamp+"&sign=" + sign;
         Request request = new Request.Builder().url(streamingUrl).build();
-        final WebSocket webSocket = client.newWebSocket(request, listener);
+        webSocket = client.newWebSocket(request, listener);
         scheduledService.scheduleAtFixedRate(()->webSocket.send("ping"),5,10,TimeUnit.SECONDS);
 
         return () -> {
@@ -79,5 +81,13 @@ public class CoinceresTradeWebSocketClientImpl implements CoinceresTradeWebSocke
             webSocket.close(code, null);
             listener.onClosed(webSocket, code, null);
         };
+    }
+
+    @Override
+    public void closeWebSocket() {
+        if (this.webSocket != null) {
+            this.webSocket.close(1000, "断线重连");
+            this.webSocket = null;
+        }
     }
 }

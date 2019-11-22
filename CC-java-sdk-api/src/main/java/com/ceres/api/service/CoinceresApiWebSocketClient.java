@@ -43,4 +43,9 @@ public interface CoinceresApiWebSocketClient {
      * @return
      */
     Closeable onTradeEvent(String text, CoinceresApiCallback<TradeEvent> callback);
+
+    /**
+     * 重连 关闭之前的连接
+     */
+    void closeWebSocket();
 }

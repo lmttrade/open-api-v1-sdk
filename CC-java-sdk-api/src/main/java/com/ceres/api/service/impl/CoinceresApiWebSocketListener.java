@@ -3,6 +3,7 @@ package com.ceres.api.service.impl;
 import com.ceres.api.exception.CoinceresApiException;
 import com.ceres.api.service.CoinceresApiCallback;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.Response;
@@ -33,6 +34,14 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
 
     private boolean closing = false;
 
+    private  static ObjectMapper objectMapper = buildObjectMapper();
+
+    private static ObjectMapper buildObjectMapper(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return objectMapper;
+    }
+
     public CoinceresApiWebSocketListener(CoinceresApiCallback<T> callback, Class<T> eventClass) {
         this.callback = callback;
         this.eventClass = eventClass;
@@ -52,7 +61,6 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
     @Override
     @SuppressWarnings("all")
     public void onMessage(WebSocket webSocket, String text) {
-        ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = null;
 
         if (text.equalsIgnoreCase("success")) {
@@ -74,7 +82,7 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
         }
 
         try {
-            jsonNode = mapper.readTree(text);
+            jsonNode = objectMapper.readTree(text);
         } catch (Exception e) {
             log.error("jackson readTree occur error", e);
             return;
@@ -93,9 +101,9 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
         try {
             T event = null;
             if (eventClass == null) {
-                event = mapper.readValue(text, eventTypeReference);
+                event = objectMapper.readValue(text, eventTypeReference);
             } else {
-                event = mapper.readValue(text, eventClass);
+                event = objectMapper.readValue(text, eventClass);
             }
             callback.onResponse(event);
         } catch (IOException e) {

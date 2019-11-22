@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
 import static com.ceres.api.constant.Const.MONITOR_TRADE;
-import static com.ceres.api.constant.Const.PRE_orderWsUrl;
+import static com.ceres.api.constant.Const.orderWsUrl;
 
 /**
  * 订单状态数据推送
@@ -28,29 +28,35 @@ public class OrderStreamTest {
     private static long lastPingCount = 0;
 
     static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr",
-                "b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl")
-                .newTradeWebSocketClient(PRE_orderWsUrl);
+        orderStreamClient = CoinceresApiClientFactory.newInstance("kycxakrfMVpTDYgb",
+                "kcOLgiND8dxNfIQ3rymD7BOYv38wZJkW")
+                .newTradeWebSocketClient(orderWsUrl);
 
     }
 
+    private static long testPingCountEqualsAndReconnect = 5;
+
     public static void main(String[] args) {
         try {
-
-            connectAndListen();
+            OrderStreamTest orderStreamTest = new OrderStreamTest();
+            orderStreamTest.connectAndListen();
 
             ScheduledExecutorService reconnectService = new ScheduledThreadPoolExecutor(1,
                     new BasicThreadFactory.Builder().namingPattern("lmt-trade-reconnect-scheduled-%d").daemon(true).build());
             reconnectService.scheduleAtFixedRate(()->{
                 Long currentPingCount = MONITOR_MAP.getOrDefault(MONITOR_TRADE,0L);
-                if (currentPingCount.longValue() == lastPingCount && lastPingCount != 0){
-                    // 重连
-                    orderStreamClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr","b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl")
-                            .newTradeWebSocketClient(PRE_orderWsUrl);
-                    connectAndListen();
-                    lastPingCount = 0;
+                if (currentPingCount == testPingCountEqualsAndReconnect){
+                    System.out.println("模拟心跳次数相等 主动重连");
+                    orderStreamClient.closeWebSocket();
+                    orderStreamTest.connectAndListen();
                 }else {
-                    lastPingCount = currentPingCount.longValue();
+                    if (currentPingCount.longValue() == lastPingCount && lastPingCount != 0) {
+                        // 重连
+                        orderStreamTest.connectAndListen();
+                        lastPingCount = 0;
+                    } else {
+                        lastPingCount = currentPingCount.longValue();
+                    }
                 }
 
             },6,15,TimeUnit.SECONDS);
@@ -60,7 +66,7 @@ public class OrderStreamTest {
         }
     }
 
-    private static void connectAndListen(){
+    public  void connectAndListen(){
         orderStreamClient.onOrderStreamEvent(response -> {
             String json = JsonUtils.serialize(response);
 

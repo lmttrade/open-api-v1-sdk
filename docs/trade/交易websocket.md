@@ -15,16 +15,53 @@
 ```java
 public class OrderStreamTest {
     private static CoinceresTradeWebSocketClient orderStreamClient;
-    static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("dWbkgDeLIzLavnYs","dePW2XslyzFYnTuc41yRhqHIUWEVco4W").newTradeWebSocketClient();
-    }
 
+    private static long lastPingCount = 0;
+    static  {
+            orderStreamClient = CoinceresApiClientFactory.newInstance("kycxakrfMVpTDYgb",
+                    "kcOLgiND8dxNfIQ3rymD7BOYv38wZJkW")
+                    .newTradeWebSocketClient(orderWsUrl);// 这里URL 可选沙箱环境进行测试：PRE_orderWsUrl
+
+        }
+    private static long testPingCountEqualsAndReconnect = 5;
     public static void main(String[] args) {
         try {
+                    OrderStreamTest orderStreamTest = new OrderStreamTest();
+                    orderStreamTest.connectAndListen();
+
+                    ScheduledExecutorService reconnectService = new ScheduledThreadPoolExecutor(1,
+                            new BasicThreadFactory.Builder().namingPattern("lmt-trade-reconnect-scheduled-%d").daemon(true).build());
+                    reconnectService.scheduleAtFixedRate(()->{
+                        Long currentPingCount = MONITOR_MAP.getOrDefault(MONITOR_TRADE,0L);
+                        if (currentPingCount == testPingCountEqualsAndReconnect){
+                            System.out.println("模拟心跳次数相等 主动重连");
+                            // 这里为了测试 强制重连
+                            // 重连需要注意 先关闭 后重连 否则重新连接上后 消息将重复推送
+                            orderStreamClient.closeWebSocket();
+                            orderStreamTest.connectAndListen();
+                        }else {
+                            if (currentPingCount.longValue() == lastPingCount && lastPingCount != 0) {
+                                // 重连需要注意 先关闭 后重连 否则重新连接上后 消息将重复推送
+                                orderStreamClient.closeWebSocket();
+                                orderStreamTest.connectAndListen();
+                                lastPingCount = 0;
+                            } else {
+                                lastPingCount = currentPingCount.longValue();
+                            }
+                        }
+
+                    },6,15,TimeUnit.SECONDS);
+
+                } catch (Exception ignore) {
+                    ignore.printStackTrace();
+                }
+    }
+
+    public  void connectAndListen(){
             orderStreamClient.onOrderStreamEvent(response -> {
                 String json = JsonUtils.serialize(response);
 
-                int messageType = response.getMessageType();
+                int messageType = response.getMessage_type();
                 if (1 == messageType) {
                     // entrustNotice
                     EntrustNotice entrustNotice = JsonUtils.parse(json, EntrustNotice.class);
@@ -35,10 +72,7 @@ public class OrderStreamTest {
                     System.out.println(positionNotice);
                 }
             });
-        } catch (Exception e) {
-            TestCase.fail(e.getMessage());
         }
-    }
 }
 ```
 

@@ -3,6 +3,7 @@ package com.ceres.api.service.impl;
 import com.ceres.api.exception.CoinceresApiException;
 import com.ceres.api.service.CoinceresApiCallback;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -31,6 +32,14 @@ public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
 
     private boolean closing = false;
 
+    private  static ObjectMapper objectMapper = buildObjectMapper();
+
+    private static ObjectMapper buildObjectMapper(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return objectMapper;
+    }
+
     public CoinceresTradeWebSocketListener(CoinceresApiCallback<T> callback, Class<T> eventClass) {
         this.callback = callback;
         this.eventClass = eventClass;
@@ -51,9 +60,8 @@ public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
     @Override
     @SuppressWarnings("all")
     public void onMessage(WebSocket webSocket, String text) {
-        ObjectMapper mapper = new ObjectMapper();
         if ("pong".equalsIgnoreCase(text)) {
-            log.info("收到交易连接心跳:{}", text);
+            log.info("收到交易连接心跳:{} 当前线程:{}", text,Thread.currentThread().getId());
             if (MONITOR_MAP.get(MONITOR_TRADE) != null){
                 Long current = MONITOR_MAP.get(MONITOR_TRADE);
                 long next = current+1;
@@ -67,9 +75,9 @@ public class CoinceresTradeWebSocketListener<T> extends WebSocketListener {
         try {
             T event = null;
             if (eventClass == null) {
-                event = mapper.readValue(text, eventTypeReference);
+                event = objectMapper.readValue(text, eventTypeReference);
             } else {
-                event = mapper.readValue(text, eventClass);
+                event = objectMapper.readValue(text, eventClass);
             }
             callback.onResponse(event);
         } catch (IOException e) {

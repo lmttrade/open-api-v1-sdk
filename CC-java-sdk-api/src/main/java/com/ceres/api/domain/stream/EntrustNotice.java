@@ -1,96 +1,123 @@
 package com.ceres.api.domain.stream;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 成交推送，状态推送的websocket信息
  *
  * @author LMT
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntrustNotice {
 
     /** 交易所名称 */
+    @JsonProperty("exchange")
     private String exchange;
 
     /** 交易对 */
+    @JsonProperty("symbol")
     private String symbol;
 
     /** 委托单号 */
+    @JsonProperty("system_oid")
     private String system_oid;
 
     /** 客户端单号 */
+    @JsonProperty("client_oid")
     private String client_oid;
 
     /** 成交均价 */
+    @JsonProperty("average_dealt_price")
     private String average_dealt_price;
 
     /** 委托时间 */
+    @JsonProperty("entrust_time")
     private String entrust_time;
 
     /** 委托状态 */
+    @JsonProperty("status")
     private String status;
 
     /** 委托方向 */
+    @JsonProperty("entrust_bs")
     private String entrust_bs;
 
     /** 价格类型 */
+    @JsonProperty("price_type")
     private String price_type;
 
     /** 杠杆倍数 */
+    @JsonProperty("lever")
     private String lever;
 
     /** 委托价格 */
+    @JsonProperty("entrust_price")
     private String entrust_price;
 
     /** 委托数量 */
+    @JsonProperty("entrust_amount")
     private String entrust_amount;
 
     /** 本单累计成交数量 */
+    @JsonProperty("dealt_amount")
     private String dealt_amount;
 
     /**
      * 最新成交时间
      */
+    @JsonProperty("dealt_time")
     private String dealt_time;
 
     /**
      * 交易类型
      */
+    @JsonProperty("trade_type")
     private String trade_type;
 
     /**
      * 保证金模式
      */
+    @JsonProperty("margin_mode")
     private String margin_mode;
 
     /**
      * 账户编码
      */
+    @JsonProperty("asset_code")
     private long asset_code;
 
     /**
      * 程序单编码
      */
+    @JsonProperty("program_oid")
     private String program_oid;
 
     /** 通知类型 1: 状态变更通知  2: 持仓变化通知 */
+    @JsonProperty("message_type")
     private int message_type;
     /**
      * 最新一次成交数量 即本次成交的数量 仅在成交下有值 其他状态推送是 "0"
      */
+    @JsonProperty("last_fill_amount")
     private String last_fill_amount;
 
     /**
      * 最新一次成交价格 即本次成交的价格 仅在成交下有值 其他状态推送是 "0"
      */
+    @JsonProperty("last_fill_price")
     private String last_fill_price;
 
     /**
      * 错误码 仅在状态是 FAILURE 时有值 其他状态是0
      */
+    @JsonProperty("error_code")
     private long error_code = 0;
 
     /**
      * 错误信息 仅在状态是 FAILURE 时有值 其他状态是 ""
      */
+    @JsonProperty("message")
     private String message = "";
 
     public String getExchange() {
