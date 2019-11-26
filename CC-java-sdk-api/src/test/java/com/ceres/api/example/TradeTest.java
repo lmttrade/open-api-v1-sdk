@@ -43,8 +43,8 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("bVHOwaYzkmtfSUXr",
-                "b7tKSQahoYzfcI7nwJ0qAgXXuArzTstl").newRestClient(Const.PRE_API_BASE_URL);
+        restClient = CoinceresApiClientFactory.newInstance("kycxakrfMVpTDYgb",
+                "kcOLgiND8dxNfIQ3rymD7BOYv38wZJkW").newRestClient(Const.API_BASE_URL);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -57,9 +57,10 @@ public class TradeTest {
         //04. 子账户资产划转
 //        accountTransfer();
         //05. 下单
-        placeOrder();
+//        placeOrder();
         //06. 查询订单信息
 //        queryOrderInfo();
+        queryOrderInfoByClientOid();
         //07. 活动委托
 //        queryOpenOrders();
         //10. 撤单
@@ -121,10 +122,19 @@ public class TradeTest {
         PrettyPrinter.println(result);
     }
 
-    /** 查询订单信息 */
+    /** 查询订单信息 根据系统单号*/
     private static void queryOrderInfo() {
         OrderDetailReq req = new OrderDetailReq();
         req.setSystemOid("1109950535628501010");
+        req.setTimestamp(System.currentTimeMillis());
+        ResultsVO<OrderDetailRes> result = restClient.getOrderInfo(req);
+        PrettyPrinter.println(result);
+    }
+
+    /** 查询订单信息 根据客户端保留字段*/
+    private static void queryOrderInfoByClientOid() {
+        OrderDetailReq req = new OrderDetailReq();
+        req.setClientOid("XknsYu76wsIsO09");
         req.setTimestamp(System.currentTimeMillis());
         ResultsVO<OrderDetailRes> result = restClient.getOrderInfo(req);
         PrettyPrinter.println(result);

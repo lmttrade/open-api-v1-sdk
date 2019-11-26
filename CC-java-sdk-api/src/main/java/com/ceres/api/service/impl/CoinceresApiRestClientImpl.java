@@ -53,7 +53,7 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
 
     @Override
     public ResultsVO<OrderDetailRes> getOrderInfo(OrderDetailReq req) {
-        return executeSync(coinceresApiService.getOrderInfo(req.getSystemOid(),req.getAssetCode(),req.getTimestamp()));
+        return executeSync(coinceresApiService.getOrderInfo(req.getSystemOid(),req.getClientOid(),req.getAssetCode(),req.getTimestamp()));
     }
 
     @Override

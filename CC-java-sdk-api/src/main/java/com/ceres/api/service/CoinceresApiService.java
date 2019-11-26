@@ -70,13 +70,15 @@ public interface CoinceresApiService {
     /**
      * 查询订单详情
      * @param systemOid
+     * @param clientOid
      * @param assetCode
      * @param timestamp
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @GET("/api/v1/trade/order")
-    Call<ResultsVO<OrderDetailRes>> getOrderInfo(@Query("system_oid") String systemOid, @Query("asset_code") Long assetCode,@Query("timestamp") Long timestamp);
+    Call<ResultsVO<OrderDetailRes>> getOrderInfo(@Query("system_oid") String systemOid, @Query("client_oid") String
+            clientOid,@Query("asset_code") Long assetCode,@Query("timestamp") Long timestamp);
 
     /**
      * 查询当前活动委托

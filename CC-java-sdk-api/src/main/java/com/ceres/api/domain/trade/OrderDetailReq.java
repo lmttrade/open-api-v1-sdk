@@ -4,6 +4,7 @@ package com.ceres.api.domain.trade;
  */
 public class OrderDetailReq {
     private String systemOid;
+    private String clientOid;
     private Long assetCode;
     private Long timestamp;
 
@@ -29,5 +30,13 @@ public class OrderDetailReq {
 
     public void setAssetCode(Long assetCode) {
         this.assetCode = assetCode;
+    }
+
+    public String getClientOid() {
+        return clientOid;
+    }
+
+    public void setClientOid(String clientOid) {
+        this.clientOid = clientOid;
     }
 }
