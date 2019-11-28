@@ -61,11 +61,14 @@ public interface CoinceresApiService {
      * 账户余额信息
      * @param timestamp
      * @param assetCode 账户编码
+     * @param symbol
+     * @param side
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @GET("/api/v1/account/get")
-    Call<ResultsVO<List<AccountInfoRes>>> getAccountInfo(@Query("timestamp") Long timestamp,@Query("asset_code") Long assetCode);
+    Call<ResultsVO<AccountInfoRes>> getAccountInfo(@Query("timestamp") Long timestamp,@Query("asset_code") Long
+            assetCode,@Query("symbol")String symbol,@Query("side")String side);
 
     /**
      * 查询订单详情

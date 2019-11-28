@@ -50,7 +50,7 @@ public interface CoinceresApiRestClient {
      * @param req
      * @return
      */
-    ResultsVO<List<AccountInfoRes>> accountTransfer(AccountTransferReq req);
+    ResultsVO accountTransfer(AccountTransferReq req);
 
     /**
      * 下单
@@ -71,9 +71,11 @@ public interface CoinceresApiRestClient {
      * 查询账户信息
      * @param timestamp
      * @param assetCode
+     * @param symbol
+     * @param side
      * @return 账户信息
      */
-    ResultsVO<List<AccountInfoRes>> getAccountInfo(Long timestamp,Long assetCode);
+    ResultsVO<AccountInfoRes> getAccountInfo(Long timestamp,Long assetCode,String symbol,String side);
 
     /**
      * 查询订单信息

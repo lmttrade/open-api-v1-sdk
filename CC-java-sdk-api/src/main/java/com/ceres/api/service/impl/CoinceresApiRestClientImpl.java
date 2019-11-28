@@ -32,7 +32,7 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<AccountInfoRes>> accountTransfer(AccountTransferReq req) {
+    public ResultsVO accountTransfer(AccountTransferReq req) {
         return executeSync(coinceresApiService.accountTransfer(req));
     }
 
@@ -47,8 +47,8 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<AccountInfoRes>> getAccountInfo(Long timestamp,Long assetCode) {
-        return executeSync(coinceresApiService.getAccountInfo(timestamp,assetCode));
+    public ResultsVO<AccountInfoRes> getAccountInfo(Long timestamp,Long assetCode,String symbol,String side) {
+        return executeSync(coinceresApiService.getAccountInfo(timestamp,assetCode,symbol,side));
     }
 
     @Override

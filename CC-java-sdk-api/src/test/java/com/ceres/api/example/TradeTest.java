@@ -53,14 +53,14 @@ public class TradeTest {
         //02. 添加子账户
 //        addSubAccount();
         //03. 查询账户资产信息
-//        queryAccountInfo();
+        queryAccountInfo();
         //04. 子账户资产划转
 //        accountTransfer();
         //05. 下单
 //        placeOrder();
         //06. 查询订单信息
 //        queryOrderInfo();
-        queryOrderInfoByClientOid();
+//        queryOrderInfoByClientOid();
         //07. 活动委托
 //        queryOpenOrders();
         //10. 撤单
@@ -168,28 +168,28 @@ public class TradeTest {
 
     /** 查询账户信息 */
     private static void queryAccountInfo() {
-        ResultsVO<List<AccountInfoRes>> result = restClient.getAccountInfo(System.currentTimeMillis(),190908122L);
+        String symbol = "BTC_USDT";
+        String side = "sell";
+        ResultsVO<AccountInfoRes> result = restClient.getAccountInfo(System.currentTimeMillis(),0L, symbol,side);
         PrettyPrinter.println(result);
     }
 
     /** 撤单 */
     private static void cancelOrder() {
-        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1128133132787396617",190908122L);
+        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1153449574239842305",0L);
         PrettyPrinter.println(result);
     }
 
     /** 下单 */
     private static void placeOrder() {
         InputOrderReq req = new InputOrderReq();
-        req.setSymbol("ETH_USDT");
+        req.setSymbol("BTC_USDT");
         req.setPriceType("limit");
-        req.setEntrustPrice("175");
-        req.setEntrustAmount("1");
-        req.setEntrustBs("buy");
+        req.setEntrustPrice("8000");
+        req.setEntrustAmount("0.02");
+        req.setEntrustBs("sell");
         req.setClientOid(UUID.randomUUID().toString());
         req.setTradeType("spot");
-        req.setProgramOid("AT127366888882712580");
-        req.setAssetCode(190908122L);
         req.setTimestamp(System.currentTimeMillis());
         ResultsVO<InputOrderRes> result = restClient.input(req);
         PrettyPrinter.println(result);

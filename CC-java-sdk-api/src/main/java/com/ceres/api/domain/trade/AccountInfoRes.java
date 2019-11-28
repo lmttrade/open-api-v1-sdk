@@ -1,58 +1,62 @@
 package com.ceres.api.domain.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author LMT
  */
 public class AccountInfoRes {
-    private String balance;
-    @JsonProperty("market_value")
-    private String marketValue;
-    private String frozen;
-    private String currency;
+    @JsonProperty("current_lever")
+    private String currentLever = "1";
+    @JsonProperty("warn_line")
+    private String warnLine = "--";
+    @JsonProperty("close_line")
+    private String closeLine = "--";
+    @JsonProperty("risk_rate")
+    private String riskRate = "--";
+    @JsonProperty("currency_list")
+    private List<AccountInfoDetail> currencyList = new ArrayList<>();
 
-    public String getBalance() {
-        return balance;
+    public String getCurrentLever() {
+        return currentLever;
     }
 
-    public void setBalance(String balance) {
-        this.balance = balance;
+    public void setCurrentLever(String currentLever) {
+        this.currentLever = currentLever;
     }
 
-    public String getMarketValue() {
-        return marketValue;
+    public String getWarnLine() {
+        return warnLine;
     }
 
-    public void setMarketValue(String marketValue) {
-        this.marketValue = marketValue;
+    public void setWarnLine(String warnLine) {
+        this.warnLine = warnLine;
     }
 
-    public String getFrozen() {
-        return frozen;
+    public String getCloseLine() {
+        return closeLine;
     }
 
-    public void setFrozen(String frozen) {
-        this.frozen = frozen;
+    public void setCloseLine(String closeLine) {
+        this.closeLine = closeLine;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getRiskRate() {
+        return riskRate;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setRiskRate(String riskRate) {
+        this.riskRate = riskRate;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("balance", balance)
-                .append("marketValue", marketValue)
-                .append("frozen", frozen)
-                .append("currency", currency)
-                .toString();
+    public List<AccountInfoDetail> getCurrencyList() {
+        return currencyList;
+    }
+
+    public void setCurrencyList(List<AccountInfoDetail> currencyList) {
+        this.currencyList = currencyList;
     }
 }
