@@ -639,46 +639,51 @@ asset_code:账户编码
 | 参数名称 | 参数类型 | 是否必须 | 参数解释                |
 | -------- | -------- | -------- | ----------------------- |
 | exchange | String   | 是       | 目前仅支持 LMT、INSTANTEX    |
-| symbol | String   | 是       | 币币交易对或合约名称    |
+| symbol | String   | 否     | 币币交易对或合约名称    |
+| system_oid | String   | 否       | 委托单号    |
+| from | int   | 否       | 查询起始位置 初始0 或不填 查询下一页时填入上一次查询得到的next_from    |
 | count    | int      | 是       | 查询数量 最大50         |
 | asset_code | Long    | 否       | 账户编码 不填默认查询此apiKey所属用户的订单成交记录,否则将依据apiKey权限查询输入账户订单成交记录|
 
 #### 返回数据:
 
 ```json
+
 {
-    "code": "200",
-    "data": [
-        {
-            "exchange":"OKEX",
-            "commission":"0.001",
-            "commission_currency":"BTC",
-            "symbol":"ADA_BTC",
-            "dealt_amount":"1",
-            "dealt_price":"0.00001176",
-            "dealt_time":"2018-11-29 16:19:09",
-            "entrust_bs":"buy",
-            "future_dir":"币币交易，不区分",
-            "system_oid":"121606988609761289",
-            "system_tid":"221619148110966794",
-            "asset_code":190810234
-        },
-        {
-            "exchange":"INSTANTEX",
-            "commission":"0.2",
-            "commission_currency":"BTC",
-            "symbol":"ADA_BTC",
-            "dealt_amount":"200",
-            "dealt_price":"0.00001176",
-            "dealt_time":"2018-11-29 16:19:33",
-            "entrust_bs":"buy",
-            "future_dir":"币币交易，不区分",
-            "system_oid":"121606988609761290",
-            "system_tid":"221619148110966795",
-            "asset_code":190810234
-        }
-    ],
-    "message":"SUCESS"
+  "code" : "200",
+  "data" : {
+    "transRecordList" : [ {
+      "exchange" : "VHUOBI",
+      "commission" : "0.23915815",
+      "symbol" : "BTC_USDT",
+      "entrust_bs" : "buy",
+      "future_dir" : "none",
+      "commission_currency" : "USDT",
+      "dealt_amount" : "0.0372254",
+      "dealt_price" : "7138.44",
+      "dealt_time" : "2019-12-04 14:07:53",
+      "system_oid" : "1154910190792093736",
+      "system_tid" : "2155676655061315665",
+      "asset_code" : 0,
+      "flow_id" : "2bc07bd2e19c4e08a904edfd728c7941_2019120453o5vu"
+    }, {
+      "exchange" : "VHUOBI",
+      "commission" : "0.2656638",
+      "symbol" : "BTC_USDT",
+      "entrust_bs" : "sell",
+      "future_dir" : "none",
+      "commission_currency" : "USDT",
+      "dealt_amount" : "0.0414",
+      "dealt_price" : "7130",
+      "dealt_time" : "2019-12-04 14:07:36",
+      "system_oid" : "1154910190792093735",
+      "system_tid" : "2155676655061315646",
+      "asset_code" : 0,
+      "flow_id" : "ecbd8fe27a784d329bcc8ffd67935169_20191204363z9o"
+    } ],
+    "next_from" : 532
+  },
+  "message" : "SUCCESS"
 }
 ```
 
@@ -710,6 +715,10 @@ system_oid:平台委托单号
 system_tid:平台成交编号
 
 asset_code:账户编码
+
+flow_id: 成交流水号
+
+外层next_from:作为下一页查询的from入参
 ```
 
 

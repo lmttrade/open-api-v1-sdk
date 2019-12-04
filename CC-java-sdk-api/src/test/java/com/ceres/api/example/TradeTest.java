@@ -106,10 +106,9 @@ public class TradeTest {
         TransReq req = new TransReq();
         req.setExchange("LMT");
         req.setSymbol("BTC_USDT");
-        req.setCount(10);
+        req.setCount(2);
 //        req.setAssetCode(190900062L);
         req.setFrom(534L);
-        req.setSystemOid("1154910190792093736");
         ResultsVO<TransRep> result = restClient.queryTransRecord(req);
         PrettyPrinter.println(result);
     }

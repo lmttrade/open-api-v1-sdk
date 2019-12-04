@@ -1,5 +1,7 @@
 package com.ceres.api.domain.trade;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,7 @@ import java.util.List;
  */
 public class TransRep {
 
+    @JsonProperty("next_from")
     private long nextFrom;
 
     private List<TransRecord> transRecordList;
