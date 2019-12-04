@@ -4,7 +4,6 @@
 market 目录下是行情api
 trade 目录下是交易api
 
-## 2019-11-09
 - 增加沙箱环境配置URL
 - 代码路径 com.ceres.api.constant.Const
 
