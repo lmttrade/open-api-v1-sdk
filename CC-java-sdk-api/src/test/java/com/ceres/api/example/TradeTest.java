@@ -7,6 +7,7 @@ import com.ceres.api.domain.trade.AccountInfoRes;
 import com.ceres.api.domain.trade.AccountTransferReq;
 import com.ceres.api.domain.trade.AddSubAccountReq;
 import com.ceres.api.domain.trade.AddSubAccountRes;
+import com.ceres.api.domain.trade.CancelOrderRep;
 import com.ceres.api.domain.trade.CloseOrderReq;
 import com.ceres.api.domain.trade.InputOrderReq;
 import com.ceres.api.domain.trade.InputOrderRes;
@@ -22,14 +23,12 @@ import com.ceres.api.domain.trade.OrdersRes;
 import com.ceres.api.domain.trade.PositionQueryReq;
 import com.ceres.api.domain.trade.ProgramOrdersHisReq;
 import com.ceres.api.domain.trade.ResultsVO;
-import com.ceres.api.domain.trade.SystemOidRecord;
-import com.ceres.api.domain.trade.TransRecord;
+import com.ceres.api.domain.trade.TransRep;
 import com.ceres.api.domain.trade.TransReq;
 import com.ceres.api.service.CoinceresApiRestClient;
 import util.PrettyPrinter;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -43,8 +42,8 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("kycxakrfMVpTDYgb",
-                "kcOLgiND8dxNfIQ3rymD7BOYv38wZJkW").newRestClient(Const.API_BASE_URL);
+        restClient = CoinceresApiClientFactory.newInstance("GPkCpsVsaZlHzWVU",
+                "GNcwRuhOG17tdqp6pLqYLMmhVXussBEp").newRestClient(Const.API_BASE_URL);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -53,7 +52,7 @@ public class TradeTest {
         //02. 添加子账户
 //        addSubAccount();
         //03. 查询账户资产信息
-        queryAccountInfo();
+//        queryAccountInfo();
         //04. 子账户资产划转
 //        accountTransfer();
         //05. 下单
@@ -66,7 +65,7 @@ public class TradeTest {
         //10. 撤单
 //        cancelOrder();
         //12. 查询成交
-//        queryTrade();
+        queryTrade();
         //13.14.闪电交易询价+确认
 //        String confirmId = instantTradingAskPriceByVol();
 //        System.out.println(confirmId);
@@ -105,11 +104,13 @@ public class TradeTest {
     /** 查询成交 */
     private static void queryTrade() {
         TransReq req = new TransReq();
-        req.setExchange("BINANCE");
-        req.setSymbol("NEO_USDT");
-        req.setCount("10");
-        req.setAssetCode(190900062L);
-        ResultsVO<List<TransRecord>> result = restClient.queryTransRecord(req);
+        req.setExchange("LMT");
+        req.setSymbol("BTC_USDT");
+        req.setCount(10);
+//        req.setAssetCode(190900062L);
+        req.setFrom(534L);
+        req.setSystemOid("1154910190792093736");
+        ResultsVO<TransRep> result = restClient.queryTransRecord(req);
         PrettyPrinter.println(result);
     }
 
@@ -176,7 +177,7 @@ public class TradeTest {
 
     /** 撤单 */
     private static void cancelOrder() {
-        ResultsVO<Map<String, List<SystemOidRecord>>> result = restClient.cancel("1153449574239842305",0L);
+        ResultsVO<CancelOrderRep> result = restClient.cancel("1153449574239842305",0L);
         PrettyPrinter.println(result);
     }
 

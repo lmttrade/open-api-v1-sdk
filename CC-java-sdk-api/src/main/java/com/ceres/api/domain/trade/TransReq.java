@@ -11,7 +11,12 @@ public class TransReq {
 
     private String symbol;
 
-    private String count;
+    @JsonProperty("system_oid")
+    private String systemOid;
+
+    private Long from;
+
+    private Integer count;
 
     @JsonProperty("asset_code")
     private Long assetCode = 0L;
@@ -28,14 +33,6 @@ public class TransReq {
         this.symbol = symbol;
     }
 
-    public String getCount() {
-        return count;
-    }
-
-    public void setCount(String count) {
-        this.count = count;
-    }
-
     public Long getAssetCode() {
         return assetCode;
     }
@@ -46,5 +43,29 @@ public class TransReq {
 
     public String getSymbol() {
         return symbol;
+    }
+
+    public String getSystemOid() {
+        return systemOid;
+    }
+
+    public void setSystemOid(String systemOid) {
+        this.systemOid = systemOid;
+    }
+
+    public Long getFrom() {
+        return from;
+    }
+
+    public void setFrom(Long from) {
+        this.from = from;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

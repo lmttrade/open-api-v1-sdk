@@ -28,8 +28,8 @@ public class OrderStreamTest {
     private static long lastPingCount = 0;
 
     static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("kycxakrfMVpTDYgb",
-                "kcOLgiND8dxNfIQ3rymD7BOYv38wZJkW")
+        orderStreamClient = CoinceresApiClientFactory.newInstance("GPkCpsVsaZlHzWVU",
+                "GNcwRuhOG17tdqp6pLqYLMmhVXussBEp")
                 .newTradeWebSocketClient(orderWsUrl);
 
     }
@@ -69,7 +69,6 @@ public class OrderStreamTest {
     public  void connectAndListen(){
         orderStreamClient.onOrderStreamEvent(response -> {
             String json = JsonUtils.serialize(response);
-
             int messageType = response.getMessage_type();
             if (1 == messageType) {
                 // entrustNotice

@@ -1,12 +1,37 @@
 package com.ceres.api.service;
 
 import com.ceres.api.constant.Const;
-import com.ceres.api.domain.trade.*;
+import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountInfoRes;
+import com.ceres.api.domain.trade.AccountTransferReq;
+import com.ceres.api.domain.trade.AddSubAccountReq;
+import com.ceres.api.domain.trade.AddSubAccountRes;
+import com.ceres.api.domain.trade.CancelOrderRep;
+import com.ceres.api.domain.trade.CloseOrderReq;
+import com.ceres.api.domain.trade.InputOrderReq;
+import com.ceres.api.domain.trade.InputOrderRes;
+import com.ceres.api.domain.trade.InstantTradingAskPriceReq;
+import com.ceres.api.domain.trade.InstantTradingAskPriceRes;
+import com.ceres.api.domain.trade.InstantTradingConfirmReq;
+import com.ceres.api.domain.trade.InstantTradingConfirmRes;
+import com.ceres.api.domain.trade.OpenOrdersReq;
+import com.ceres.api.domain.trade.OrderDetailRes;
+import com.ceres.api.domain.trade.OrdersHisReq;
+import com.ceres.api.domain.trade.OrdersRes;
+import com.ceres.api.domain.trade.PositionDetailRes;
+import com.ceres.api.domain.trade.ProgramOrdersHisReq;
+import com.ceres.api.domain.trade.ResultsVO;
+import com.ceres.api.domain.trade.TransRep;
 import retrofit2.Call;
-import retrofit2.http.*;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 import java.util.List;
-import java.util.Map;
 /**
  * @author LMT
  * @date 2019/01/30
@@ -55,7 +80,7 @@ public interface CoinceresApiService {
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @DELETE("/api/v1/trade/order/{system_oid}")
-    Call<ResultsVO<Map<String, List<SystemOidRecord>>>> cancel(@Path("system_oid") String systemOid,@Query("asset_code")Long assetCode);
+    Call<ResultsVO<CancelOrderRep>> cancel(@Path("system_oid") String systemOid,@Query("asset_code")Long assetCode);
 
     /**
      * 账户余额信息
@@ -126,14 +151,16 @@ public interface CoinceresApiService {
      * 查询成交记录
      * @param exchange
      * @param symbol
+     * @param systemOid
+     * @param from
      * @param count
      * @param assetCode
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @GET("/api/v1/trade/trans")
-    Call<ResultsVO<List<TransRecord>>> queryTransRecord(@Query("exchange") String exchange, @Query("symbol") String symbol,
-                                                        @Query("count") String count,@Query("asset_code") Long assetCode);
+    Call<ResultsVO<TransRep>> queryTransRecord(@Query("exchange") String exchange, @Query("symbol") String symbol,
+            @Query("system_oid") String systemOid,@Query("from") Long from, @Query("count") Integer count,@Query("asset_code") Long assetCode);
 
     /**
      * 平仓

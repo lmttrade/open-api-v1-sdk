@@ -109,6 +109,12 @@ public class EntrustNotice {
     private String last_fill_price;
 
     /**
+     * 成交流水号
+     */
+    @JsonProperty("flow_id")
+    private String flow_id = "";
+
+    /**
      * 错误码 仅在状态是 FAILURE 时有值 其他状态是0
      */
     @JsonProperty("error_code")
@@ -304,6 +310,14 @@ public class EntrustNotice {
         this.message = message;
     }
 
+    public String getFlow_id() {
+        return flow_id;
+    }
+
+    public void setFlow_id(String flow_id) {
+        this.flow_id = flow_id;
+    }
+
     @Override
     public String toString() {
         return "EntrustNotice{" +
@@ -330,6 +344,7 @@ public class EntrustNotice {
                 ", last_fill_price='" + last_fill_price + '\'' +
                 ", error_code=" + error_code +
                 ", message='" + message + '\'' +
+                ", flow_id='" + flow_id + '\'' +
                 '}';
     }
 }

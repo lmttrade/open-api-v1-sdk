@@ -28,6 +28,8 @@ public class TransRecord {
     private String systemTid;
     @JsonProperty("asset_code")
     private Long assetCode;
+    @JsonProperty("flow_id")
+    private String flowId;
 
     public String getEntrustBs() {
         return entrustBs;
@@ -125,6 +127,14 @@ public class TransRecord {
         this.assetCode = assetCode;
     }
 
+    public String getFlowId() {
+        return flowId;
+    }
+
+    public void setFlowId(String flowId) {
+        this.flowId = flowId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -138,6 +148,7 @@ public class TransRecord {
                 .append("dealtTime", dealtTime)
                 .append("systemOid", systemOid)
                 .append("systemTid", systemTid)
+                .append("flowId", flowId)
                 .toString();
     }
 }

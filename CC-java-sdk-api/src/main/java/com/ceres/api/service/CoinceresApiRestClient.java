@@ -5,6 +5,7 @@ import com.ceres.api.domain.trade.AccountInfoRes;
 import com.ceres.api.domain.trade.AccountTransferReq;
 import com.ceres.api.domain.trade.AddSubAccountReq;
 import com.ceres.api.domain.trade.AddSubAccountRes;
+import com.ceres.api.domain.trade.CancelOrderRep;
 import com.ceres.api.domain.trade.CloseOrderReq;
 import com.ceres.api.domain.trade.InputOrderReq;
 import com.ceres.api.domain.trade.InputOrderRes;
@@ -21,12 +22,10 @@ import com.ceres.api.domain.trade.PositionDetailRes;
 import com.ceres.api.domain.trade.PositionQueryReq;
 import com.ceres.api.domain.trade.ProgramOrdersHisReq;
 import com.ceres.api.domain.trade.ResultsVO;
-import com.ceres.api.domain.trade.SystemOidRecord;
-import com.ceres.api.domain.trade.TransRecord;
+import com.ceres.api.domain.trade.TransRep;
 import com.ceres.api.domain.trade.TransReq;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author LMT
@@ -65,7 +64,7 @@ public interface CoinceresApiRestClient {
      * @param assetCode
      * @return 撤单结果
      */
-    ResultsVO<Map<String,List<SystemOidRecord>>> cancel(String systemOid,Long assetCode);
+    ResultsVO<CancelOrderRep> cancel(String systemOid,Long assetCode);
 
     /**
      * 查询账户信息
@@ -117,7 +116,7 @@ public interface CoinceresApiRestClient {
      * @param req
      * @return
      */
-    ResultsVO<List<TransRecord>> queryTransRecord(TransReq req);
+    ResultsVO<TransRep> queryTransRecord(TransReq req);
 
     /**
      * 平仓

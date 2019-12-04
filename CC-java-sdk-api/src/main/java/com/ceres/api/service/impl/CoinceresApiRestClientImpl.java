@@ -1,11 +1,33 @@
 package com.ceres.api.service.impl;
 
-import com.ceres.api.domain.trade.*;
+import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountInfoRes;
+import com.ceres.api.domain.trade.AccountTransferReq;
+import com.ceres.api.domain.trade.AddSubAccountReq;
+import com.ceres.api.domain.trade.AddSubAccountRes;
+import com.ceres.api.domain.trade.CancelOrderRep;
+import com.ceres.api.domain.trade.CloseOrderReq;
+import com.ceres.api.domain.trade.InputOrderReq;
+import com.ceres.api.domain.trade.InputOrderRes;
+import com.ceres.api.domain.trade.InstantTradingAskPriceReq;
+import com.ceres.api.domain.trade.InstantTradingAskPriceRes;
+import com.ceres.api.domain.trade.InstantTradingConfirmReq;
+import com.ceres.api.domain.trade.InstantTradingConfirmRes;
+import com.ceres.api.domain.trade.OpenOrdersReq;
+import com.ceres.api.domain.trade.OrderDetailReq;
+import com.ceres.api.domain.trade.OrderDetailRes;
+import com.ceres.api.domain.trade.OrdersHisReq;
+import com.ceres.api.domain.trade.OrdersRes;
+import com.ceres.api.domain.trade.PositionDetailRes;
+import com.ceres.api.domain.trade.PositionQueryReq;
+import com.ceres.api.domain.trade.ProgramOrdersHisReq;
+import com.ceres.api.domain.trade.ResultsVO;
+import com.ceres.api.domain.trade.TransRep;
+import com.ceres.api.domain.trade.TransReq;
 import com.ceres.api.service.CoinceresApiRestClient;
 import com.ceres.api.service.CoinceresApiService;
 
 import java.util.List;
-import java.util.Map;
 
 import static com.ceres.api.service.CoinceresApiServiceGenerator.createService;
 import static com.ceres.api.service.CoinceresApiServiceGenerator.executeSync;
@@ -42,7 +64,7 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<Map<String, List<SystemOidRecord>>> cancel(String systemOid,Long assetCode) {
+    public ResultsVO<CancelOrderRep> cancel(String systemOid,Long assetCode) {
         return executeSync(coinceresApiService.cancel(systemOid,assetCode));
     }
 
@@ -77,9 +99,9 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<TransRecord>> queryTransRecord(TransReq req) {
-        return executeSync(coinceresApiService.queryTransRecord(req.getExchange(), req.getSymbol(), req.getCount(),
-                req.getAssetCode()));
+    public ResultsVO<TransRep> queryTransRecord(TransReq req) {
+        return executeSync(coinceresApiService.queryTransRecord(req.getExchange(), req.getSymbol(), req.getSystemOid
+                        (),req.getFrom(),req.getCount(), req.getAssetCode()));
     }
 
     @Override
