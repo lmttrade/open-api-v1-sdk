@@ -23,7 +23,7 @@ WebSocket是HTML5一种新的协议(Protocol)。它实现了客户端与服务�
 客户端和服务器皆可以主动地发送数据给对方；
 不需要多次创建TCP请求和销毁，节约宽带和服务器的资源。 强烈建议开发者使用WebSocket API获取市场行情和买卖深度等信息。
 # 2、行情请求域名
-- websocket api host： wss://open.lmt.trade:28003
+- websocket api host： wss://open.lmt.trade/ws/market
 
 - rest api host：https://open.lmt.trade
 

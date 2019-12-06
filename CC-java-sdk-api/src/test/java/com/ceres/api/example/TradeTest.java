@@ -42,8 +42,8 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("GPkCpsVsaZlHzWVU",
-                "GNcwRuhOG17tdqp6pLqYLMmhVXussBEp").newRestClient(Const.API_BASE_URL);
+        restClient = CoinceresApiClientFactory.newInstance("QkkzDCyjmUODrLMc",
+                "QYAvZ2I5MUGPxvyCQVlmWrKQbgH4JM1S").newRestClient(Const.PRE_API_BASE_URL);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -106,9 +106,8 @@ public class TradeTest {
         TransReq req = new TransReq();
         req.setExchange("LMT");
         req.setSymbol("BTC_USDT");
-        req.setCount(2);
+        req.setCount(10);
 //        req.setAssetCode(190900062L);
-        req.setFrom(534L);
         ResultsVO<TransRep> result = restClient.queryTransRecord(req);
         PrettyPrinter.println(result);
     }

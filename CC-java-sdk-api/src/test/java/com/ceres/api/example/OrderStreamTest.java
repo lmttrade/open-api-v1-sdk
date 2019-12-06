@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
 import static com.ceres.api.constant.Const.MONITOR_TRADE;
-import static com.ceres.api.constant.Const.orderWsUrl;
+import static com.ceres.api.constant.Const.PRE_orderWsUrl;
 
 /**
  * 订单状态数据推送
@@ -28,13 +28,13 @@ public class OrderStreamTest {
     private static long lastPingCount = 0;
 
     static  {
-        orderStreamClient = CoinceresApiClientFactory.newInstance("GPkCpsVsaZlHzWVU",
-                "GNcwRuhOG17tdqp6pLqYLMmhVXussBEp")
-                .newTradeWebSocketClient(orderWsUrl);
+        orderStreamClient = CoinceresApiClientFactory.newInstance("QkkzDCyjmUODrLMc",
+                "QYAvZ2I5MUGPxvyCQVlmWrKQbgH4JM1S")
+                .newTradeWebSocketClient(PRE_orderWsUrl);
 
     }
 
-    private static long testPingCountEqualsAndReconnect = 5;
+    private static long testPingCountEqualsAndReconnect = -5;
 
     public static void main(String[] args) {
         try {
