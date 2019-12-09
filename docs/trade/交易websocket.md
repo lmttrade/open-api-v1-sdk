@@ -92,7 +92,7 @@ public class OrderStreamTest {
    >api_key:apiKey
    >timestamp:时间戳
    >sign:签名结果
-   > wss://open.lmt.trade/ws?api_key=**********&timestamp=1568602940731&sign=**********
+   > wss://open.lmt.trade/ws/trade?api_key=**********&timestamp=1568602940731&sign=**********
    >
    >按照签名说明文档中描述的规则进行加密得到sign
 
