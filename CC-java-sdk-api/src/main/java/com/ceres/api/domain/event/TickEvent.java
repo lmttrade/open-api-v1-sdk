@@ -11,37 +11,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * e.g
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TickEvent {
+public class TickEvent extends BaseEvent{
 
     private String change;
     @JsonProperty("changeRate")
     private String changeRate;
-    @JsonProperty("dataType")
-    private String dataType;
-    private String symbol;
-    private String exchange;
     private String high;
     private String last;
     private String low;
     private String open;
-    private String time;
     private String volume;
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
-    }
 
     public String getChange() {
         return change;
@@ -57,14 +36,6 @@ public class TickEvent {
 
     public void setChangeRate(String changeRate) {
         this.changeRate = changeRate;
-    }
-
-    public String getExchange() {
-        return exchange;
-    }
-
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
     }
 
     public String getHigh() {
@@ -99,13 +70,6 @@ public class TickEvent {
         this.open = open;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getVolume() {
         return volume;
@@ -121,14 +85,14 @@ public class TickEvent {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("change", change)
                 .append("changeRate", changeRate)
-                .append("symbol", symbol)
-                .append("exchange", exchange)
+                .append("symbol", super.getSymbol())
+                .append("exchange", super.getExchange())
                 .append("high", high)
                 .append("last", last)
                 .append("low", low)
-                .append("dataType",dataType)
+                .append("dataType",super.getDataType())
                 .append("open", open)
-                .append("time", time)
+                .append("time", super.getTime())
                 .append("volume", volume)
                 .toString();
     }

@@ -1,8 +1,12 @@
 package com.ceres.api.service.impl;
 
+import com.ceres.api.domain.event.BaseEvent;
+import com.ceres.api.domain.event.CandleEvent;
+import com.ceres.api.domain.event.DepthEvent;
+import com.ceres.api.domain.event.TickEvent;
+import com.ceres.api.domain.event.TradeEvent;
 import com.ceres.api.exception.CoinceresApiException;
-import com.ceres.api.service.CoinceresApiCallback;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.ceres.api.service.CoinceresWebsocketCallback;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,19 +26,15 @@ import static com.ceres.api.constant.Const.MONITOR_MARKET;
  * @author LMT
  * @date 2019/01/30
  */
-public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
+public class CoinceresApiWebSocketListener extends WebSocketListener {
 
     private static final Logger log = LoggerFactory.getLogger(CoinceresApiWebSocketListener.class);
 
-    private CoinceresApiCallback<T> callback;
-
-    private Class<T> eventClass;
-
-    private TypeReference<T> eventTypeReference;
-
     private boolean closing = false;
 
-    private  static ObjectMapper objectMapper = buildObjectMapper();
+    private static ObjectMapper objectMapper = buildObjectMapper();
+
+    private CoinceresWebsocketCallback callback;
 
     private static ObjectMapper buildObjectMapper(){
         ObjectMapper objectMapper = new ObjectMapper();
@@ -42,14 +42,8 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
         return objectMapper;
     }
 
-    public CoinceresApiWebSocketListener(CoinceresApiCallback<T> callback, Class<T> eventClass) {
+    public CoinceresApiWebSocketListener(CoinceresWebsocketCallback callback) {
         this.callback = callback;
-        this.eventClass = eventClass;
-    }
-
-    public CoinceresApiWebSocketListener(CoinceresApiCallback<T> callback, TypeReference<T> eventTypeReference) {
-        this.callback = callback;
-        this.eventTypeReference = eventTypeReference;
     }
 
     @Override
@@ -62,7 +56,6 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
     @SuppressWarnings("all")
     public void onMessage(WebSocket webSocket, String text) {
         JsonNode jsonNode = null;
-
         if (text.equalsIgnoreCase("success")) {
             log.info("WebSocket 连接成功!");
             return;
@@ -99,13 +92,30 @@ public class CoinceresApiWebSocketListener<T> extends WebSocketListener {
             }
         }
         try {
-            T event = null;
-            if (eventClass == null) {
-                event = objectMapper.readValue(text, eventTypeReference);
-            } else {
-                event = objectMapper.readValue(text, eventClass);
+            BaseEvent event = null;
+            JsonNode node = jsonNode.get("dataType");
+            if (node != null) {
+                String dataType = node.asText();
+                switch (dataType) {
+                case "Trade":
+                    event = (TradeEvent) objectMapper.readValue(text, TradeEvent.class);
+                    break;
+                case "Tick":
+                    event = (TickEvent) objectMapper.readValue(text, TickEvent.class);
+                    break;
+                case "AskBidQueue":
+                    event = (DepthEvent) objectMapper.readValue(text, DepthEvent.class);
+
+                    break;
+                case "Cycle":
+                    event = (CandleEvent) objectMapper.readValue(text, CandleEvent.class);
+                    break;
+                default:
+                    return;
+                }
+                this.callback.onResponse(event);
             }
-            callback.onResponse(event);
+
         } catch (IOException e) {
             throw new CoinceresApiException(e);
         }

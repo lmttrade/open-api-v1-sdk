@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import util.PrettyPrinter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import static com.ceres.api.client.CoinceresApiClientFactory.MONITOR_MAP;
 import static com.ceres.api.constant.Const.MONITOR_MARKET;
 import static com.ceres.api.constant.Const.PRE_API_BASE_URL;
-import static com.ceres.api.constant.Const.PRE_wsUrl;
+import static com.ceres.api.constant.Const.wsUrl;
 
 /**
  * 关于行情查询和订阅的示例
@@ -46,7 +47,7 @@ public class MarketTest {
     static {
         mapper = new ObjectMapper();
         dataRestClient = CoinceresApiClientFactory.newInstance().newDataClient(PRE_API_BASE_URL);
-        dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient(PRE_wsUrl);
+        dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient(wsUrl);
     }
 
 
@@ -70,18 +71,8 @@ public class MarketTest {
          * 2、一直订阅，SDK根据需求筛选需要的币对信息，
          */
         //WebSocket API
-        // !!!【注意】!!! 测试订阅方法时,订阅什么内容 下面的reconnectService中是同样的方法
-        // 订阅trade
-        subTrade();
-
-        // 订阅tick
-//                subTick();
-
-        // 订阅candle
-//                subCandle();
-
-        // 订阅depth
-//                subDepth();
+        // 订阅 行情实时数据 包含 depth trade tick candle
+        subMarketData();
 
         MONITOR_MAP.put(MONITOR_MARKET, 5L);
 
@@ -90,25 +81,16 @@ public class MarketTest {
         reconnectService.scheduleAtFixedRate(()->{
             Long currentPingCount = MONITOR_MAP.getOrDefault(MONITOR_MARKET,0L);
             if (currentPingCount.longValue() == lastPingCount && lastPingCount != 0){
-                dataWebSocketClient = CoinceresApiClientFactory.newWebSocketClient(PRE_wsUrl);
-                // 订阅trade 这里的几个订阅方法和上面需同时打开或关闭
-                subTrade();
-
-                // 订阅tick
-//                subTick();
-
-                // 订阅candle
-//                subCandle();
-
-                // 订阅depth
-//                subDepth();
+                dataWebSocketClient.closeWebSocket();
+                // 订阅 行情实时数据 包含 depth trade tick candle
+                subMarketData();
                 lastPingCount = 0;
             }else {
+                //取消订阅 注意 这里是为了测试 取消订阅这个功能
+                unSubTrade();
                 lastPingCount = currentPingCount.longValue();
             }
         },6,15,TimeUnit.SECONDS);
-        //取消订阅
-        //unSubTrade();
     }
 
 
@@ -149,75 +131,51 @@ public class MarketTest {
     }
 
 
-    /**
-     * 订阅depth
-     */
-    private static void subDepth() {
-        SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setDataType("AskBidQueue");
-        subscribeReq.setActionType(ActionTypeEnum.sub.name());
-        subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
-        subscribeReq.setSymbol("ETH_BTC");
-        List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
+
+    private static void subMarketData() {
+        /**
+         * 订阅depth
+         */
+        SubscribeReq subscribeAskBidQueueReq = new SubscribeReq();
+        subscribeAskBidQueueReq.setDataType("AskBidQueue");
+        subscribeAskBidQueueReq.setActionType(ActionTypeEnum.sub.name());
+        subscribeAskBidQueueReq.setExchange(ExchangeEnum.BINANCE.getValue());
+        subscribeAskBidQueueReq.setSymbol("BTC_USDT");
+
+        /**
+         * 订阅candle
+         */
+        SubscribeReq subscribeCycleReq = new SubscribeReq();
+        subscribeCycleReq.setDataType("Cycle");
+        subscribeCycleReq.setActionType(ActionTypeEnum.sub.name());
+        subscribeCycleReq.setExchange(ExchangeEnum.BINANCE.getValue());
+        subscribeCycleReq.setSymbol("BTC_USDT");
+        subscribeCycleReq.setDuration("5");
+        /**
+         * 订阅tick
+         */
+        SubscribeReq subscribeTickReq = new SubscribeReq();
+        subscribeTickReq.setDataType("Tick");
+        subscribeTickReq.setSymbol("BTC_USDT");
+        subscribeTickReq.setActionType(ActionTypeEnum.sub.name());
+        subscribeTickReq.setExchange(ExchangeEnum.BINANCE.getValue());
+        /**
+         * 订阅trade
+         */
+        SubscribeReq subscribeTradeReq = new SubscribeReq();
+        subscribeTradeReq.setDataType("Trade");
+        subscribeTradeReq.setSymbol("BTC_USDT");
+        subscribeTradeReq.setActionType(ActionTypeEnum.sub.name());
+        subscribeTradeReq.setExchange(ExchangeEnum.BINANCE.getValue());
+
+        List<SubscribeReq> subscribeReqList = new ArrayList<>();
+        subscribeReqList.add(subscribeAskBidQueueReq);
+        subscribeReqList.add(subscribeCycleReq);
+        subscribeReqList.add(subscribeTickReq);
+        subscribeReqList.add(subscribeTradeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
-            dataWebSocketClient.onDepthEvent(text, reponse -> System.out.println(reponse));
-        } catch (Exception ignore) {
-            ignore.printStackTrace();
-        }
-    }
-
-    /**
-     * 订阅candle
-     */
-    private static void subCandle() {
-        SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setDataType("Cycle");
-        subscribeReq.setActionType(ActionTypeEnum.sub.name());
-        subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
-        subscribeReq.setSymbol("ETH_BTC");
-        subscribeReq.setDuration("5");
-        List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
-        try {
-            String text = mapper.writeValueAsString(subscribeReqList);
-            dataWebSocketClient.onCandleEvent(text, response -> System.out.println(response));
-        } catch (Exception ignore) {
-            ignore.printStackTrace();
-        }
-    }
-
-    /**
-     * 订阅tick
-     */
-    private static void subTick() {
-        SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setDataType("Tick");
-        subscribeReq.setSymbol("HT_BTC");
-        subscribeReq.setActionType(ActionTypeEnum.sub.name());
-        subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
-        List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
-        try {
-            String text = mapper.writeValueAsString(subscribeReqList);
-            dataWebSocketClient.onTickEvent(text, response -> System.out.println(response));
-        } catch (Exception ignore) {
-            ignore.printStackTrace();
-        }
-    }
-
-    /**
-     * 订阅trade
-     */
-    private static void subTrade() {
-        SubscribeReq subscribeReq = new SubscribeReq();
-        subscribeReq.setDataType("Trade");
-        subscribeReq.setSymbol("ETH_BTC");
-        subscribeReq.setActionType(ActionTypeEnum.sub.name());
-        subscribeReq.setExchange(ExchangeEnum.OKEX.getValue());
-
-        List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
-        try {
-            String text = mapper.writeValueAsString(subscribeReqList);
-            dataWebSocketClient.onTradeEvent(text, response -> System.out.println(response.toString()));
+            dataWebSocketClient.onMarketEvent(text, reponse -> System.out.println(reponse));
         } catch (Exception ignore) {
             ignore.printStackTrace();
         }
@@ -229,14 +187,14 @@ public class MarketTest {
     private static void unSubTrade() {
         SubscribeReq subscribeReq = new SubscribeReq();
         subscribeReq.setDataType("Trade");
-        subscribeReq.setSymbol("ETH_BTC");
+        subscribeReq.setSymbol("BTC_USDT");
         subscribeReq.setActionType(ActionTypeEnum.unsub.name());
-        subscribeReq.setExchange(ExchangeEnum.HUOBI.getValue());
+        subscribeReq.setExchange(ExchangeEnum.BINANCE.getValue());
 
         List<SubscribeReq> subscribeReqList = Arrays.asList(subscribeReq);
         try {
             String text = mapper.writeValueAsString(subscribeReqList);
-            dataWebSocketClient.onTradeEvent(text, response -> System.out.println(response.toString()));
+            dataWebSocketClient.onMarketEvent(text, response -> System.out.println(response.toString()));
         } catch (Exception ignore) {
             ignore.printStackTrace();
         }
@@ -246,7 +204,6 @@ public class MarketTest {
      * 获取交易所
      */
     private static void getExchange() {
-
         ResultsVO<ExchangeVO> exchange = dataRestClient.getExchange();
         PrettyPrinter.println(exchange);
     }

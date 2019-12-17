@@ -1,11 +1,7 @@
 package com.ceres.api.service.impl;
 
-import com.ceres.api.domain.event.CandleEvent;
-import com.ceres.api.domain.event.DepthEvent;
-import com.ceres.api.domain.event.TickEvent;
-import com.ceres.api.domain.event.TradeEvent;
-import com.ceres.api.service.CoinceresApiCallback;
 import com.ceres.api.service.CoinceresApiWebSocketClient;
+import com.ceres.api.service.CoinceresWebsocketCallback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
@@ -35,14 +31,19 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
 
     private WebSocket webSocket = null;
 
-    static {
-        scheduledService = new ScheduledThreadPoolExecutor(1,
-                new BasicThreadFactory.Builder().namingPattern("lmt-market-ping-scheduled-%d").daemon(true).build());
-    }
 
     public CoinceresApiWebSocketClientImpl(String wsEndPoint,OkHttpClient client) {
         this.wsEndPoint = wsEndPoint;
         this.client = client;
+
+        scheduledService = new ScheduledThreadPoolExecutor(1,
+                new BasicThreadFactory.Builder().namingPattern("lmt-market-ping-scheduled-%d").daemon(true).build());
+
+        scheduledService.scheduleAtFixedRate(() -> {
+            if (webSocket != null){
+                webSocket.send("ping");
+            }
+        }, 5, 10, TimeUnit.SECONDS);
     }
 
     @Override
@@ -50,40 +51,31 @@ public class CoinceresApiWebSocketClientImpl implements CoinceresApiWebSocketCli
     }
 
     @Override
-    public Closeable onDepthEvent(String text, CoinceresApiCallback<DepthEvent> callback) {
-        return createNewWebSocket(text, new CoinceresApiWebSocketListener<>(callback, DepthEvent.class));
+    public Closeable onMarketEvent(String text, CoinceresWebsocketCallback callback) {
+        return createNewWebSocket(text, callback);
     }
 
-    @Override
-    public Closeable onCandleEvent(String text, CoinceresApiCallback<CandleEvent> callback) {
-        return createNewWebSocket(text, new CoinceresApiWebSocketListener<>(callback, CandleEvent.class));
-    }
-
-    @Override
-    public Closeable onTickEvent(String text, CoinceresApiCallback<TickEvent> callback) {
-        return createNewWebSocket(text, new CoinceresApiWebSocketListener<>(callback, TickEvent.class));
-    }
-
-    @Override
-    public Closeable onTradeEvent(String text, CoinceresApiCallback<TradeEvent> callback) {
-        return createNewWebSocket(text, new CoinceresApiWebSocketListener<>(callback, TradeEvent.class));
-    }
-
-    private Closeable createNewWebSocket(String text, CoinceresApiWebSocketListener<?> listener) {
-        Request request = new Request.Builder().url(this.wsEndPoint).build();
-        webSocket = client.newWebSocket(request, listener);
-        // 订阅
-        webSocket.send(text);
-
-        scheduledService.scheduleAtFixedRate(()->webSocket.send("ping"),5,10,TimeUnit.SECONDS);
-        return () -> {
-            final int code = 1000;
-            log.warn("行情-关闭ping-pong线程监听");
-            scheduledService.shutdownNow();
-            listener.onClosing(webSocket, code, null);
-            webSocket.close(code, null);
-            listener.onClosed(webSocket, code, null);
-        };
+    private Closeable createNewWebSocket(String text, CoinceresWebsocketCallback callback) {
+        if (webSocket == null) {
+            Request request = new Request.Builder().url(this.wsEndPoint).build();
+            CoinceresApiWebSocketListener listener = new CoinceresApiWebSocketListener(callback);
+            webSocket = client.newWebSocket(request, listener);
+            // 订阅
+            webSocket.send(text);
+            log.error("开始订阅:{}", text);
+            return () -> {
+                final int code = 1000;
+                log.warn("行情-关闭ping-pong线程监听");
+                scheduledService.shutdownNow();
+                listener.onClosing(webSocket, code, null);
+                webSocket.close(code, null);
+                listener.onClosed(webSocket, code, null);
+            };
+        }else {
+            webSocket.send(text);
+            log.error("开始订阅:{}", text);
+            return null;
+        }
     }
 
     @Override

@@ -42,8 +42,8 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("QkkzDCyjmUODrLMc",
-                "QYAvZ2I5MUGPxvyCQVlmWrKQbgH4JM1S").newRestClient(Const.PRE_API_BASE_URL);
+        restClient = CoinceresApiClientFactory.newInstance("GPkCpsVsaZlHzWVU",
+                "GNcwRuhOG17tdqp6pLqYLMmhVXussBEp").newRestClient(Const.API_BASE_URL);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -52,7 +52,7 @@ public class TradeTest {
         //02. 添加子账户
 //        addSubAccount();
         //03. 查询账户资产信息
-//        queryAccountInfo();
+        queryAccountInfo();
         //04. 子账户资产划转
 //        accountTransfer();
         //05. 下单
@@ -65,7 +65,7 @@ public class TradeTest {
         //10. 撤单
 //        cancelOrder();
         //12. 查询成交
-        queryTrade();
+//        queryTrade();
         //13.14.闪电交易询价+确认
 //        String confirmId = instantTradingAskPriceByVol();
 //        System.out.println(confirmId);
@@ -168,7 +168,7 @@ public class TradeTest {
     /** 查询账户信息 */
     private static void queryAccountInfo() {
         String symbol = "BTC_USDT";
-        String side = "sell";
+        String side = "buy";
         ResultsVO<AccountInfoRes> result = restClient.getAccountInfo(System.currentTimeMillis(),0L, symbol,side);
         PrettyPrinter.println(result);
     }

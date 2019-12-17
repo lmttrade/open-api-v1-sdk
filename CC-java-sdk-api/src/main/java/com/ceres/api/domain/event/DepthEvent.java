@@ -2,7 +2,6 @@ package com.ceres.api.domain.event;
 
 import com.ceres.api.domain.market.OrderBookEntry;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,44 +13,11 @@ import java.util.List;
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DepthEvent {
-
-  private String exchange;
-
-  private String symbol;
-
-  @JsonProperty("dataType")
-  private String dataType;
-
-  private String time;
+public class DepthEvent extends BaseEvent{
 
   private List<OrderBookEntry> bids;
 
   private List<OrderBookEntry> asks;
-
-  public String getSymbol() {
-    return symbol;
-  }
-
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
-  }
-
-  public String getExchange() {
-    return exchange;
-  }
-
-  public String getDataType() {
-    return dataType;
-  }
-
-  public void setDataType(String dataType) {
-    this.dataType = dataType;
-  }
-
-  public void setExchange(String exchange) {
-    this.exchange = exchange;
-  }
 
   public List<OrderBookEntry> getBids() {
     return bids;
@@ -69,23 +35,15 @@ public class DepthEvent {
     this.asks = asks;
   }
 
-  public String getTime() {
-    return time;
-  }
-
-  public void setTime(String time) {
-    this.time = time;
-  }
-
   @Override
   public String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-        .append("exchange", exchange)
-        .append("symbol", symbol)
-        .append("dataType", dataType)
+        .append("exchange", super.getExchange())
+        .append("symbol", super.getSymbol())
+        .append("dataType", super.getDataType())
         .append("bids", bids)
         .append("asks", asks)
-            .append("time", time)
+            .append("time", super.getTime())
         .toString();
   }
 }
