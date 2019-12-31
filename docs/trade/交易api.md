@@ -270,6 +270,7 @@ system_oid: 系统生成的订单ID
             "commission":"0.00000011655",
             "symbol":"ADA_BTC",
             "dealt_amount":"10",
+            "dealt_cash_amount":"0.00011655",
             "entrust_amount":"10",
             "entrust_bs":"sell",
             "price_type":"limit",
@@ -313,6 +314,8 @@ entrust_time:委托时间
 average_dealt_price:平均成交价
 
 dealt_amount:已成交数量
+
+dealt_cash_amount:已成交金额
 
 lever:杠杆 （币币交易时忽略该字段）
 
