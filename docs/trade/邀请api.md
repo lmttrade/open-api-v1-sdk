@@ -16,7 +16,7 @@
 | -------- | -------- | -------- | ----------------------- |
 | pageNum | Integer    | 是       | 查询第几页，从1开始。比如：1|
 | pageSize | Integer    | 是       | 每页显示几条。比如：10|
-| accounts | String    | 是       | 查询账号,多个用','分割，为空为查询所有|
+| accounts | String    | 是       | 查询被邀请人的账号,多个用','分割，为空为查询所有|
 
 
 #### 返回数据:
@@ -26,20 +26,20 @@
 	"code": "200",
 	"data": {
 		"list": [{
-                	"mobil": "1234567",
-                	"profitComminssionList": [{
-                		"commissionCurrency": "USDT",
-                		"accumulatedCommission": "20"
+                	"phone": "84-48537217",
+                	"comminssions": [{
+                		"currency": "USDT",
+                		"value": "20"
                 	}],
-                	"registrationTime": "2019-10-29 22:57:50",
-                	"valid": "YES",
-                	"googleBind": "YES",
+                	"registerTime": "2019-10-29 22:57:50",
+                	"valid": "yes",
+                	"2fa": "yes",
                 	"uid": "123456",
-                	"kyc": "YES",
-                	"email": "chaochao@gMail.com",
-                	"followProfitList": [{
-                		"followProfitCurrency": "USDT",
-                		"totalFollowProfit": "20.09"
+                	"kyc": "yes",
+                	"email": "chaochao@gmail.com",
+                	"followProfits": [{
+                		"currency": "USDT",
+                		"value": "20.09"
                 	}]
                 }],
 		"page": {
@@ -49,7 +49,7 @@
 			"pages": 0
 		}
 	},
-	"message": "SUCESS"
+	"message": "success"
 }
 ```
 
