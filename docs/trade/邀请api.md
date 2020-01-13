@@ -24,31 +24,29 @@
 ```json
 {
 	"code": "200",
-	"data": {
-		"list": [{
-                	"phone": "84-48537217",
-                	"comminssions": [{
-                		"currency": "USDT",
-                		"value": "20"
-                	}],
-                	"registerTime": "2019-10-29 22:57:50",
-                	"valid": "yes",
-                	"2fa": "yes",
-                	"uid": "123456",
-                	"kyc": "yes",
-                	"email": "chaochao@gmail.com",
-                	"followProfits": [{
-                		"currency": "USDT",
-                		"value": "20.09"
-                	}]
-                }],
-		"page": {
-			"pageNum": 1,
-			"pageSize": 10,
-			"total": 0,
-			"pages": 0
-		}
-	},
+	"data": [{
+        	"phone": "84-48537217",
+        	"comminssions": [{
+        		"currency": "USDT",
+        		"value": "20"
+        	}],
+        	"registerTime": "2019-10-29 22:57:50",
+        	"valid": "yes",
+        	"googleAuth": "yes",
+        	"uid": "123456",
+        	"kyc": "yes",
+        	"email": "chaochao@gmail.com",
+        	"followProfits": [{
+        		"currency": "USDT",
+        		"value": "20.09"
+        	}]
+        }],
+	"page": {
+		"pageNum": 1,
+		"pageSize": 10,
+		"total": 0,
+		"pages": 0
+	}
 	"message": "success"
 }
 ```
