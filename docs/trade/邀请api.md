@@ -57,21 +57,22 @@
 
 ```json
 [{
-	"mobil": "1234567",
-	"profitComminssionList": [{
-		"commissionCurrency": "USDT",
-		"accumulatedCommission": "20"
+	"phone": "84-48537217",
+	"comminssions": [{
+		"currency": "USDT",
+		"value": "20"
 	}],
-	"registrationTime": "2019-10-29 22:57:50",
-	"valid": "YES",
-	"googleBind": "YES",
+	"registerTime": "2019-10-29 22:57:50",
+	"valid": "yes",
+	"2fa": "yes",
 	"uid": "123456",
-	"kyc": "YES",
-	"email": "chaochao@gMail.com",
-	"followProfitList": [{
-		"followProfitCurrency": "USDT",
-		"totalFollowProfit": "20.09"
+	"kyc": "yes",
+	"email": "chaochao@gmail.com",
+	"followProfits": [{
+		"currency": "USDT",
+		"value": "20.09"
 	}]
+}]
 }]
 ```
 
