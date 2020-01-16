@@ -8,6 +8,8 @@
 - LMT提供[沙箱测试环境](https://github.com/lmttrade/open-api-v1-sdk/blob/master/docs/README.md)
 
 # 更新日志
+## 2020-01-16
+- 新增查询账户借贷信息接口
 
 ## 2019-12-17
 - 针对行情websocket数据订阅方式进行优化 具体查看行情的测试方法

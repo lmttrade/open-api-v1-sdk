@@ -240,7 +240,7 @@ public class TradeTest {
 
     /** 查询借贷信息 */
     private static void getBorrowed(){
-        ResultsVO<List<AccountBorrowInfoRes>> result = restClient.getBorrowed(null);
+        ResultsVO<List<AccountBorrowInfoRes>> result = restClient.getBorrowed(0L);
         PrettyPrinter.println(result);
     }
 }
