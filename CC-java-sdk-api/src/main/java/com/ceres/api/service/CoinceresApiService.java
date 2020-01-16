@@ -66,12 +66,13 @@ public interface CoinceresApiService {
 
     /**
      * 查询借贷信息
+     * @param timestamp
      * @param assetCode
      * @return
      */
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @GET("/api/v1/account/get_borrowed")
-    Call<ResultsVO<List<AccountBorrowInfoRes>>> getBorrowed(@Query("asset_code") Long assetCode);
+    Call<ResultsVO<List<AccountBorrowInfoRes>>> getBorrowed(@Query("timestamp") Long timestamp,@Query("asset_code") Long assetCode);
 
     /**
      * 下单

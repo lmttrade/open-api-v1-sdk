@@ -121,7 +121,7 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     }
 
     @Override
-    public ResultsVO<List<AccountBorrowInfoRes>> getBorrowed(Long assetCode) {
-        return executeSync(coinceresApiService.getBorrowed(assetCode));
+    public ResultsVO<List<AccountBorrowInfoRes>> getBorrowed(Long timestamp,Long assetCode) {
+        return executeSync(coinceresApiService.getBorrowed(timestamp,assetCode));
     }
 }

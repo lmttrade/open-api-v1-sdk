@@ -79,10 +79,11 @@ public interface CoinceresApiRestClient {
 
     /**
      * 查询借贷信息
+     * @param timestamp
      * @param assetCode
      * @return
      */
-    ResultsVO<List<AccountBorrowInfoRes>> getBorrowed(Long assetCode);
+    ResultsVO<List<AccountBorrowInfoRes>> getBorrowed(Long timestamp,Long assetCode);
 
     /**
      * 查询订单信息
