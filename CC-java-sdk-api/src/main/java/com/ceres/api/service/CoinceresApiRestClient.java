@@ -1,6 +1,7 @@
 package com.ceres.api.service;
 
 import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountBorrowInfoRes;
 import com.ceres.api.domain.trade.AccountInfoRes;
 import com.ceres.api.domain.trade.AccountTransferReq;
 import com.ceres.api.domain.trade.AddSubAccountReq;
@@ -75,6 +76,13 @@ public interface CoinceresApiRestClient {
      * @return 账户信息
      */
     ResultsVO<AccountInfoRes> getAccountInfo(Long timestamp,Long assetCode,String symbol,String side);
+
+    /**
+     * 查询借贷信息
+     * @param assetCode
+     * @return
+     */
+    ResultsVO<List<AccountBorrowInfoRes>> getBorrowed(Long assetCode);
 
     /**
      * 查询订单信息

@@ -1,6 +1,7 @@
 package com.ceres.api.service.impl;
 
 import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountBorrowInfoRes;
 import com.ceres.api.domain.trade.AccountInfoRes;
 import com.ceres.api.domain.trade.AccountTransferReq;
 import com.ceres.api.domain.trade.AddSubAccountReq;
@@ -117,5 +118,10 @@ public class CoinceresApiRestClientImpl implements CoinceresApiRestClient {
     @Override
     public ResultsVO<InstantTradingConfirmRes> flashConfirm(InstantTradingConfirmReq req) {
         return executeSync(coinceresApiService.flashConfirm(req));
+    }
+
+    @Override
+    public ResultsVO<List<AccountBorrowInfoRes>> getBorrowed(Long assetCode) {
+        return executeSync(coinceresApiService.getBorrowed(assetCode));
     }
 }

@@ -3,6 +3,7 @@ package com.ceres.api.example;
 import com.ceres.api.client.CoinceresApiClientFactory;
 import com.ceres.api.constant.Const;
 import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountBorrowInfoRes;
 import com.ceres.api.domain.trade.AccountInfoRes;
 import com.ceres.api.domain.trade.AccountTransferReq;
 import com.ceres.api.domain.trade.AddSubAccountReq;
@@ -52,7 +53,7 @@ public class TradeTest {
         //02. 添加子账户
 //        addSubAccount();
         //03. 查询账户资产信息
-        queryAccountInfo();
+//        queryAccountInfo();
         //04. 子账户资产划转
 //        accountTransfer();
         //05. 下单
@@ -76,6 +77,8 @@ public class TradeTest {
 //        getProgramOrders();
         //16. 查询历史订单数据(时间最大跨度一个月)
 //        getOrders();
+
+        getBorrowed();
     }
 
     /** 平仓 */
@@ -232,6 +235,12 @@ public class TradeTest {
         ordersHisReq.setExchange("INSTANTEX");
         ordersHisReq.setSymbol("BTC_USDT");
         ResultsVO<OrdersRes> result = restClient.getOrders(ordersHisReq);
+        PrettyPrinter.println(result);
+    }
+
+    /** 查询借贷信息 */
+    private static void getBorrowed(){
+        ResultsVO<List<AccountBorrowInfoRes>> result = restClient.getBorrowed(null);
         PrettyPrinter.println(result);
     }
 }

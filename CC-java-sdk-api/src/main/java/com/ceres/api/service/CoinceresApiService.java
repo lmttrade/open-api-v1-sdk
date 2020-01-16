@@ -2,6 +2,7 @@ package com.ceres.api.service;
 
 import com.ceres.api.constant.Const;
 import com.ceres.api.domain.trade.AccountBase;
+import com.ceres.api.domain.trade.AccountBorrowInfoRes;
 import com.ceres.api.domain.trade.AccountInfoRes;
 import com.ceres.api.domain.trade.AccountTransferReq;
 import com.ceres.api.domain.trade.AddSubAccountReq;
@@ -62,6 +63,15 @@ public interface CoinceresApiService {
     @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
     @POST("/api/v1/account/transfer")
     Call<ResultsVO<List<AccountInfoRes>>> accountTransfer(@Body AccountTransferReq req);
+
+    /**
+     * 查询借贷信息
+     * @param assetCode
+     * @return
+     */
+    @Headers({Const.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER, Const.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER})
+    @GET("/api/v1/account/get_borrowed")
+    Call<ResultsVO<List<AccountBorrowInfoRes>>> getBorrowed(@Query("asset_code") Long assetCode);
 
     /**
      * 下单
