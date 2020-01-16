@@ -43,8 +43,8 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("6Tm49eMy8ITTZ4Kk",
-                "UgImPm6SiJKZW0SJ3OJsOEWf6ZuhzSSZjwF").newRestClient(Const.PRE_API_BASE_URL);
+        restClient = CoinceresApiClientFactory.newInstance("GPkCpsVsaZlHzWVU",
+                "GNcwRuhOG17tdqp6pLqYLMmhVXussBEp").newRestClient(Const.API_BASE_URL);
     }
 
     public static void main(String[] args) throws InterruptedException {
