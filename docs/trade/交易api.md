@@ -938,6 +938,49 @@ client_oid: 客户端自定义id
     各字段含义同单个订单接口
 ```
 
+# 17. 查询借贷信息
+
+```tex
+接口用途: 查询借币和借币产生的未还利息
+
+请求方式: GET
+
+接口地址Path: https://open.lmt.trade/api/v1/account/get_borrowed
+```
+
+#### 输入参数:
+
+| 参数名称 | 参数类型 | 是否必须 | 参数解释                |
+| -------- | -------- | -------- | ----------------------- |
+| asset_code | Long   | 否       | 账户编码 不填默认以此apiKey所属用户账户进行查询  |
+
+#### 返回数据:
+
+```json
+{
+  "code" : "200",
+  "data" : [ {
+    "currency" : "EOS",
+    "borrowed" : "10",
+    "lending_fee" : "0.0033334"
+  }, {
+    "currency" : "USDT",
+    "borrowed" : "993.42577765",
+    "lending_fee" : "0.15917677"
+  } ],
+  "message" : "SUCCESS"
+}
+```
+
+#### 备注:
+
+```tex
+    currency:币种
+    borrowed:已借数量
+    lending_fee:未还利息
+    应还总额=已借数量+未还利息
+```
+
 ## 下单 撤单时序图
 ![avatar](input_cancel.jpg)
 
