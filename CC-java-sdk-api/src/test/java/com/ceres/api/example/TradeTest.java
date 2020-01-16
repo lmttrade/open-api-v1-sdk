@@ -43,8 +43,8 @@ public class TradeTest {
     private static CoinceresApiRestClient restClient;
 
     static {
-        restClient = CoinceresApiClientFactory.newInstance("GPkCpsVsaZlHzWVU",
-                "GNcwRuhOG17tdqp6pLqYLMmhVXussBEp").newRestClient(Const.API_BASE_URL);
+        restClient = CoinceresApiClientFactory.newInstance("6Tm49eMy8ITTZ4Kk",
+                "UgImPm6SiJKZW0SJ3OJsOEWf6ZuhzSSZjwF").newRestClient(Const.PRE_API_BASE_URL);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -240,7 +240,7 @@ public class TradeTest {
 
     /** 查询借贷信息 */
     private static void getBorrowed(){
-        ResultsVO<List<AccountBorrowInfoRes>> result = restClient.getBorrowed(0L);
+        ResultsVO<List<AccountBorrowInfoRes>> result = restClient.getBorrowed(null);
         PrettyPrinter.println(result);
     }
 }
